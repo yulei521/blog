@@ -1,0 +1,897 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第四章 字体和文本4.1 字体网页中的字体有三个来源：    
+
+用户机器中安装的字体。
+保存在第三方网站上的字体，可以使用link标签链接到页面上。
+保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css权威指南学习笔记(三)">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/03/30/css权威指南学习笔记-三/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="第四章 字体和文本4.1 字体网页中的字体有三个来源：    
+
+用户机器中安装的字体。
+保存在第三方网站上的字体，可以使用link标签链接到页面上。
+保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。">
+<meta property="og:updated_time" content="2016-04-04T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css权威指南学习笔记(三)">
+<meta name="twitter:description" content="第四章 字体和文本4.1 字体网页中的字体有三个来源：    
+
+用户机器中安装的字体。
+保存在第三方网站上的字体，可以使用link标签链接到页面上。
+保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> css权威指南学习笔记(三) | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                css权威指南学习笔记(三)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-30T16:49:30+08:00" content="2016-03-30">
+              2016-03-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/css权威指南学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">css权威指南学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/30/css权威指南学习笔记-三/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/css权威指南学习笔记-三/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/30/css权威指南学习笔记-三/" class="leancloud_visitors" data-flag-title="css权威指南学习笔记(三)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C"><a href="#u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C" class="headerlink" title="第四章 字体和文本"></a>第四章 字体和文本</h2><h3 id="4-1__u5B57_u4F53"><a href="#4-1__u5B57_u4F53" class="headerlink" title="4.1 字体"></a>4.1 字体</h3><p>网页中的字体有三个来源：    </p>
+<ul>
+<li>用户机器中安装的字体。</li>
+<li>保存在第三方网站上的字体，可以使用link标签链接到页面上。</li>
+<li>保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。</li>
+</ul>
+<a id="more"></a>
+<p>与字体样式相关的6个属性：</p>
+<ul>
+<li><p>font-family，字体族，用于设定元素中的文本使用什么字体，font-family是可以继承的属性。为了防止字体无效，在指定文本的字体时，需要多列出几种后备字体，以防第一种字体无效，这个字体的列表也叫字体栈。例如：body {font-family:”trebuchet ms”, tahoma, sans-serif;}，<em>注意字体名多于一个单词(有空格)，应该加上引号</em>。<br>有以下5类通用字体类<br>serif，也就是衬线字体，在每个字符笔画的末端会有一些装饰线；<br>sans-serif，也就是无衬线字体，字符笔画的末端没有装饰线；<br>monospace，也就是等宽字体，顾名思义，就是每个字符的宽度相等；<br>cursive，也就是草书体或手写体；<br>fantasy，不能归入其他类别的字体</p>
+</li>
+<li><p>font-size，表示字体大小。这里有两种表示形式，一种是绝对字体大小，使用像素，派卡等；另一种是相对字体大小，使用百分比、em或rem。</p>
+</li>
+<li><p>font-style，字体样式值：italic(斜体)、oblique(斜体)、normal(常规值，会取消所有的特殊样式)。</p>
+</li>
+<li><p>font-weight，字体粗细，可能的值：100、200  900,或者lighter、normal、bold和bolder。</p>
+</li>
+<li><p>font-variant，字体变化，值：small-caps、normal。small-caps会导致所有小写英文字母变成小型大写字母。</p>
+</li>
+</ul>
+<ul>
+<li>font(简写属性)：规则有必须声明font-size和font-family的值，所有值必须按如下顺序<br>1.font-weight、font-style、font-variant不分先后<br>2.然后是font-size<br>3.最后是font-family</li>
+</ul>
+<h3 id="4-2__u6587_u672C_u5C5E_u6027"><a href="#4-2__u6587_u672C_u5C5E_u6027" class="headerlink" title="4.2 文本属性"></a>4.2 文本属性</h3><p>常用的文本属性主要有：    </p>
+<ul>
+<li>text-indent–文本缩进，例如p{text-indent:3em},正负均可    </li>
+</ul>
+<ul>
+<li><p>letter-spacing–字符间距，值任何长度值(正、负值均可)，例如:p{letter-spacing:.2rem}    </p>
+</li>
+<li><p>word-spacing–单词间距，例如：p{word-spacing:.2rem},单词间距与字符间距非常相似，区别在于它只调整单词间距，而不影响字符间距。css把任何两边有空白的字符和字符串都视作“单词”。(纯汉字文本一段中没有空格，因为word-spacing对中文网页几乎没有用)</p>
+</li>
+<li><p>text-decoration–文本装饰，值：underline(下划线)、overline(上划线)、line-through(划线在文本中间)、blink(给文本添加闪烁效果)、none。</p>
+</li>
+<li><p>text-align–文本对齐，值：left、right、center(也可以用来在较大的元素中居中较小的固定宽度的元素或图片)、justify(两端对齐)。</p>
+</li>
+<li><p>line-height–行高，值：任意数字值，实例 p:{line-height:1.5},css中的行高平均分布在一行文本的上方和下方。举个例子，如果字体大小是12像素，行高是20像素，浏览器会在文本上方和下方各加4像素的空白，以凑足20像素的行高。</p>
+</li>
+<li><p>text-transform–文本转换，值：none、uppercase(转换成大写)、lowercase(转换成小写)、capitalize(每个词的首字母大写)。</p>
+</li>
+<li><p>vertical-align–垂直对齐，值任意长度值以及sub、super、top、middle、bottom等。vertical-align以基线为参照上下移动文本，但这个属性只影响行内元素，如果你想在垂直方向上对齐块级元素，必须把其display属性设定为inline。</p>
+</li>
+</ul>
+<h3 id="4-3_Web_u5B57_u4F53_u5927_u63ED_u79D8"><a href="#4-3_Web_u5B57_u4F53_u5927_u63ED_u79D8" class="headerlink" title="4.3 Web字体大揭秘"></a>4.3 Web字体大揭秘</h3><p>@font-face规则为设计师提供了系统自带字体以外的广泛选择，浏览器可以从Web服务器下载字体。<br>设定Web字体的方式有以下三种：   </p>
+<ul>
+<li><p>使用公共字体库。例如Google Web Fonts提供的在线公共字体库。打开 <a href="http://www.google.com/webfonts，找到想要的字体，单击" target="_blank" rel="external">http://www.google.com/webfonts，找到想要的字体，单击</a> Add to Collection 按钮，然后单击页面底部的 Use 按钮。然后Google 就会生成一个指向你刚刚选定字体的<link>标签，直接把它复制粘贴到你的 HTML 文件中即可。比如：<link href="http://fonts.googleapis.com/css?family=Anton|Niconne|Prata" rel="stylesheet" type="text/css">。</p>
+</li>
+<li><p>使用打包的@font-face包。Font Squirrel（<a href="http://www.fontsquirrel.com）提供了很多现成的字体包，每个字体包中都包含所有必要格式的字体和为每款浏览器提供正确格式的" target="_blank" rel="external">http://www.fontsquirrel.com）提供了很多现成的字体包，每个字体包中都包含所有必要格式的字体和为每款浏览器提供正确格式的</a> CSS 代码。 </p>
+</li>
+<li><p>使用生成的@font-face包。</p>
+</li>
+</ul>
+<p>举个例子，如果你想在伪元素中添加十六进制值&#x201C;（左双引号），则<br>需要改写成如下形式：<br>e::before {content:”\201C”;}<br>就是在数字前面加了一个反斜杠。相应地，右双引号的十六进制值改写后是\201D。</p>
+<h2 id="u7B2C_u4E94_u7AE0__u9875_u9762_u5E03_u5C40"><a href="#u7B2C_u4E94_u7AE0__u9875_u9762_u5E03_u5C40" class="headerlink" title="第五章 页面布局"></a>第五章 页面布局</h2><p>主要介绍“用内部DIV创建浮动的栏”，这是多年来一直被业内用于创建多栏布局的经典技术。如今，不仅仅可以使用box-sizing属性代替内部DIV，也可以使用让元素行为跟表格一样的css3的display属性。</p>
+<h3 id="5-1__u5E03_u5C40_u7684_u57FA_u672C_u6982_u5FF5"><a href="#5-1__u5E03_u5C40_u7684_u57FA_u672C_u6982_u5FF5" class="headerlink" title="5.1 布局的基本概念"></a>5.1 布局的基本概念</h3><p>多栏布局有三种基本实现方案：    </p>
+<ul>
+<li>固定宽度–布局的大小不会随着用户调整浏览器窗口大小而变化，一般是900到1100像素宽，其中960像素最常见的。</li>
+<li>流动–布局的大小会随着用户调整浏览器窗口大小而变化。</li>
+<li>弹性–布局与流动布局类似，在浏览器窗口变宽时，不仅布局变宽，而且所有内容元素的大小也会变化。</li>
+</ul>
+<p>一般是控制布局宽度。而让内容决定布局高度。</p>
+<h3 id="5-2__u4E09_u680F-_u56FA_u5B9A_u5BBD_u5EA6_u5E03_u5C40"><a href="#5-2__u4E09_u680F-_u56FA_u5B9A_u5BBD_u5EA6_u5E03_u5C40" class="headerlink" title="5.2 三栏-固定宽度布局"></a>5.2 三栏-固定宽度布局</h3><p>可以设定一个固定宽度的div标签，两边 margin:auto，实现居中；<br>然后div标签里面用float容器控制三栏布局，三栏加起来的宽度为div标签的宽度。可以这样设计布局：    </p>
+<pre><code class="bash">&lt;div id=<span class="string">"wrapper"</span>&gt;    
+    &lt;header&gt;    
+    &lt;/header&gt;    
+    &lt;nav&gt;    
+    &lt;/nav&gt;    
+    &lt;article&gt;    
+    &lt;/article&gt;    
+    &lt;aside&gt;    
+    &lt;/aside&gt;    
+    &lt;footer&gt;     
+    &lt;/footer&gt;    
+&lt;/div\&gt;
+</code></pre>
+<p>应用的样式如下：</p>
+<pre><code class="bash">\* {margin:0; padding:0;}    
+\<span class="comment">#wrapper {width:960px; margin:0 auto; border:1px solid;}    </span>
+header {background:<span class="comment">#f00;}    </span>
+nav {    
+   width:150px;    
+   <span class="built_in">float</span>:left;    
+   background:<span class="comment">#dcd9c0;    </span>
+}    
+nav li {    
+   list-style-type:none;    
+}    
+article {    
+   width:600px;    
+   <span class="built_in">float</span>:left;    
+   background:<span class="comment">#ffed53;    </span>
+}    
+aside {    
+   width:210px;    
+   <span class="built_in">float</span>:left;    
+   background:<span class="comment">#3f7ccf;    </span>
+}    
+footer {clear:both; background:<span class="comment">#000;}</span>
+</code></pre>
+<h4 id="u4E3A_u680F_u8BBE_u5B9A_u5185_u8FB9_u8DDD_u548C_u8FB9_u6846"><a href="#u4E3A_u680F_u8BBE_u5B9A_u5185_u8FB9_u8DDD_u548C_u8FB9_u6846" class="headerlink" title="为栏设定内边距和边框"></a>为栏设定内边距和边框</h4><p>注意这里，因为我们div标签宽度一定的，如果调整各栏中的内容，布局就可能超过容器宽度，而右边的栏就可能滑到左边的栏下方。为固定宽度的元素添加水平外边距、边框和内边距，会导致元素盒子变宽。</p>
+<p>我们有三种方法可以防止这种情况发生：    </p>
+<ul>
+<li>从设定的元素宽度中减去添加的水平外边距、边框和内边距的宽度和</li>
+<li>在容器内部的元素上添加内边距或外边距，前提是这些元素没有明确设定宽度，他们内容随着内、外边距的增加而缩小。<strong>就像盒模型定义所说的，没有宽度的元素在水平方向上会适应其父元素，其内容会随着外边距、边框和内边距的增加而减少。</strong></li>
+<li><strong>使用css3的box-sizing属性切换盒子缩放方式，比如section{box-sizing:border-box};</strong>应用box-sizing属性后，给section添加的边框和内边距都不会增大盒子，相反会导致内容变窄。注意box-sizing属性在IE6和IE7不支持需要单独处理下。可以通过名叫borderBoxModel.js的腻子脚本实现单独处理。</li>
+</ul>
+<h4 id="CSS_u9009_u62E9_u7B26_u7684_u5B9E_u9645_u5E94_u7528"><a href="#CSS_u9009_u62E9_u7B26_u7684_u5B9E_u9645_u5E94_u7528" class="headerlink" title="CSS选择符的实际应用"></a>CSS选择符的实际应用</h4><p>类应该标记具有相同特征的元素。对于那些唯一性的标签，更好的办法是添加一个ID，相当于页面每个部分的路标。</p>
+<p><strong><em>注意： 每一栏中的垂直间距是由父元素的内边距生成的，为什么要用父元素呢？原因就是父元素没有上下边框的情况下，子元素的上下边距会折叠的，即当我设置了margin的值，但是浏览器解析为0。</em></strong></p>
+<p>人造栏技术–通过给各栏添加背景图片和背景色使得背景随着内容的增加实现垂直repeat，背景图片会覆盖背景色，从而造成各栏高度一样。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag">#css</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/29/css权威指南学习笔记-二/" rel="next" title="css权威指南学习笔记(二)">
+                <i class="fa fa-chevron-left"></i> css权威指南学习笔记(二)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/06/css权威指南学习笔记-四/" rel="prev" title="css权威指南学习笔记-四">
+                css权威指南学习笔记-四 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/30/css权威指南学习笔记-三/"
+     data-title="css权威指南学习笔记(三)"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/03/30/css权威指南学习笔记-三/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/30/css权威指南学习笔记-三/"
+           data-title="css权威指南学习笔记(三)" data-url="http://blog.zhangyulei.site/2016/03/30/css权威指南学习笔记-三/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C"><span class="nav-number">1.</span> <span class="nav-text">第四章 字体和文本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1__u5B57_u4F53"><span class="nav-number">1.1.</span> <span class="nav-text">4.1 字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2__u6587_u672C_u5C5E_u6027"><span class="nav-number">1.2.</span> <span class="nav-text">4.2 文本属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3_Web_u5B57_u4F53_u5927_u63ED_u79D8"><span class="nav-number">1.3.</span> <span class="nav-text">4.3 Web字体大揭秘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E94_u7AE0__u9875_u9762_u5E03_u5C40"><span class="nav-number">2.</span> <span class="nav-text">第五章 页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1__u5E03_u5C40_u7684_u57FA_u672C_u6982_u5FF5"><span class="nav-number">2.1.</span> <span class="nav-text">5.1 布局的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2__u4E09_u680F-_u56FA_u5B9A_u5BBD_u5EA6_u5E03_u5C40"><span class="nav-number">2.2.</span> <span class="nav-text">5.2 三栏-固定宽度布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E3A_u680F_u8BBE_u5B9A_u5185_u8FB9_u8DDD_u548C_u8FB9_u6846"><span class="nav-number">2.2.1.</span> <span class="nav-text">为栏设定内边距和边框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS_u9009_u62E9_u7B26_u7684_u5B9E_u9645_u5E94_u7528"><span class="nav-number">2.2.2.</span> <span class="nav-text">CSS选择符的实际应用</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

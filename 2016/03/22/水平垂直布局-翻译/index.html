@@ -1,0 +1,930 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css,居中," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="这里主要参考的是CHRIS COYIER写的一篇的文章(点击查看)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="居中的css:完全指南(翻译)">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/03/22/水平垂直布局-翻译/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="这里主要参考的是CHRIS COYIER写的一篇的文章(点击查看)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。">
+<meta property="og:updated_time" content="2016-04-07T14:39:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="居中的css:完全指南(翻译)">
+<meta name="twitter:description" content="这里主要参考的是CHRIS COYIER写的一篇的文章(点击查看)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> 居中的css:完全指南(翻译) | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                居中的css:完全指南(翻译)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-22T19:46:00+08:00" content="2016-03-22">
+              2016-03-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/22/水平垂直布局-翻译/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/22/水平垂直布局-翻译/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/22/水平垂直布局-翻译/" class="leancloud_visitors" data-flag-title="居中的css:完全指南(翻译)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里主要参考的是CHRIS COYIER写的一篇的文章(<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="external">点击查看</a>)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。</p>
+<a id="more"></a>
+<h2 id="1__u6C34_u5E73"><a href="#1__u6C34_u5E73" class="headerlink" title="1 水平"></a>1 水平</h2><p>水平居中有行内元素和块元素，行内元素有文字、图片、链接等；块元素主要是div、p等block元素。</p>
+<h3 id="1-1__u884C_u5185_u5143_u7D20"><a href="#1-1__u884C_u5185_u5143_u7D20" class="headerlink" title="1.1 行内元素"></a>1.1 行内元素</h3><p>对于行内元素可以使用如下实现水平居中(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_1" target="_blank" rel="external">在线查看demo</a>)：   </p>
+<pre><code class="bash">.blocklist1_1 {    
+    text-align: center;
+}
+</code></pre>
+<p>这种方法对于inline，inline-block，inline-table等都有效。</p>
+<h3 id="1-2__u5757_u5143_u7D20"><a href="#1-2__u5757_u5143_u7D20" class="headerlink" title="1.2 块元素"></a>1.2 块元素</h3><p>对于一个块元素，可以设置其margin-left和margin-right自动，就像这样(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_2" target="_blank" rel="external">在线查看demo</a>)：  </p>
+<pre><code class="bash">.blocklist1_2 .div1 {    
+    margin: 0px auto;
+}
+</code></pre>
+<p>无论块元素的宽度是否已知，都可以实现水平居中。</p>
+<h3 id="1-3__u591A_u4E2A_u5757_u5143_u7D20"><a href="#1-3__u591A_u4E2A_u5757_u5143_u7D20" class="headerlink" title="1.3 多个块元素"></a>1.3 多个块元素</h3><p>如果有多个块元素需要水平居中时，有两种办法可以实现。一种是借助inline-block，另一种是借助flex。对于第一种方法可以使用如下方式(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_3" target="_blank" rel="external">在线查看demo</a>)，设置块元素display:inline-block,其父元素水平居中：   </p>
+<pre><code class="bash">..blocklist1_3 .div1 {    
+    text-align: center;    
+}    
+.blocklist1_3 .div1 div {    
+    display: inline-block;    
+}
+</code></pre>
+<p>用flex的话需要给块的父元素添加如下样式(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_3" target="_blank" rel="external">在线查看demo</a>)：    </p>
+<pre><code class="bash">.blocklist1_3 .div2 {    
+    display: flex;    
+    justify-content: center;    
+}
+</code></pre>
+<h3 id="u8865_u5145_28_u65B0_u52A0_29"><a href="#u8865_u5145_28_u65B0_u52A0_29" class="headerlink" title="补充(新加)"></a>补充(新加)</h3><p>对于那些没有宽度的块元素，可以设置其为 display:inline-block；然后给其父元素添加 text-align:center，实现水平居中。</p>
+<h2 id="2__u5782_u76F4"><a href="#2__u5782_u76F4" class="headerlink" title="2 垂直"></a>2 垂直</h2><p>垂直居中也分有行内元素和块元素，不过相比水平居中，垂直居中这里需要讨论的情况有点多，下面我们一一分析。</p>
+<h3 id="2-1__u884C_u5185_u5143_u7D20"><a href="#2-1__u884C_u5185_u5143_u7D20" class="headerlink" title="2.1 行内元素"></a>2.1 行内元素</h3><h4 id="2-1-1__u5355_u884C"><a href="#2-1-1__u5355_u884C" class="headerlink" title="2.1.1 单行"></a>2.1.1 单行</h4><p>对于单行的行内元素，我们只需要设置其padding-top和padding-bottom值相等即可(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_1" target="_blank" rel="external">在线查看demo</a>):</p>
+<pre><code class="bash">.blocklist2_1_1 .div1 {    
+    padding-top: 20px;    
+    padding-bottom: 20px;    
+}
+</code></pre>
+<p>如果我们不能设置padding的话，而行内元素的高度(height=50px)已知时，可以设置line-height=height,实现元素的垂直居中(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_1" target="_blank" rel="external">在线查看demo</a>)：    </p>
+<pre><code class="bash">.blocklist2_1_1 .div2 {    
+    line-height: 50px;    
+    height: 50px;    
+}
+</code></pre>
+<h4 id="2-1-2__u591A_u884C"><a href="#2-1-2__u591A_u884C" class="headerlink" title="2.1.2 多行"></a>2.1.2 多行</h4><p>对于多行元素我们有四种方式可以实现垂直居中：</p>
+<ul>
+<li>a.可以像上面那样通过设置padding-top和padding-bottom的值相等来实现垂直居中(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2" target="_blank" rel="external">demo-1</a>)：    </li>
+</ul>
+<pre><code class="bash">.blocklist2_1_2 .div1 {   
+    padding: 20px 0px;  
+}
+</code></pre>
+<ul>
+<li>b.可以借助vertical-align属性来实现垂直居中(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2" target="_blank" rel="external">demo-2</a>)：    </li>
+</ul>
+<pre><code class="bash">.blocklist2_1_2 .div2 {   
+    display: table;    
+}    
+.blocklist2_1_2 .div2&gt;div {    
+    display: table-cell;    
+    vertical-align: middle;    
+}
+</code></pre>
+<ul>
+<li>c.可以借助flex技术来实现垂直居中，只需添加如下样式(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2" target="_blank" rel="external">demo-3</a>)：    </li>
+</ul>
+<pre><code class="bash">.blocklist2_1_2 .div3 {    
+    display: flex;    
+    justify-content: center;   
+    flex-direction: column;    
+    height: 400px;   
+}
+</code></pre>
+<ul>
+<li>d.将一个全高度的伪元素放置在容器内，然后设置文本垂直对齐(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2" target="_blank" rel="external">demo-4</a>)：    </li>
+</ul>
+<pre><code class="bash">.blocklist2_1_2 .div4 {    
+    position:relative;    
+}    
+.blocklist2_1_2 .div4::before {    
+    content: <span class="string">' '</span>;    
+    display: inline-block;    
+    height: 100%;    
+    width: 1%;    
+    vertical-align: middle;    
+}    
+.blocklist2_1_2 .div4&gt;div {    
+    display: inline-block;    
+    vertical-align: middle;    
+}
+</code></pre>
+<h3 id="2-2__u5757_u5143_u7D20"><a href="#2-2__u5757_u5143_u7D20" class="headerlink" title="2.2 块元素"></a>2.2 块元素</h3><h4 id="2-2-1__u5757_u5143_u7D20_u9AD8_u5EA6_u5DF2_u77E5"><a href="#2-2-1__u5757_u5143_u7D20_u9AD8_u5EA6_u5DF2_u77E5" class="headerlink" title="2.2.1 块元素高度已知"></a>2.2.1 块元素高度已知</h4><p>在网页布局中有的时候我们知道元素的高度，有的时候我们不知道。对于已知高度的块元素可以这样设置来实现垂直居中(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_1" target="_blank" rel="external">demo</a>)：    </p>
+<pre><code class="bash">.blocklist2_2_1 .div {    
+    position: relative;    
+}   
+.blocklist2_2_1 .div div {    
+    position: absoulte;
+    top: 50%;    
+    height: 100px;
+    margin-top: -70px; //这里70px是height*1/2 + padding    
+    padding: 20px;    
+}
+</code></pre>
+<h4 id="2-2-2__u5757_u5143_u7D20_u9AD8_u5EA6_u672A_u77E5"><a href="#2-2-2__u5757_u5143_u7D20_u9AD8_u5EA6_u672A_u77E5" class="headerlink" title="2.2.2 块元素高度未知"></a>2.2.2 块元素高度未知</h4><p>有时候我们是不知道块元素的高度的，这时候可以使用transform来实现(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_2" target="_blank" rel="external">demo</a>):    </p>
+<pre><code class="bash">.blocklist2_2_2 .div {    
+    position: relative;    
+}    
+.blocklist2_2_2 .div div {    
+    transform: translateY(-50%);    
+    top: 50%;    
+    position: absoulte;    
+}
+</code></pre>
+<h4 id="2-2-3__u5229_u7528flex_u5B9E_u73B0"><a href="#2-2-3__u5229_u7528flex_u5B9E_u73B0" class="headerlink" title="2.2.3 利用flex实现"></a>2.2.3 利用flex实现</h4><p>除了以上两种办法，还可以使用flex实现(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_3" target="_blank" rel="external">demo</a>):    </p>
+<pre><code class="bash">.blocklist2_2_3 .div {    
+    display: flex;    
+    flex-direction: column;    
+    justify-content: center;    
+}
+</code></pre>
+<h2 id="3__u6C34_u5E73_u5782_u76F4"><a href="#3__u6C34_u5E73_u5782_u76F4" class="headerlink" title="3 水平垂直"></a>3 水平垂直</h2><p>有的时候我们不仅希望水平居中还希望垂直居中，可以结合以上提到的例子进行组合实现，主要分为以下三个方面：</p>
+<h3 id="3-1__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u5DF2_u77E5"><a href="#3-1__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u5DF2_u77E5" class="headerlink" title="3.1 元素高度、宽度已知"></a>3.1 元素高度、宽度已知</h3><p>当元素高度和宽度已知时，可以将元素绝对定位，偏移中心50%，然后使用负的margin值实现，如下(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_1" target="_blank" rel="external">demo</a>):    </p>
+<pre><code class="bash">.blocklist3_1 .div {    
+    position: relative;    
+}    
+.blocklist3_1 .div div {    
+    position: absoulte;
+    top: 50%;    
+    left: 50%;    
+    margin: -120px 0px 0px -220px;    //height一半，width一半，另外加上padding值
+    height: 200px;    
+    width: 400px;    
+    padding: 20px;    
+}
+</code></pre>
+<h3 id="3-2__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u672A_u77E5"><a href="#3-2__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u672A_u77E5" class="headerlink" title="3.2 元素高度、宽度未知"></a>3.2 元素高度、宽度未知</h3><p>如果元素的高度和宽度未知呢，我们可以使用变换属性，在两个方向赋予50%的负值，如下(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_2" target="_blank" rel="external">demo</a>):    </p>
+<pre><code class="bash">.blocklist3_2 .div {   
+    position: relative;    
+}    
+.blocklist3_2 .div div {    
+    position: absolute;     
+    top: 50%;    
+    left: 50%;    
+    transform: translate(-50%, -50%);    
+}
+</code></pre>
+<h3 id="3-3__u5229_u7528flexbox_u5B9E_u73B0"><a href="#3-3__u5229_u7528flexbox_u5B9E_u73B0" class="headerlink" title="3.3 利用flexbox实现"></a>3.3 利用flexbox实现</h3><p>用flex实现时需要使用两个中心属性(<a href="http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_3" target="_blank" rel="external">demo</a>)：    </p>
+<pre><code class="bash">.blocklist3_3 .div {     
+    display: flex;    
+    justify-content: center;    
+    align-items: center;
+}
+</code></pre>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag">#css</a>
+          
+            <a href="/tags/居中/" rel="tag">#居中</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/18/css权威指南学习笔记-一/" rel="next" title="css权威指南学习笔记(一)">
+                <i class="fa fa-chevron-left"></i> css权威指南学习笔记(一)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/29/css权威指南学习笔记-二/" rel="prev" title="css权威指南学习笔记(二)">
+                css权威指南学习笔记(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/22/水平垂直布局-翻译/"
+     data-title="居中的css:完全指南(翻译)"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/03/22/水平垂直布局-翻译/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/22/水平垂直布局-翻译/"
+           data-title="居中的css:完全指南(翻译)" data-url="http://blog.zhangyulei.site/2016/03/22/水平垂直布局-翻译/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1__u6C34_u5E73"><span class="nav-number">1.</span> <span class="nav-text">1 水平</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1__u884C_u5185_u5143_u7D20"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 行内元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2__u5757_u5143_u7D20"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 块元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3__u591A_u4E2A_u5757_u5143_u7D20"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 多个块元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8865_u5145_28_u65B0_u52A0_29"><span class="nav-number">1.4.</span> <span class="nav-text">补充(新加)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2__u5782_u76F4"><span class="nav-number">2.</span> <span class="nav-text">2 垂直</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1__u884C_u5185_u5143_u7D20"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 行内元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1__u5355_u884C"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 单行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2__u591A_u884C"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 多行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2__u5757_u5143_u7D20"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 块元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1__u5757_u5143_u7D20_u9AD8_u5EA6_u5DF2_u77E5"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 块元素高度已知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2__u5757_u5143_u7D20_u9AD8_u5EA6_u672A_u77E5"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 块元素高度未知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3__u5229_u7528flex_u5B9E_u73B0"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 利用flex实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3__u6C34_u5E73_u5782_u76F4"><span class="nav-number">3.</span> <span class="nav-text">3 水平垂直</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u5DF2_u77E5"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 元素高度、宽度已知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u672A_u77E5"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 元素高度、宽度未知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3__u5229_u7528flexbox_u5B9E_u73B0"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 利用flexbox实现</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

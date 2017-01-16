@@ -1,0 +1,910 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第一章 HTML标记与文档结构用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些用户代理(user agent)能够理解的含义。
+
+这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    
+
+html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css权威指南学习笔记(一)">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/03/18/css权威指南学习笔记-一/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="第一章 HTML标记与文档结构用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些用户代理(user agent)能够理解的含义。
+
+这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    
+
+html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。">
+<meta property="og:image" content="http://blog.zhangyulei.site/images/css2-1.jpg">
+<meta property="og:image" content="http://blog.zhangyulei.site/images/css2-2.jpg">
+<meta property="og:updated_time" content="2016-04-05T07:58:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css权威指南学习笔记(一)">
+<meta name="twitter:description" content="第一章 HTML标记与文档结构用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些用户代理(user agent)能够理解的含义。
+
+这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    
+
+html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> css权威指南学习笔记(一) | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                css权威指南学习笔记(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-18T09:56:14+08:00" content="2016-03-18">
+              2016-03-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/css权威指南学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">css权威指南学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/css权威指南学习笔记-一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/css权威指南学习笔记-一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/18/css权威指南学习笔记-一/" class="leancloud_visitors" data-flag-title="css权威指南学习笔记(一)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784"><a href="#u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784" class="headerlink" title="第一章 HTML标记与文档结构"></a>第一章 HTML标记与文档结构</h2><p>用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些<em>用户代理(user agent)</em>能够理解的含义。</p>
+<blockquote>
+<p>这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    </p>
+</blockquote>
+<p>html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。<br><a id="more"></a></p>
+<h2 id="u7B2C_u4E8C_u7AE0_CSS_u5DE5_u4F5C_u539F_u7406"><a href="#u7B2C_u4E8C_u7AE0_CSS_u5DE5_u4F5C_u539F_u7406" class="headerlink" title="第二章 CSS工作原理"></a>第二章 CSS工作原理</h2><h3 id="2-1__u5256_u6790CSS_u89C4_u5219"><a href="#2-1__u5256_u6790CSS_u89C4_u5219" class="headerlink" title="2.1 剖析CSS规则"></a>2.1 剖析CSS规则</h3><p>css注释使用  /<em> 注释内容 </em>/<br>有一种在样式表中链接到其他样式表的方法，应用@import 指令(是一种at规则)  </p>
+<blockquote>
+<p>@import url(css/style2.css)</p>
+</blockquote>
+<p>要注意的是@import指令必须出现在样式表中其他样式之前，否则@import引用的样式表不会被加载。<br>css规则由选择符和声明两部分组成。</p>
+<h4 id="u4E3A_u6587_u6863_u6DFB_u52A0_u6837_u5F0F_u7684_u4E09_u79CD_u65B9_u6CD5"><a href="#u4E3A_u6587_u6863_u6DFB_u52A0_u6837_u5F0F_u7684_u4E09_u79CD_u65B9_u6CD5" class="headerlink" title="为文档添加样式的三种方法"></a>为文档添加样式的三种方法</h4><ul>
+<li>行内样式，写在元素标签里</li>
+<li>嵌入样式，写在style标签里</li>
+<li>链接样式，写在单独的css样式表中    </li>
+</ul>
+<p>优先级：行内样式&gt;嵌入样式&gt;链接样式    </p>
+<h3 id="CSS_u89C4_u5219_u547D_u540D_u60EF_u4F8B"><a href="#CSS_u89C4_u5219_u547D_u540D_u60EF_u4F8B" class="headerlink" title="CSS规则命名惯例"></a>CSS规则命名惯例</h3><p>css规则由选择符和声明两部分组成，声明又由属性和值两部分组成。如下图：<br><img src="/images/css2-1.jpg" alt="">    </p>
+<h3 id="2-2__u9009_u62E9_u7B26"><a href="#2-2__u9009_u62E9_u7B26" class="headerlink" title="2.2 选择符"></a>2.2 选择符</h3><p>所有用于特定元素的选择符有三种：    </p>
+<ul>
+<li>上下文选择符。基于祖先或同胞元素选择一个元素。</li>
+<li>ID和类选择符。基于id和class属性的值选择元素。</li>
+<li>属性选择符。基于属性的有无和特征选择元素。</li>
+</ul>
+<h4 id="2-2-1__u4E0A_u4E0B_u6587_u9009_u62E9_u7B26"><a href="#2-2-1__u4E0A_u4E0B_u6587_u9009_u62E9_u7B26" class="headerlink" title="2.2.1 上下文选择符"></a>2.2.1 上下文选择符</h4><p>这种“基于位置”变换某个标签样式的问题，可以用上下文选择符来解决。<br>上下文选择符的格式:    </p>
+<blockquote>
+<p>标签1 标签2 {声明}    </p>
+</blockquote>
+<p>其中标签2就是我们想要选择的目标，而且只有在标签1是其祖先元素(不一定是父元素)的情况下才会被选中。<br><strong>上下文选择符</strong>，严格来讲叫后代组合式选择符，就是一组以空格分隔的标签名。用于选择作为指定祖先元素后代的标签。    </p>
+<h5 id="u8FD8_u6709_u4E00_u4E9B_u7279_u6B8A_u7684_u4E0A_u4E0B_u6587_u9009_u62E9_u7B26_uFF0C_u5982_u4E0B_uFF1A"><a href="#u8FD8_u6709_u4E00_u4E9B_u7279_u6B8A_u7684_u4E0A_u4E0B_u6587_u9009_u62E9_u7B26_uFF0C_u5982_u4E0B_uFF1A" class="headerlink" title="还有一些特殊的上下文选择符，如下："></a>还有一些特殊的上下文选择符，如下：</h5><ul>
+<li><p>子选择符 &gt;<br>标签1 &gt; 标签2，标签2必须是标签1的子元素，标签1必须是标签2的父元素。注意：这个选择符中的标签1不能是标签2的父元素之外的其他祖先元素。</p>
+</li>
+<li><p>紧邻同胞选择符 +<br>标签1 + 标签2，标签2必须紧跟在其同胞标签1的后面。而且标签1和标签2属于同一个父元素。是标签2的样式。</p>
+</li>
+</ul>
+<ul>
+<li>一般同胞选择符 ~<br>标签1 ~标签2，标签2必须跟(不一定紧跟)在其同胞标签1后面。而且标签1和标签2属于同一个父元素。是标签2的样式。</li>
+</ul>
+<ul>
+<li>通用选择符 *<br>表示匹配任何元素。</li>
+</ul>
+<h4 id="2-2-2_ID_u548C_u7C7B_u9009_u62E9_u7B26"><a href="#2-2-2_ID_u548C_u7C7B_u9009_u62E9_u7B26" class="headerlink" title="2.2.2 ID和类选择符"></a>2.2.2 ID和类选择符</h4><p>ID和类选择符为我们选择元素提供了另一套手段，利用它们可以不用考虑文档的层次结构，只要你在HTML标记中为元素添加了id和class属性，就可以在css选择符中使用ID和类名，直接选中文档中特定的区域。</p>
+<ul>
+<li><p>类属性<br>就是HTML元素的class属性，body标签中包含任何HTML元素都可以添加这个属性。类选择符 .类名。选择同时存在两个类名的元素，可以这样写：    </p>
+<blockquote>
+<p>.class1.class2 { 样式 };</p>
+</blockquote>
+</li>
+<li><p>ID属性<br>ID与类的写法相似，而且表示ID选择符的#(井号)的用法，也跟表示类选择符的.(句号)类似。<br>#ID值 {css声明样式}。<br>另外ID可以用于页内导航，例如:<br>&lt;a href=”#ID值”>&lt;/a>。<br>如果链接的href属性里只有一个#，那么点击该链接会返回页面顶部，像这样&lt;a href=”#”>回到顶部<a\>。    </a\></p>
+</li>
+</ul>
+<h4 id="ID_u548C_u7C7B_u533A_u522B"><a href="#ID_u548C_u7C7B_u533A_u522B" class="headerlink" title="ID和类区别"></a>ID和类区别</h4><p>ID的用途是在页面标记中唯一标识一个特定的元素。它能够为我们编写css规则提供必要的上下文，排除无关的标记，而只选择该上下文的标签。    </p>
+<p>类是可以应用给任意多个页面中的任意多个HTML元素的公共标识符，以便我们为这些元素应用相同的css样式。而且，使用类也让为不同标签名的元素应用相同的样式成为可能。</p>
+<h4 id="2-2-3__u5C5E_u6027_u9009_u62E9_u7B26"><a href="#2-2-3__u5C5E_u6027_u9009_u62E9_u7B26" class="headerlink" title="2.2.3 属性选择符"></a>2.2.3 属性选择符</h4><p>是基于HTML标签的属性选择元素。</p>
+<ul>
+<li><p>属性名选择符<br>标签名[属性名],选择任何带有属性名的标签名。比如：<br>img[title] {样式}—给带有title属性的img元素添加样式，至于title属性什么值无关紧要，只有有这个属性即可。</p>
+</li>
+<li><p>属性值选择符<br>标签名[属性名=”属性值”]，选择任何带有值为属性值的属性名的标签名。<br>比如：img[title=”red flower”]{样式}—-在图片的title的值为red flower的情况下，才会为图片添加边框。</p>
+</li>
+</ul>
+<h3 id="2-3__u4F2A_u7C7B"><a href="#2-3__u4F2A_u7C7B" class="headerlink" title="2.3 伪类"></a>2.3 伪类</h3><p>一个冒号(:)表示伪类，两个冒号(::)表示css3新增的伪元素。伪类实际上并没有类会附加到标记中的标签上，有两种：</p>
+<ul>
+<li>UI(用户界面)伪类会在HTML元素处于某个状态时(比如鼠标指针位于链接上)，为该元素应用css样式。</li>
+<li>结构化伪类会在标记中存在某种结构上的关系时(如某个元素是一组元素中的第一个或最后一个)，为响应元素应用css样式。</li>
+</ul>
+<h4 id="2-3-1_UI_u4F2A_u7C7B"><a href="#2-3-1_UI_u4F2A_u7C7B" class="headerlink" title="2.3.1 UI伪类"></a>2.3.1 UI伪类</h4><p>UI伪类会基于特定HTML元素的状态应用样式。有：    </p>
+<ul>
+<li><p>链接伪类，针对链接的伪类一共有四个。<br>link—链接就在那等着用户点击<br>visited—用户已经点过这个链接<br>hover—鼠标指针正悬停在链接上<br>active—链接正在被点击<br><strong>顺序可变，否则会得不到预期效果，可以这样记–LoVe？HA！</strong></p>
+</li>
+<li><p>:focus伪类，表单中的文本字段在用户点击它时会获得焦点，然后用户才能在其中输入字符。例如：<br>input:focus {border:input solid blue};</p>
+</li>
+<li><p>:target伪类，如果用户点击一个指向页面中其他元素的链接，则那个元素就是目标(target),可以用:target伪类选中它。<br>例如:<br>#more_info:target {样式}<br>对于下面这个链接<br>&lt;a href=”#more_info”>More Information<br>位于页面其他地方、ID为more_info的那个元素就是目标。该元素可能是这样的：<br>&lt;h2 id=”more_info”>这是：target类显示样式地址</p>
+</li>
+</ul>
+<h4 id="2-3-2__u7ED3_u6784_u5316_u4F2A_u7C7B"><a href="#2-3-2__u7ED3_u6784_u5316_u4F2A_u7C7B" class="headerlink" title="2.3.2 结构化伪类"></a>2.3.2 结构化伪类</h4><p>结构化伪类可以根据标记的结构应用样式，比如根据某些元素的父元素或前面的同胞元素是什么。主要有：  </p>
+<ul>
+<li><p>:first-child和：last-child<br>:first-child代表一组同胞元素中的第一个元素，而：last-child代表最后一个，<br>li:first-child {样式}</p>
+</li>
+<li><p>:nth-child<br>e:nth-child(n)，e表示元素名，n表示一个数值(也可以使用odd代表奇数或even代表偶数)。例如：<br>li:nth-child(3)–会选择一组列表中的每个第三项。</p>
+</li>
+</ul>
+<h3 id="2-4__u4F2A_u5143_u7D20"><a href="#2-4__u4F2A_u5143_u7D20" class="headerlink" title="2.4 伪元素"></a>2.4 伪元素</h3><p>伪元素是指文档中若有实无的元素。主要有：    </p>
+<ul>
+<li><p>::first-letter伪元素<br>例如： p::first-letter {font-size:300%},可以使得段首字符放大效果。</p>
+</li>
+<li><p>::first-line伪元素<br>例如： p::first-line{color:red},可以使得段的第一行字体颜色成为红色。</p>
+</li>
+<li><p>::before和::after伪元素<br>用于在特定元素前面或后面添加特殊的内容，例如:对于</p><p class="age" \="">25,添加如下样式<br>p.age::before {content:”Age”;}<br>p.age::after {content:” years.”;}<br>能得到以下结果：<br>Age: 25 years.</p>
+</li>
+</ul>
+<h3 id="2-5__u7EE7_u627F"><a href="#2-5__u7EE7_u627F" class="headerlink" title="2.5 继承"></a>2.5 继承</h3><p>css有很多属性是可以继承的，其中相当一部分都跟文本有关，比如颜色、字体、字号。然而，也有很多css属性不能继承，因为继承这些属性没有意义，主要有元素盒子的定位和显示方式，比如边框、外边距、内边距等。</p>
+<h3 id="2-6__u5C42_u53E0"><a href="#2-6__u5C42_u53E0" class="headerlink" title="2.6 层叠"></a>2.6 层叠</h3><p>层叠就是样式表中的层叠，是一种样式在文档层次中叠加的过程。<br>浏览器层叠各个来源样式的顺序： </p>
+<ul>
+<li>浏览器默认样式</li>
+<li>用户样式表</li>
+<li>作者链接样式表(按照它们链接到页面的先后顺序)</li>
+<li>作业嵌入样式</li>
+<li>作者行内样式</li>
+</ul>
+<p>层叠规则：    </p>
+<ul>
+<li>找到应用给每个元素和属性的所有声明</li>
+<li>按照顺序和权重排序，<strong>声明也可以有权重，空格!important分号(；)用于加重声明的权重，例如：p{color:green !important; font-size:12pt;},优先级最高。</strong></li>
+<li>按特指度排序。特指度更高的优先级高，比如p.class 优先级比p 优先级高，类名选择器比普通的标签选择符具有更高的特指度。一条规则的特指度，由它的选择符中包含多少个标签、类名和ID决定。</li>
+<li>顺序决定权重，位置靠下的(或后声明)规则胜出。</li>
+<li>设定的样式会覆盖继承的样式。    </li>
+</ul>
+<p>还可以参考查理版要点，如下图:<br><img src="/images/css2-2.jpg" alt=""></p>
+<h4 id="u8BA1_u7B97_u7279_u6307_u5EA6"><a href="#u8BA1_u7B97_u7279_u6307_u5EA6" class="headerlink" title="计算特指度"></a>计算特指度</h4><p>有一个简单的记分规则，即对每个选择符都要按下面”ICE”公式计算三个值：I-C-E<br>注意：0-1-12与0-2-0相比，仍然是0-2-0的特指度更高，可以看做一个三位数。<br>三个字母间的端横线是分隔符，并非减号，有如下记分办法:    </p>
+<ul>
+<li>选择符中有一个ID，就在I的位置上加1;</li>
+<li>选择符中有一个类，就在c的位置上加1;</li>
+<li>选择符中有一个元素(标签)名，就在E的位置加1;</li>
+<li>得到一个三位数。此外每个选择符比前一个选择符的特指度更高，即ID&gt;类&gt;标签名</li>
+</ul>
+<h3 id="2-7__u89C4_u5219_u58F0_u660E"><a href="#2-7__u89C4_u5219_u58F0_u660E" class="headerlink" title="2.7 规则声明"></a>2.7 规则声明</h3><p>css属性值主要分以下三类:    </p>
+<ul>
+<li>文本值<br>例如，font-weight:bold声明中的bold就一个文本值，文本值也叫关键字。</li>
+<li>数字值<br>数字值后面都有一个单位，例如英寸或点。数字值主要分两类:绝对值和相对值。</li>
+<li>颜色值<br>颜色值可以用RGB、HSL和十六进制值表示。</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag">#css</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/14/px-pt-em-rem区别/" rel="next" title="px,pt,em,rem区别">
+                <i class="fa fa-chevron-left"></i> px,pt,em,rem区别
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/22/水平垂直布局-翻译/" rel="prev" title="居中的css:完全指南(翻译)">
+                居中的css:完全指南(翻译) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/18/css权威指南学习笔记-一/"
+     data-title="css权威指南学习笔记(一)"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/03/18/css权威指南学习笔记-一/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/18/css权威指南学习笔记-一/"
+           data-title="css权威指南学习笔记(一)" data-url="http://blog.zhangyulei.site/2016/03/18/css权威指南学习笔记-一/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784"><span class="nav-number">1.</span> <span class="nav-text">第一章 HTML标记与文档结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E8C_u7AE0_CSS_u5DE5_u4F5C_u539F_u7406"><span class="nav-number">2.</span> <span class="nav-text">第二章 CSS工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1__u5256_u6790CSS_u89C4_u5219"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 剖析CSS规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E3A_u6587_u6863_u6DFB_u52A0_u6837_u5F0F_u7684_u4E09_u79CD_u65B9_u6CD5"><span class="nav-number">2.1.1.</span> <span class="nav-text">为文档添加样式的三种方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS_u89C4_u5219_u547D_u540D_u60EF_u4F8B"><span class="nav-number">2.2.</span> <span class="nav-text">CSS规则命名惯例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2__u9009_u62E9_u7B26"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 选择符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1__u4E0A_u4E0B_u6587_u9009_u62E9_u7B26"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.2.1 上下文选择符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u8FD8_u6709_u4E00_u4E9B_u7279_u6B8A_u7684_u4E0A_u4E0B_u6587_u9009_u62E9_u7B26_uFF0C_u5982_u4E0B_uFF1A"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">还有一些特殊的上下文选择符，如下：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2_ID_u548C_u7C7B_u9009_u62E9_u7B26"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.2.2 ID和类选择符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ID_u548C_u7C7B_u533A_u522B"><span class="nav-number">2.3.3.</span> <span class="nav-text">ID和类区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3__u5C5E_u6027_u9009_u62E9_u7B26"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.2.3 属性选择符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3__u4F2A_u7C7B"><span class="nav-number">2.4.</span> <span class="nav-text">2.3 伪类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1_UI_u4F2A_u7C7B"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.3.1 UI伪类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2__u7ED3_u6784_u5316_u4F2A_u7C7B"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.3.2 结构化伪类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4__u4F2A_u5143_u7D20"><span class="nav-number">2.5.</span> <span class="nav-text">2.4 伪元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5__u7EE7_u627F"><span class="nav-number">2.6.</span> <span class="nav-text">2.5 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6__u5C42_u53E0"><span class="nav-number">2.7.</span> <span class="nav-text">2.6 层叠</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u8BA1_u7B97_u7279_u6307_u5EA6"><span class="nav-number">2.7.1.</span> <span class="nav-text">计算特指度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7__u89C4_u5219_u58F0_u660E"><span class="nav-number">2.8.</span> <span class="nav-text">2.7 规则声明</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

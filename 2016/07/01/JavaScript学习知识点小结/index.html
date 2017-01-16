@@ -1,0 +1,1126 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 如何将一个函数直接作用在一个字符串对象上?比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      
+String.prototype.spacify = function(){        
+    return this.split(&apos;&apos;).join(&apos; &apos;);      
+};">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习知识点小结">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/07/01/JavaScript学习知识点小结/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="1. 如何将一个函数直接作用在一个字符串对象上?比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      
+String.prototype.spacify = function(){        
+    return this.split(&apos;&apos;).join(&apos; &apos;);      
+};">
+<meta property="og:updated_time" content="2016-08-15T07:53:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习知识点小结">
+<meta name="twitter:description" content="1. 如何将一个函数直接作用在一个字符串对象上?比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      
+String.prototype.spacify = function(){        
+    return this.split(&apos;&apos;).join(&apos; &apos;);      
+};">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> JavaScript学习知识点小结 | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript学习知识点小结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-01T10:58:17+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/01/JavaScript学习知识点小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/01/JavaScript学习知识点小结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/01/JavaScript学习知识点小结/" class="leancloud_visitors" data-flag-title="JavaScript学习知识点小结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F"><a href="#1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F" class="headerlink" title="1. 如何将一个函数直接作用在一个字符串对象上?"></a>1. 如何将一个函数直接作用在一个字符串对象上?</h4><p>比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      </p>
+<pre><code class="bash">String.prototype.spacify = <span class="function"><span class="title">function</span></span>(){        
+    <span class="built_in">return</span> this.split(<span class="string">''</span>).join(<span class="string">' '</span>);      
+};
+</code></pre>
+<a id="more"></a>
+<h4 id="2-__u51FD_u6570_u58F0_u660E_u548C_u51FD_u6570_u8868_u8FBE_u5F0F_u7684_u533A_u522B"><a href="#2-__u51FD_u6570_u58F0_u660E_u548C_u51FD_u6570_u8868_u8FBE_u5F0F_u7684_u533A_u522B" class="headerlink" title="2. 函数声明和函数表达式的区别"></a>2. 函数声明和函数表达式的区别</h4><p>函数声明必须带有标示符(Identifier)(就是大家常说的函数名称),而函数表达式则可以省略这个标示符。<br>函数声明:<br>　 function 函数名称 (参数：可选){ 函数体 }<br>函数表达式：<br>　 function 函数名称（可选）(参数：可选){ 函数体 }<br>如何判断是函数声明还是函数表达式呢？ECMAScript是通过上下文来区分的，如果function foo(){}是作为赋值表达式的一部分的话，那它就是一个函数表达式，如果function foo(){}被包含在一个函数体内，或者位于程序的最顶部的话，那它就是一个函数声明。<br>比如：     </p>
+<pre><code class="bash">unction <span class="function"><span class="title">foo</span></span>(){} // 声明，因为它是程序的一部分      
+var bar = <span class="keyword">function</span> <span class="function"><span class="title">foo</span></span>(){}; // 表达式，因为它是赋值表达式的一部分    
+new <span class="keyword">function</span> <span class="function"><span class="title">bar</span></span>(){}; // 表达式，因为它是new表达式    
+(<span class="function"><span class="title">function</span></span>(){    
+   <span class="keyword">function</span> <span class="function"><span class="title">bar</span></span>(){} // 声明，因为它是函数体的一部分    
+})();
+</code></pre>
+<h4 id="3-_Arguments_u7406_u89E3"><a href="#3-_Arguments_u7406_u89E3" class="headerlink" title="3. Arguments理解"></a>3. Arguments理解</h4><p>如何定义一个log(‘hello word’);函数实现控制台的输出，传入参数不固定，比如log(‘hello’, ‘world’)？<br>可以这样：      </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">log</span></span>(){        
+  console.log.apply(console, arguments);      
+};
+</code></pre>
+<p>如果希望在那个输出的字符串前统一加上(app) 这样的字符串，类似于这样:’(app) hello world’<br>应该知道arguments是一个伪数组，我们需要先将它转换成正常的数组，我们可以使用Array.prototype.slice,代码如下:        </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">log</span></span>(){        
+    var args = Array.prototype.slice.call(arguments);    
+    args.unshift(<span class="string">'(app)'</span>);    
+    console.log.apply(console, args);    
+};
+</code></pre>
+<h4 id="4-_context"><a href="#4-_context" class="headerlink" title="4. context"></a>4. context</h4><p>每个函数都有一个执行context(语句)，包括函数可以访问的所有的变量，因此context包含arguments和定义变量。<br>如下代码：      </p>
+<pre><code class="bash">var User = {      
+  count: 1,    
+  getCount: <span class="function"><span class="title">function</span></span>() {    
+    <span class="built_in">return</span> this.count;    
+  }    
+};    
+var func = User.getCount;      
+console.log(func());  //<span class="string">'undefined'</span>
+</code></pre>
+<p>对于上面这个问题，怎么解决，就是使用Function.prototype.bind，代码如下:      </p>
+<pre><code class="bash">var func = User.getCount.bind(User);        
+console.log(func());  //1
+</code></pre>
+<p>如果老的浏览器不支持这种办法，怎么解决(办法如下)：      </p>
+<pre><code class="bash">Function.prototype.bind = Function.prototype.bind || <span class="keyword">function</span>(context) {        
+    var self = this;      
+    <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>(){       
+        <span class="built_in">return</span> self.apply(context, arguments);        
+    };      
+}
+</code></pre>
+<h4 id="5-__u6784_u9020_u51FD_u6570_u7684_u65B9_u6CD5_u548C_u539F_u578Bprototype_u5C5E_u6027_u4E0A_u65B9_u6CD5_u533A_u522B"><a href="#5-__u6784_u9020_u51FD_u6570_u7684_u65B9_u6CD5_u548C_u539F_u578Bprototype_u5C5E_u6027_u4E0A_u65B9_u6CD5_u533A_u522B" class="headerlink" title="5. 构造函数的方法和原型prototype属性上方法区别"></a>5. 构造函数的方法和原型prototype属性上方法区别</h4><p>定义在构造函数内部的方法,会在它的每一个实例上都克隆这个方法;<br>定义在构造函数的prototype属性上的方法会让它的所有示例都共享这个方法,但是不会在每个实例的内部重新定义这个方法。<br>如果我们的应用需要创建很多新的对象,并且这些对象还有许多的方法,为了节省内存,我们建议把这些方法都定义在构造函数的prototype属性上。</p>
+<h4 id="6-__u5B9A_u4E49_u5728_u51FD_u6570_u7684prototype_u4E0A_u7684_u5C5E_u6027_u4E0D_u4F1A_u88AB_u5E8F_u5217_u5316"><a href="#6-__u5B9A_u4E49_u5728_u51FD_u6570_u7684prototype_u4E0A_u7684_u5C5E_u6027_u4E0D_u4F1A_u88AB_u5E8F_u5217_u5316" class="headerlink" title="6. 定义在函数的prototype上的属性不会被序列化"></a>6. 定义在函数的prototype上的属性不会被序列化</h4><p>参考代码如下：      </p>
+<pre><code class="bash"><span class="keyword">function</span> A(name) {    
+   this.name = name;    
+}    
+A.prototype.sayWhat = <span class="string">'say what...'</span>;    
+var a = new A(<span class="string">'dreamapple'</span>);    
+console.log(JSON.stringify(a)); //{<span class="string">"name"</span>:<span class="string">"dreamapple"</span>}，没有输出 <span class="string">"sayWhat"</span>: <span class="string">"say what..."</span>    
+console.log(a.sayWhat);//say what...
+</code></pre>
+<h4 id="7-__u6570_u7EC4_u53BB_u91CD"><a href="#7-__u6570_u7EC4_u53BB_u91CD" class="headerlink" title="7. 数组去重"></a>7. 数组去重</h4><p>思路：<br>  1.创建一个新的数组存放结果<br>  2.创建一个空对象<br>  3.for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它放到结果数组中，同时把这个元素的内容作为对象的一个属性,并赋值为1，存入到第2步建立的对象中。<br>说明：至于如何对比，就是每次从原数组中取出一个元素，然后到对象中去访问这个属性，如果能访问到值，则说明重复。<br>参考代码：     </p>
+<pre><code class="bash">Array.prototype.unique = <span class="function"><span class="title">function</span></span>(){       
+        var res = [];      
+        var json = {};      
+        <span class="keyword">for</span>(var i = 0; i &lt; this.length; i++){        
+            <span class="keyword">if</span>(!json[this[i]]){       
+                res.push(this[i]);            
+                json[this[i]]=1;        
+            }         
+        }          
+        <span class="built_in">return</span> res;            
+}          
+var arr = [<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'2'</span>,<span class="string">'d'</span>,<span class="string">'1'</span>,<span class="string">'3'</span>];             
+console.log(arr.unique());  //[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"d"</span>]
+</code></pre>
+<h4 id="8-_hasOwnProperty_u5C5E_u6027"><a href="#8-_hasOwnProperty_u5C5E_u6027" class="headerlink" title="8. hasOwnProperty属性"></a>8. hasOwnProperty属性</h4><p>如果已经被占用，可以用其他函数的hasOwnProperty并用call绑定上下文进行校验，代码如下：     </p>
+<pre><code class="bash">var foo = {      
+    hasOwnProperty: <span class="function"><span class="title">function</span></span>() {      
+        <span class="built_in">return</span> <span class="literal">false</span>;     
+    },     
+    bar: <span class="string">'Here be dragons'</span>     
+};             
+foo.hasOwnProperty(<span class="string">'bar'</span>); // 总是返回 <span class="literal">false</span>            
+// 使用其它对象的 hasOwnProperty，并将其上下文设置为foo                
+({}).hasOwnProperty.call(foo, <span class="string">'bar'</span>); // <span class="literal">true</span>
+</code></pre>
+<h4 id="9-_this_u76F4_u63A5_u8C03_u7528_u51FD_u6570"><a href="#9-_this_u76F4_u63A5_u8C03_u7528_u51FD_u6570" class="headerlink" title="9. this直接调用函数"></a>9. this直接调用函数</h4><p>this直接调用函数时，this指向全局对象，如下：      </p>
+<pre><code class="bash">var foo = {             
+     <span class="string">'name'</span>: <span class="string">'zhangyueli'</span>,         
+     <span class="string">'method'</span>: <span class="function"><span class="title">function</span></span>(){             
+        console.log(this);   // 指向foo       
+        <span class="keyword">function</span> <span class="function"><span class="title">data</span></span>(){          
+            console.log(this);   // 指向window          
+        }           
+        data();           
+      }                
+};
+</code></pre>
+<p>可以再method方法内部创建一个局部变量that指向foo对象，如下：    </p>
+<pre><code class="bash">var foo = {        
+     <span class="string">'name'</span>: <span class="string">'zhangyueli'</span>,            
+     <span class="string">'method'</span>: <span class="function"><span class="title">function</span></span>(){       
+        var that=this;   //局部变量that      
+        <span class="keyword">function</span> <span class="function"><span class="title">data</span></span>(){       
+            //使用that指向foo对象；       
+        }       
+        data();     
+     }       
+};
+</code></pre>
+<h4 id="10-__u95ED_u5305"><a href="#10-__u95ED_u5305" class="headerlink" title="10. 闭包"></a>10. 闭包</h4><p>闭包：当前作用域总是能够访问外部作用域中的变量。<br>为什么不可以在外部访问私有变量？<br>因为JavaScript中不可以对作用域进行引用或赋值，因此没有办法在外部访问私有变量。<br>循环闭包常见错误，代码如下：       </p>
+<pre><code class="bash"><span class="keyword">for</span>(var i = 0; i &lt; 10; i++) {      
+    <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() {         
+        console.log(i);            
+     }, 1000);          
+}
+</code></pre>
+<p>上面会输出数字10十次；为了正确获得循环序号，最好使用匿名包装器(即自执行匿名函数)：        </p>
+<pre><code class="bash"><span class="keyword">for</span>(var i = 0; i &lt; 10; i++) {            
+    (<span class="keyword">function</span>(e) {          
+        <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() {           
+            console.log(e);             
+        }, 1000);         
+    })(i);          
+}
+</code></pre>
+<h4 id="11-_arguments_u5BF9_u8C61"><a href="#11-_arguments_u5BF9_u8C61" class="headerlink" title="11. arguments对象"></a>11. arguments对象</h4><p>arguments变量不是一个数组(Array)。它不从Array.prototype继承，实际上它是一个对象。<br>所以无法对arguments变量使用标准的数组方法，比如push，pop或者slice。但可以使用下面的代码将其转化为一个真正的数组。</p>
+<p>Array.prototype.slice.call(arguments);<br>//这个转化比较慢，在性能不好的代码中不推荐</p>
+<p>另外arguments对象对其内部属性以及函数形式参数创建getter和setter方法；因此改变形参的值会影响到arguments对象的值，反之亦然,如下：      </p>
+<pre><code class="bash"><span class="keyword">function</span> foo(a, b, c) {              
+    arguments[0] = 2;                
+    a; // 2                                                                       
+    b = 4;          
+    arguments[1]; // 4       
+    var d = c;        
+    d = 9;         
+    c; // 3         
+}       
+foo(1, 2, 3);
+</code></pre>
+<p>传递参数：下面是将参数从一个函数传递到另一个函数的推荐做法。            </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">foo</span></span>() {        
+    bar.apply(null, arguments);          
+}      
+<span class="keyword">function</span> bar(a, b, c) {             
+    // 干活         
+}
+</code></pre>
+<h4 id="12-__u6784_u9020_u51FD_u6570"><a href="#12-__u6784_u9020_u51FD_u6570" class="headerlink" title="12. 构造函数"></a>12. 构造函数</h4><p>JavaScript中通过new关键字方式调用的函数都被认为是构造函数。         </p>
+<p>在构造函数内部，也就是被调用的函数内，this指向新创建的对象Object。<br>这个新创建的对象的prototype被指向到构造函数的prototype。              </p>
+<p>如果被调用的函数没有显式的return表达式，则隐式的会返回this对象，也就是新创建的对象(new Foo())。           </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() {             
+    this.bla = 1;           
+}        
+Foo.prototype.test = <span class="function"><span class="title">function</span></span>() {          
+    console.log(this.bla);               
+};        
+var <span class="built_in">test</span> = new Foo();
+</code></pre>
+<p>上面代码把Foo作为构造函数调用，并设置新创建对象(new Foo())的prototype为 Foo.prototype。<br>显式的return表达式将会影响返回结果，但仅限返回的是一个对象，如下代码：    </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">Bar</span></span>() {          
+    <span class="built_in">return</span> 2;           
+}        
+new Bar(); // 返回新创建的对象，即Bar{}           
+<span class="keyword">function</span> <span class="function"><span class="title">Test</span></span>() {          
+     this.value = 2;            
+     <span class="built_in">return</span> {        
+        foo: 1          
+     };         
+}           
+new Test(); // 返回的对象即，{foo：1}        
+//这里得到的 new Test()是函数返回的对象，而不是通过new关键字新创建的对象，因此：      
+(new Test()).value === undefined        
+(new Test()).foo === 1        
+//如果 new 被遗漏了，则函数不会返回新创建的对象。          
+<span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() {           
+     this.bla = 1; // 获取设置全局参数          
+}        
+Foo(); // undefined
+</code></pre>
+<h4 id="13-__u4F7F_u7528_u5DE5_u5382_u6A21_u5F0F_u521B_u5EFA_u65B0_u5BF9_u8C61"><a href="#13-__u4F7F_u7528_u5DE5_u5382_u6A21_u5F0F_u521B_u5EFA_u65B0_u5BF9_u8C61" class="headerlink" title="13. 使用工厂模式创建新对象"></a>13. 使用工厂模式创建新对象</h4><p>为了创建新对象，我们可以创建一个工厂方法，并且在方法内构造一个新对象。         </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() {       
+    var obj = {};         
+    obj.value = <span class="string">'blub'</span>;      
+    var private = 2;        
+    obj.someMethod = <span class="keyword">function</span>(value) {       
+        this.value = value;        
+    }         
+    obj.getPrivate = <span class="function"><span class="title">function</span></span>() {       
+        <span class="built_in">return</span> private;       
+    }        
+    <span class="built_in">return</span> obj;       
+}
+</code></pre>
+<p>虽然上面的方式比起new的调用方式不容易出错，并且可以充分利用私有变量带来的便利，但是随之而来的是一些不好的地方。<br>会占用更多的内存，因为新创建的对象不能共享原型上的方法。<br>为了实现继承，工厂方法需要从另外一个对象拷贝所有属性，或者把一个对象作为新创建对象的原型。<br>放弃原型链仅仅是因为防止遗漏new带来的问题，这似乎和语言本身的思想相违背。</p>
+<h4 id="14-__u4F5C_u7528_u57DF_u4E0E_u547D_u540D_u7A7A_u95F4"><a href="#14-__u4F5C_u7528_u57DF_u4E0E_u547D_u540D_u7A7A_u95F4" class="headerlink" title="14. 作用域与命名空间"></a>14. 作用域与命名空间</h4><p>尽管JavaScript支持一对花括号创建的代码段，但是并不支持块级作用域；而仅仅支持函数作用域。      </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span>() { // 一个作用域            
+    <span class="keyword">for</span>(var i = 0; i &lt; 10; i++) { // 不是一个作用域           
+        // count         
+    }         
+    console.log(i); // 10          
+}
+</code></pre>
+<p>隐式的全局变量：      </p>
+<pre><code class="bash">// 脚本 A        
+foo = <span class="string">'42'</span>;  //全局变量foo         
+// 脚本 B          
+var foo = <span class="string">'42'</span>  //当前作用域下得变量foo
+</code></pre>
+<p>局部变量，JavaScript中局部变量只可能通过两种方式声明，一个是作为函数参数(函数里面的参数)，<br>另一个是通过var关键字声明。</p>
+<pre><code class="bash">// 全局变量         
+var foo = 1;         
+var bar = 2;            
+var i = 2;        
+<span class="keyword">function</span> <span class="built_in">test</span>(i) {         
+     // 函数 <span class="built_in">test</span> 内的局部作用域          
+     i = 5;  //局部变量已经在<span class="built_in">test</span>(i)中声明了        
+     var foo = 3;         
+     bar = 4;           
+}          
+<span class="built_in">test</span>(10);
+</code></pre>
+<p>foo和i是函数test内的局部变量，而对bar的赋值将会覆盖全局作用域内的同名变量。<br><strong>变量声明提升（Hoisting）</strong><br>JavaScript 会提升变量声明。这意味着 var 表达式和 function 声明都将会被提升到当前作用域的顶部。</p>
+<pre><code class="bash">bar();        
+var bar = <span class="function"><span class="title">function</span></span>() {};          
+var someValue = 42;           
+<span class="built_in">test</span>();           
+<span class="keyword">function</span> <span class="built_in">test</span>(data) {      
+     <span class="keyword">if</span> (<span class="literal">false</span>) {        
+        goo = 1;        
+     } <span class="keyword">else</span> {         
+        var goo = 2;          
+     }         
+    <span class="keyword">for</span>(var i = 0; i &lt; 100; i++) {          
+        var e = data[i];        
+    }       
+}
+</code></pre>
+<p>上面代码在运行之前将会被转化。JavaScript 将会把 var 表达式和 function 声明提升到当前作用域的顶部。如下：    </p>
+<pre><code class="bash">// var 表达式被移动到这里          
+var bar, someValue; // 缺省值是 <span class="string">'undefined'</span>          
+
+// 函数声明也会提升        
+<span class="keyword">function</span> <span class="built_in">test</span>(data) {               
+    var goo, i, e; // 没有块级作用域，这些变量被移动到函数顶部         
+    <span class="keyword">if</span> (<span class="literal">false</span>) {         
+        goo = 1;          
+    } <span class="keyword">else</span> {         
+        goo = 2;           
+    }          
+    <span class="keyword">for</span>(i = 0; i &lt; 100; i++) {           
+        e = data[i];           
+    }            
+}         
+bar(); // 出错：TypeError，因为 bar 依然是 <span class="string">'undefined'</span>        
+someValue = 42; // 赋值语句不会被提升规则（hoisting）影响          
+bar = <span class="function"><span class="title">function</span></span>() {};          
+<span class="built_in">test</span>();
+</code></pre>
+<p>没有块级作用域不仅导致 var 表达式被从循环内移到外部，而且使一些 if 表达式更难看懂。<br>在原来代码中，if 表达式看起来修改了全局变量 goo，实际上在提升规则被应用后，却是在修改局部变量。 　　　　</p>
+<h4 id="15-__u540D_u79F0_u89E3_u6790_u987A_u5E8F"><a href="#15-__u540D_u79F0_u89E3_u6790_u987A_u5E8F" class="headerlink" title="15. 名称解析顺序"></a>15. 名称解析顺序</h4><p>比如，当访问函数内的 foo 变量时，JavaScript 会按照下面顺序查找：<br>当前作用域内是否有var foo的定义。<br>函数形式参数是否有使用foo名称的。<br>函数自身是否叫做foo。<br>回溯到上一级作用域，然后从头重新开始。     
+       　　    　　　　　　</p>
+<h4 id="16-__u547D_u540D_u7A7A_u95F4"><a href="#16-__u547D_u540D_u7A7A_u95F4" class="headerlink" title="16. 命名空间"></a>16. 命名空间</h4><p>只有一个全局作用域导致的常见错误是命名冲突。在 JavaScript中，这可以通过匿名包装器轻松解决。    </p>
+<pre><code class="bash">(<span class="function"><span class="title">function</span></span>() {           
+    // 函数创建一个命名空间              
+    window.foo = <span class="function"><span class="title">function</span></span>() {         
+        // 对外公开的函数，创建了闭包        
+    };           
+})(); // 立即执行此匿名函数
+</code></pre>
+<p>匿名函数被认为是 表达式；因此为了可调用性，它们首先会被执行。             </p>
+<pre><code class="bash">( // 小括号内的函数首先被执行             
+    <span class="function"><span class="title">function</span></span>() {}                
+    ) // 并且返回函数对象         
+() // 调用上面的执行结果，也就是函数对象
+</code></pre>
+<h4 id="17-_Array_u6784_u9020_u6570_u7EC4"><a href="#17-_Array_u6784_u9020_u6570_u7EC4" class="headerlink" title="17. Array构造数组"></a>17. Array构造数组</h4><p>new Array(3) // 结果: []，此数组长度为 3<br>由于只有一个参数传递到构造函数中（指的是 new Array(3); 这种调用方式），并且这个参数是数字，构造函数会返回一个length属性被设置为此参数的空数组。<br>需要特别注意的是，此时只有length属性被设置，真正的数组并没有生成。     </p>
+<h4 id="18-__u76F8_u7B49_u4E0E_u6BD4_u8F83"><a href="#18-__u76F8_u7B49_u4E0E_u6BD4_u8F83" class="headerlink" title="18. 相等与比较"></a>18. 相等与比较</h4><p>有两种方式判断两个值是否相等：<br>a.等于操作符由两个等号组成：==<br>JavaScript是弱类型语言，这就意味着，等于操作符会为了比较两个值而进行强制类型转换。        </p>
+<pre><code class="bash"><span class="string">""</span>           ==   <span class="string">"0"</span>           // <span class="literal">false</span>     
+0            ==   <span class="string">""</span>            // <span class="literal">true</span>           
+0            ==   <span class="string">"0"</span>           // <span class="literal">true</span>         
+<span class="literal">false</span>        ==   <span class="string">"false"</span>       // <span class="literal">false</span>          
+<span class="literal">false</span>        ==   <span class="string">"0"</span>           // <span class="literal">true</span>         
+<span class="literal">false</span>        ==   undefined     // <span class="literal">false</span>         
+<span class="literal">false</span>        ==   null          // <span class="literal">false</span>        
+null         ==   undefined     // <span class="literal">true</span>        
+<span class="string">" \t\r\n"</span>    ==   0             // <span class="literal">true</span>
+</code></pre>
+<p>缺点：复杂转换规则，会导致难以追踪问题；此外强制转换也会带来性能消耗。比如一个字符串为了和一个数字进行比较，必须事先被强制转换为数字。<br>b.严格等于操作符由三个等号组成：===,严格等于操作符不会进行强制类型转换。<br>注意： 等于操作符当其中一个操作数为对象时，这里的等于操作符比较的不是值是否相等，而是是否属于同一个身份，也就是只有对象的同一个实例才会被认为是相等的。   </p>
+<h4 id="19-_typeof_u64CD_u4F5C_u7B26"><a href="#19-_typeof_u64CD_u4F5C_u7B26" class="headerlink" title="19. typeof操作符"></a>19. typeof操作符</h4><p>特殊情况， [1,2,3] 类型Array， typeof [1,2,3] — object<br>Class一列表示对象的内部属性[[Class]]的值，JavaScript标准文档中只给出了一种获取[[Class]]的值得方法，那就是使用Object.prototype.toString：        </p>
+<pre><code class="bash"><span class="keyword">function</span> is(<span class="built_in">type</span>, obj) {          
+    var class = Object.prototype.toString.call(obj).slice(8, -1);       
+    <span class="built_in">return</span> obj !== undefined &amp;&amp; obj !== null &amp;&amp; class === <span class="built_in">type</span>;        
+}       
+is(<span class="string">'String'</span>, <span class="string">'test'</span>); // <span class="literal">true</span>         
+is(<span class="string">'String'</span>, new String(<span class="string">'test'</span>)); // <span class="literal">true</span>
+</code></pre>
+<p>Object.prototype.toString 返回一种标准格式字符串，所以上例可以通过 slice 截取指定位置的字符串，如下所示：         </p>
+<pre><code class="bash">Object.prototype.toString.call([])    // <span class="string">"[object Array]"</span>           
+Object.prototype.toString.call({})    // <span class="string">"[object Object]"</span>        
+Object.prototype.toString.call(2)    // <span class="string">"[object Number]"</span>
+</code></pre>
+<p>在 ECMAScript5中,为了方便，对null和undefined调用Object.prototype.toString 方法,其返回值由Object变成了Null和Undefined。</p>
+<h4 id="20-_instanceof_u64CD_u4F5C_u7B26"><a href="#20-_instanceof_u64CD_u4F5C_u7B26" class="headerlink" title="20. instanceof操作符"></a>20. instanceof操作符</h4><p>instanceof 操作符用来比较两个操作数的构造函数。只有在比较自定义的对象时才有意义。<br>如果用来比较内置类型，将会和typeof操作符 一样用处不大。<br>比较自定义对象         </p>
+<pre><code class="bash"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() {}       
+<span class="keyword">function</span> <span class="function"><span class="title">Bar</span></span>() {}         
+Bar.prototype = new Foo();         
+new Bar() instanceof Bar; // <span class="literal">true</span>       
+new Bar() instanceof Foo; // <span class="literal">true</span>      
+// 如果仅仅设置 Bar.prototype 为函数 Foo 本身，而不是 Foo 构造函数的一个实例        
+Bar.prototype = Foo;        
+new Bar() instanceof Foo; // <span class="literal">false</span>       
+instanceof 比较内置类型          
+new String(<span class="string">'foo'</span>) instanceof String; // <span class="literal">true</span>      
+new String(<span class="string">'foo'</span>) instanceof Object; // <span class="literal">true</span>       
+<span class="string">'foo'</span> instanceof String; // <span class="literal">false</span>      
+<span class="string">'foo'</span> instanceof Object; // <span class="literal">false</span>
+</code></pre>
+<h4 id="21-__u7C7B_u578B_u8F6C_u5316"><a href="#21-__u7C7B_u578B_u8F6C_u5316" class="headerlink" title="21. 类型转化"></a>21. 类型转化</h4><p>内置类型（比如Number和String）的构造函数在被调用时，使用或者不使用 new 的结果完全不同。       </p>
+<pre><code class="bash">new Number(10) === 10;     // False, 对象与数字的比较        
+Number(10) === 10;         // True, 数字与数字的比较        
+new Number(10) + 0 === 10; // True, 由于隐式的类型转换
+</code></pre>
+<p>使用内置类型 Number 作为构造函数将会创建一个新的Number对象,而在不使用new关键字的Number函数更像是一个数字转换器。</p>
+<p>另外，在比较中引入对象的字面值将会导致更加复杂的强制类型转换。最好的选择是把要比较的值显式的转换为三种可能的类型之一。<br>a.将一个值加上空字符串可以轻松转换为字符串类型。      </p>
+<pre><code class="bash"><span class="string">''</span> + 10 === <span class="string">'10'</span>; // <span class="literal">true</span>
+</code></pre>
+<p>b.使用一元的加号操作符，可以把字符串转换为数字。      </p>
+<pre><code class="bash">+<span class="string">'10'</span> === 10; // <span class="literal">true</span>
+</code></pre>
+<p>c.转换为布尔型,通过使用否操作符两次，可以把一个值转换为布尔型。         </p>
+<pre><code>!!&apos;foo&apos;;   // true     
+!!&apos;&apos;;      // false             
+!!&apos; &apos;;     // true  
+!!&apos;0&apos;;     // true    
+!!&apos;1&apos;;     // true  
+!!&apos;-1&apos;     // true     
+!!{};      // true   ***注意这里是true，但是{} == true ---false；       
+!!true;    // true              
+!![];      // true
+</code></pre><h4 id="22-_eval"><a href="#22-_eval" class="headerlink" title="22. eval"></a>22. eval</h4><p>eval只在被直接调用并且调用函数就是eval本身时，才在当前作用域中执行(在当前作用域中执行一段代码)，不过尽量少用。因为它会执行任意传给它的代码，在代码字符串未知或者是来自一个不信任的源时，<br>绝对不要使用eval函数。  </p>
+<p>参考文献:<br>     &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://bonsaiden.github.io/JavaScript-Garden/zh/" target="_blank" rel="external">JavaScript秘密花园</a><br>     &nbsp;&nbsp;&nbsp;&nbsp;JavaScript高级教程</p>
+<p>　　　　　　　　</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/css样式小结/" rel="next" title="css样式小结">
+                <i class="fa fa-chevron-left"></i> css样式小结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/11/发射猫首页开发css样式问题总结/" rel="prev" title="发射猫首页开发css样式问题总结">
+                发射猫首页开发css样式问题总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/01/JavaScript学习知识点小结/"
+     data-title="JavaScript学习知识点小结"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/07/01/JavaScript学习知识点小结/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/01/JavaScript学习知识点小结/"
+           data-title="JavaScript学习知识点小结" data-url="http://blog.zhangyulei.site/2016/07/01/JavaScript学习知识点小结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F"><span class="nav-number">1.</span> <span class="nav-text">1. 如何将一个函数直接作用在一个字符串对象上?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-__u51FD_u6570_u58F0_u660E_u548C_u51FD_u6570_u8868_u8FBE_u5F0F_u7684_u533A_u522B"><span class="nav-number">2.</span> <span class="nav-text">2. 函数声明和函数表达式的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_Arguments_u7406_u89E3"><span class="nav-number">3.</span> <span class="nav-text">3. Arguments理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-_context"><span class="nav-number">4.</span> <span class="nav-text">4. context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-__u6784_u9020_u51FD_u6570_u7684_u65B9_u6CD5_u548C_u539F_u578Bprototype_u5C5E_u6027_u4E0A_u65B9_u6CD5_u533A_u522B"><span class="nav-number">5.</span> <span class="nav-text">5. 构造函数的方法和原型prototype属性上方法区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-__u5B9A_u4E49_u5728_u51FD_u6570_u7684prototype_u4E0A_u7684_u5C5E_u6027_u4E0D_u4F1A_u88AB_u5E8F_u5217_u5316"><span class="nav-number">6.</span> <span class="nav-text">6. 定义在函数的prototype上的属性不会被序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-__u6570_u7EC4_u53BB_u91CD"><span class="nav-number">7.</span> <span class="nav-text">7. 数组去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-_hasOwnProperty_u5C5E_u6027"><span class="nav-number">8.</span> <span class="nav-text">8. hasOwnProperty属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-_this_u76F4_u63A5_u8C03_u7528_u51FD_u6570"><span class="nav-number">9.</span> <span class="nav-text">9. this直接调用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-__u95ED_u5305"><span class="nav-number">10.</span> <span class="nav-text">10. 闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-_arguments_u5BF9_u8C61"><span class="nav-number">11.</span> <span class="nav-text">11. arguments对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-__u6784_u9020_u51FD_u6570"><span class="nav-number">12.</span> <span class="nav-text">12. 构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-__u4F7F_u7528_u5DE5_u5382_u6A21_u5F0F_u521B_u5EFA_u65B0_u5BF9_u8C61"><span class="nav-number">13.</span> <span class="nav-text">13. 使用工厂模式创建新对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-__u4F5C_u7528_u57DF_u4E0E_u547D_u540D_u7A7A_u95F4"><span class="nav-number">14.</span> <span class="nav-text">14. 作用域与命名空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-__u540D_u79F0_u89E3_u6790_u987A_u5E8F"><span class="nav-number">15.</span> <span class="nav-text">15. 名称解析顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-__u547D_u540D_u7A7A_u95F4"><span class="nav-number">16.</span> <span class="nav-text">16. 命名空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-_Array_u6784_u9020_u6570_u7EC4"><span class="nav-number">17.</span> <span class="nav-text">17. Array构造数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-__u76F8_u7B49_u4E0E_u6BD4_u8F83"><span class="nav-number">18.</span> <span class="nav-text">18. 相等与比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-_typeof_u64CD_u4F5C_u7B26"><span class="nav-number">19.</span> <span class="nav-text">19. typeof操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-_instanceof_u64CD_u4F5C_u7B26"><span class="nav-number">20.</span> <span class="nav-text">20. instanceof操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-__u7C7B_u578B_u8F6C_u5316"><span class="nav-number">21.</span> <span class="nav-text">21. 类型转化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-_eval"><span class="nav-number">22.</span> <span class="nav-text">22. eval</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

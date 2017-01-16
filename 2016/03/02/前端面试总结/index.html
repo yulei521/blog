@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端学习资料总结">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/03/02/前端面试总结/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)">
+<meta property="og:updated_time" content="2016-04-11T00:56:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端学习资料总结">
+<meta name="twitter:description" content="关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> 前端学习资料总结 | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端学习资料总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-02T10:20:02+08:00" content="2016-03-02">
+              2016-03-02
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/02/前端面试总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/02/前端面试总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/02/前端面试总结/" class="leancloud_visitors" data-flag-title="前端学习资料总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)<br><a id="more"></a></p>
+<h2 id="u56FD_u5185IT_u516C_u53F8_u524D_u7AEF_u56E2_u961F"><a href="#u56FD_u5185IT_u516C_u53F8_u524D_u7AEF_u56E2_u961F" class="headerlink" title="国内IT公司前端团队"></a>国内IT公司前端团队</h2><h3 id="u767E_u5EA6"><a href="#u767E_u5EA6" class="headerlink" title="百度"></a>百度</h3><ul>
+<li>FEX: <a href="http://fex.baidu.com/" target="_blank" rel="external">http://fex.baidu.com/</a>(<a href="https://github.com/fex-team/" target="_blank" rel="external">GitHub</a>)</li>
+<li>EFE: <a href="http://efe.baidu.com/" target="_blank" rel="external">http://efe.baidu.com/</a>(<a href="https://github.com/ecomfe" target="_blank" rel="external">GitHub</a>)<h3 id="u963F_u91CC_u5DF4_u5DF4"><a href="#u963F_u91CC_u5DF4_u5DF4" class="headerlink" title="阿里巴巴"></a>阿里巴巴</h3></li>
+<li>淘宝前端: <a href="http://taobaofed.org/" target="_blank" rel="external">http://taobaofed.org/</a></li>
+<li>淘宝手机前端: <a href="https://github.com/amfe/article" target="_blank" rel="external">https://github.com/amfe/article</a></li>
+<li>淘宝: <a href="http://ued.taobao.org/" target="_blank" rel="external">http://ued.taobao.org/</a></li>
+<li>天猫前端:<a href="https://tmallfe.github.io/" target="_blank" rel="external">https://tmallfe.github.io/</a></li>
+<li>阿里妈妈:<a href="http://thx.github.io/" target="_blank" rel="external">http://thx.github.io/</a></li>
+<li>Alinode:<a href="http://alinode.aliyun.com/blog" target="_blank" rel="external">http://alinode.aliyun.com/blog</a><h3 id="u817E_u8BAF"><a href="#u817E_u8BAF" class="headerlink" title="腾讯"></a>腾讯</h3></li>
+<li>腾讯IMWeb社区: <a href="http://imweb.io/" target="_blank" rel="external">http://imweb.io/</a></li>
+<li>腾讯AlloyTeam: <a href="http://www.alloyteam.com/" target="_blank" rel="external">http://www.alloyteam.com/</a></li>
+<li>腾讯ISUX: <a href="http://isux.tencent.com/" target="_blank" rel="external">http://isux.tencent.com/</a></li>
+<li>腾讯TID: <a href="http://tid.tenpay.com/" target="_blank" rel="external">http://tid.tenpay.com/</a><h3 id="360"><a href="#360" class="headerlink" title="360"></a>360</h3></li>
+<li>奇舞团: <a href="http://www.75team.com/" target="_blank" rel="external">http://www.75team.com/</a><h3 id="u7F8E_u56E2"><a href="#u7F8E_u56E2" class="headerlink" title="美团"></a>美团</h3></li>
+<li>美团前端: <a href="http://fe.meituan.com/" target="_blank" rel="external">http://fe.meituan.com/</a><h3 id="u53BB_u54EA_u513F"><a href="#u53BB_u54EA_u513F" class="headerlink" title="去哪儿"></a>去哪儿</h3></li>
+<li>UED: <a href="http://ued.qunar.com/" target="_blank" rel="external">http://ued.qunar.com/</a></li>
+<li>移动前端: <a href="http://ued.qunar.com/mobile/blog/" target="_blank" rel="external">http://ued.qunar.com/mobile/blog/</a></li>
+</ul>
+<h2 id="u524D_u7AEF_u7B80_u5386"><a href="#u524D_u7AEF_u7B80_u5386" class="headerlink" title="前端简历"></a>前端简历</h2><ul>
+<li>JS前端开发简历模板: <a href="http://www.kancloud.cn/jikeytang/qq/81142" target="_blank" rel="external">http://www.kancloud.cn/jikeytang/qq/81142</a></li>
+<li><a href="https://www.zhihu.com/question/23150301" target="_blank" rel="external">一份优秀的前端开发工程师简历是怎样的？(知乎)</a></li>
+<li><a href="http://get.ftqq.com/744.get" target="_blank" rel="external">如何写好技术简历</a></li>
+</ul>
+<h2 id="u524D_u7AEF_u9762_u8BD5_u9898"><a href="#u524D_u7AEF_u9762_u8BD5_u9898" class="headerlink" title="前端面试题"></a>前端面试题</h2><ul>
+<li>JS前端开发面试题: <a href="http://www.kancloud.cn/jikeytang/qq/81143" target="_blank" rel="external">http://www.kancloud.cn/jikeytang/qq/81143</a></li>
+<li>2016年Web前端面试题题目汇总:<a href="http://www.cnblogs.com/bigboyLin/p/5272902.html" target="_blank" rel="external">http://www.cnblogs.com/bigboyLin/p/5272902.html</a></li>
+<li>JavaScript问题集锦:<br><a href="https://github.com/creeperyang/blog/issues/2?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">https://github.com/creeperyang/blog/issues/2?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></li>
+</ul>
+<h2 id="u524D_u7AEF_u63A8_u8350_u4F5C_u54C1"><a href="#u524D_u7AEF_u63A8_u8350_u4F5C_u54C1" class="headerlink" title="前端推荐作品"></a>前端推荐作品</h2><ul>
+<li>JS前端开发推荐作品: <a href="http://www.kancloud.cn/jikeytang/qq/81141" target="_blank" rel="external">http://www.kancloud.cn/jikeytang/qq/81141</a></li>
+<li>实例索引:<a href="http://fgm.cc/learn/" target="_blank" rel="external">http://fgm.cc/learn/</a></li>
+</ul>
+<h2 id="u5B66_u4E60_u8D44_u6599"><a href="#u5B66_u4E60_u8D44_u6599" class="headerlink" title="学习资料"></a>学习资料</h2><ul>
+<li><a href="https://github.com/phodal/growth-ebook" target="_blank" rel="external">Growth:深入浅出全栈工程师-电子书</a></li>
+<li><a href="https://github.com/AutumnsWind/Front-end-tutorial" target="_blank" rel="external">最全的资源教程-前端涉及的所有知识体系</a></li>
+</ul>
+<h2 id="u6280_u672F_u535A_u5BA2"><a href="#u6280_u672F_u535A_u5BA2" class="headerlink" title="技术博客"></a>技术博客</h2><ul>
+<li>百度efe:<a href="http://efe.baidu.com/blog/isomorphic/" target="_blank" rel="external">http://efe.baidu.com/blog/isomorphic/</a></li>
+</ul>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><ul>
+<li>一堆超赞的JS插件:<a href="http://awei.oss-cn-shenzhen.aliyuncs.com/libs.html?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">链接地址</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag">#前端</a>
+          
+            <a href="/tags/面试/" rel="tag">#面试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/10/markdown-语法/" rel="next" title="markdown 语法">
+                <i class="fa fa-chevron-left"></i> markdown 语法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/14/px-pt-em-rem区别/" rel="prev" title="px,pt,em,rem区别">
+                px,pt,em,rem区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/02/前端面试总结/"
+     data-title="前端学习资料总结"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/03/02/前端面试总结/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/02/前端面试总结/"
+           data-title="前端学习资料总结" data-url="http://blog.zhangyulei.site/2016/03/02/前端面试总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u56FD_u5185IT_u516C_u53F8_u524D_u7AEF_u56E2_u961F"><span class="nav-number">1.</span> <span class="nav-text">国内IT公司前端团队</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u767E_u5EA6"><span class="nav-number">1.1.</span> <span class="nav-text">百度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u963F_u91CC_u5DF4_u5DF4"><span class="nav-number">1.2.</span> <span class="nav-text">阿里巴巴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u817E_u8BAF"><span class="nav-number">1.3.</span> <span class="nav-text">腾讯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#360"><span class="nav-number">1.4.</span> <span class="nav-text">360</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7F8E_u56E2"><span class="nav-number">1.5.</span> <span class="nav-text">美团</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53BB_u54EA_u513F"><span class="nav-number">1.6.</span> <span class="nav-text">去哪儿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u524D_u7AEF_u7B80_u5386"><span class="nav-number">2.</span> <span class="nav-text">前端简历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u524D_u7AEF_u9762_u8BD5_u9898"><span class="nav-number">3.</span> <span class="nav-text">前端面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u524D_u7AEF_u63A8_u8350_u4F5C_u54C1"><span class="nav-number">4.</span> <span class="nav-text">前端推荐作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B66_u4E60_u8D44_u6599"><span class="nav-number">5.</span> <span class="nav-text">学习资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6280_u672F_u535A_u5BA2"><span class="nav-number">6.</span> <span class="nav-text">技术博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS"><span class="nav-number">7.</span> <span class="nav-text">JS</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

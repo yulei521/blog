@@ -1,0 +1,855 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第六章 界面组件界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。
+6.1 导航菜单这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。主要有：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css权威指南学习笔记-四">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/04/06/css权威指南学习笔记-四/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="第六章 界面组件界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。
+6.1 导航菜单这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。主要有：">
+<meta property="og:image" content="http://blog.zhangyulei.site/images/css3过渡.jpg">
+<meta property="og:image" content="http://blog.zhangyulei.site/images/border-radius.jpg">
+<meta property="og:image" content="http://blog.zhangyulei.site/images/box-shadow.jpg">
+<meta property="og:updated_time" content="2016-04-07T14:21:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css权威指南学习笔记-四">
+<meta name="twitter:description" content="第六章 界面组件界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。
+6.1 导航菜单这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。主要有：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> css权威指南学习笔记-四 | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                css权威指南学习笔记-四
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-06T16:09:53+08:00" content="2016-04-06">
+              2016-04-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/css权威指南学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">css权威指南学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/06/css权威指南学习笔记-四/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/css权威指南学习笔记-四/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/06/css权威指南学习笔记-四/" class="leancloud_visitors" data-flag-title="css权威指南学习笔记-四">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6"><a href="#u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6" class="headerlink" title="第六章 界面组件"></a>第六章 界面组件</h2><p>界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。</p>
+<h3 id="6-1__u5BFC_u822A_u83DC_u5355"><a href="#6-1__u5BFC_u822A_u83DC_u5355" class="headerlink" title="6.1 导航菜单"></a>6.1 导航菜单</h3><p>这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。<br>主要有：   </p>
+<a id="more"></a>
+<ul>
+<li>纵向菜单–(<em>非首位子元素 li + li</em>,表示任何跟在li之后的li)默认列表是纵向布局的。</li>
+<li>横向菜单–将纵向菜单的列表项<strong>浮动</strong>就可以变成横向菜单。</li>
+<li>下拉菜单–多层嵌套列表(这里有几个嵌套技巧，回头实现下把demo地址附在这里)。</li>
+</ul>
+<h3 id="6-2__u8868_u5355"><a href="#6-2__u8868_u5355" class="headerlink" title="6.2 表单"></a>6.2 表单</h3><h4 id="6-2-1_HTML_u8868_u5355_u5143_u7D20"><a href="#6-2-1_HTML_u8868_u5355_u5143_u7D20" class="headerlink" title="6.2.1 HTML表单元素"></a>6.2.1 HTML表单元素</h4><p>for属性与id属性通过相同的值关联起来后，用户点击标注文本也可以选择单选按钮和复选框。比如：</p>
+<pre><code class="bash">&lt;label <span class="keyword">for</span>=<span class="string">"user_name"</span>&gt;User Name&lt;/label&gt;    
+&lt;!-- 创建一个文本字段 --&gt;    
+&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"user_name"</span> name=<span class="string">"user_name"</span> /&gt;    
+&lt;p&gt;Please select a user name&lt;/p&gt;
+</code></pre>
+<p>常用的表单元素：    </p>
+<ul>
+<li>form元素，所有表单的标记都包含在一个form元素中，form这里有两个必要的属性：action和method。</li>
+<li>提交表单，表单中的数据是以“名=值”的形式发送给服务器的，比如“username=zefeng”，每个控件都是这么一个名/值对形式。这里的“名”就是在控件name属性中设定的名字。“值”是你给予的值。(对于选框，1表示选中，0表示未选中)</li>
+<li>控件组，可以把一组相关的表单控件组织到一个控件组元素fieldset，fieldset的第一个子元素一定得是legend文本元素，其中包含这个控件组的标题。</li>
+<li>控件与标注，表单包含一或多个控件。每个表单控件都有一个对应的label文本元素，用于描述控件代表的数据。</li>
+<li>控件类型-input，text-基本的单行文本框；password-文本显示为掩码；checkbox-复选框(分组办法是为它们设定相同的name属性)；radio-单选按钮(分组办法是为它们设定相同的name属性)；submit-提交按钮；time、data、search-html5文本框的变体；还有多行文本区textarea；选项列表(select元素)会创建一个下拉列表，每个备选项都用option文本元素来完成。</li>
+</ul>
+<h4 id="6-2-2__u8868_u5355_u6807_u8BB0_u7B56_u7565"><a href="#6-2-2__u8868_u5355_u6807_u8BB0_u7B56_u7565" class="headerlink" title="6.2.2 表单标记策略"></a>6.2.2 表单标记策略</h4><p>书里推荐用块级section元素来充当这个角色，这样既方便组织控件，又方便为行内表单控件及其标注设定样式。</p>
+<p><img src="/images/css3过渡.jpg" alt="">;</p>
+<h3 id="6-3__u5F39_u51FA_u5C42"><a href="#6-3__u5F39_u51FA_u5C42" class="headerlink" title="6.3 弹出层"></a>6.3 弹出层</h3><p>弹出层指的是在鼠标悬停于某个元素之上时显示的一个界面组件。主要用到z-index属性和动态生成HTML元素。</p>
+<p>这里有个利用css创建三角形的样式代码：      </p>
+<pre><code class="bash">div {
+    border:12px solid;    
+    border-color:transparent red transparent transparent;    
+    height:0px;    
+    width:0px;    
+}
+</code></pre>
+<p>以上代码的意思，通过增加盒子的边框，将盒子的宽和高都设定成0，同时将其他三个边框设定成transparent,就可以用css造出一个三角形。</p>
+<h2 id="u7B2C_u4E03_u7AE0_CSS3_u5B9E_u6218"><a href="#u7B2C_u4E03_u7AE0_CSS3_u5B9E_u6218" class="headerlink" title="第七章 CSS3实战"></a>第七章 CSS3实战</h2><p>关于弧形角，这里借助书里的一个图片说明下:<br><img src="/images/border-radius.jpg" alt="">    </p>
+<p>对于box-shadow,如下说明：<br><img src="/images/box-shadow.jpg" alt=""></p>
+<h2 id="u7B2C_u516B_u7AE0__u54CD_u5E94_u5F0F_u8BBE_u8BA1"><a href="#u7B2C_u516B_u7AE0__u54CD_u5E94_u5F0F_u8BBE_u8BA1" class="headerlink" title="第八章 响应式设计"></a>第八章 响应式设计</h2><p>响应式设计的要素：     </p>
+<ul>
+<li>媒体查询-是一种css语法，可以根据浏览器的特性，一般是屏幕或浏览器宽度提供css规则。</li>
+<li>流式布局-使用em或百分比等相对单位设定页面总体结构，让布局能够随着屏幕大小而缩放</li>
+<li>弹性图片-是使用相对单位确保图片再大也不会超过其容器(max-width:100%)。</li>
+</ul>
+<h3 id="8-1__u5A92_u4F53_u67E5_u8BE2"><a href="#8-1__u5A92_u4F53_u67E5_u8BE2" class="headerlink" title="8.1 媒体查询"></a>8.1 媒体查询</h3><p>媒体查询时css代码容器，其中的css只在某些条件具备时才会应用。可以用两种方式来写：@media规则和&lt;link&gt;标签的media属性。  </p>
+<p><strong>@media规则使用如下：</strong>    </p>
+<pre><code class="bash">/*只在屏幕宽度不大于 568 像素时应用*/
+@media screen and (max-width:568px) {    
+    .column {<span class="built_in">float</span>:none; width:96%; margin:0 auto;}    
+}         
+@media <span class="built_in">print</span> {    
+    nav {    
+        display:none;    
+    }    
+}
+</code></pre>
+<p>媒体特性-媒体特性也就是媒体某一方面的特征，一般带有 min-或 max-前缀。最常用的媒体特性如下：    </p>
+<p>min-device-width 和 max-device-width：匹配设备屏幕的尺寸；<br>min-width 和 max-width：匹配视口的宽度，例如浏览器窗口宽度；<br>orientation（值为 portrait 和 landscape）：匹配设备是横屏还是竖屏。    </p>
+<p><em>如果想通过媒体查询来根据用户对浏览器窗口的缩放重新调整布局，应该使用 min-width 和<br>max-width。</em>    </p>
+<p><strong>&lt;link&gt;标签的media属性使用如下：</strong>  </p>
+<pre><code class="bash">&lt;link <span class="built_in">type</span>=<span class="string">"text/css"</span> media=<span class="string">"print"</span> href=<span class="string">"css/print_styles.css"</span> /&gt;     
+&lt;link <span class="built_in">type</span>=<span class="string">"text/css"</span> media=<span class="string">"screen and (max-width:568px)"</span>href=<span class="string">"css/iphone_styles.css"</span> /&gt;
+</code></pre>
+<p>上面的css样式会根据media属性中的指定的条件应用。</p>
+<p><strong>使用&lt;meta&gt;标签设定视口</strong>      </p>
+<p>如果你想让自己的页面布局适合这些小屏幕，首先就要覆盖这种自动缩小的设定。方法是在页面的<head>标签里添加一个<meta>标签：</head></p>
+<pre><code class="bash">&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width; maximumscale=1.0"</span> /&gt;
+</code></pre>
+<p>meta标签告诉浏览器按照屏幕宽度来显示网页，不要缩小网页。</p>
+<h2 id="u5176_u4ED6"><a href="#u5176_u4ED6" class="headerlink" title="其他"></a>其他</h2><h4 id="u6761_u4EF6_u6CE8_u91CA"><a href="#u6761_u4EF6_u6CE8_u91CA" class="headerlink" title="条件注释"></a>条件注释</h4><p>对于IE浏览器单独应用的样式：</p>
+<pre><code class="bash">&lt;!--[<span class="keyword">if</span> lte IE 8]&gt; &lt;!-- IE 条件注释 --&gt;    
+&lt;link src=<span class="string">"ie_only.css"</span> rel=<span class="string">"stylesheet"</span> /&gt;    
+&lt;![endif]--&gt;
+</code></pre>
+<p>以上只在IE浏览器中执行。加载条件可以使用 lte（less than or equal to，小于等于）、 lt（less than，小于）、 gte（greaterthan or equal to，大于等于）、 gt（greater than，大于），甚至只写一个浏览器版本号如 IE 6。</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag">#css</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/30/css权威指南学习笔记-三/" rel="next" title="css权威指南学习笔记(三)">
+                <i class="fa fa-chevron-left"></i> css权威指南学习笔记(三)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/20/css样式小结/" rel="prev" title="css样式小结">
+                css样式小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/06/css权威指南学习笔记-四/"
+     data-title="css权威指南学习笔记-四"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/04/06/css权威指南学习笔记-四/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/06/css权威指南学习笔记-四/"
+           data-title="css权威指南学习笔记-四" data-url="http://blog.zhangyulei.site/2016/04/06/css权威指南学习笔记-四/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6"><span class="nav-number">1.</span> <span class="nav-text">第六章 界面组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1__u5BFC_u822A_u83DC_u5355"><span class="nav-number">1.1.</span> <span class="nav-text">6.1 导航菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2__u8868_u5355"><span class="nav-number">1.2.</span> <span class="nav-text">6.2 表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-1_HTML_u8868_u5355_u5143_u7D20"><span class="nav-number">1.2.1.</span> <span class="nav-text">6.2.1 HTML表单元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-2__u8868_u5355_u6807_u8BB0_u7B56_u7565"><span class="nav-number">1.2.2.</span> <span class="nav-text">6.2.2 表单标记策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3__u5F39_u51FA_u5C42"><span class="nav-number">1.3.</span> <span class="nav-text">6.3 弹出层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E03_u7AE0_CSS3_u5B9E_u6218"><span class="nav-number">2.</span> <span class="nav-text">第七章 CSS3实战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u516B_u7AE0__u54CD_u5E94_u5F0F_u8BBE_u8BA1"><span class="nav-number">3.</span> <span class="nav-text">第八章 响应式设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1__u5A92_u4F53_u67E5_u8BE2"><span class="nav-number">3.1.</span> <span class="nav-text">8.1 媒体查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5176_u4ED6"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u6761_u4EF6_u6CE8_u91CA"><span class="nav-number">4.0.1.</span> <span class="nav-text">条件注释</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

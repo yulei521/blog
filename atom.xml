@@ -1,0 +1,1810 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>泽枫&#39;s blog</title>
+  <subtitle>一个安静的web爱好者</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.zhangyulei.site/"/>
+  <updated>2016-10-11T01:37:00.000Z</updated>
+  <id>http://blog.zhangyulei.site/</id>
+  
+  <author>
+    <name>泽枫</name>
+    <email>zhangyulei5217@163.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一道简单的JavaScript编程题</title>
+    <link href="http://blog.zhangyulei.site/2016/10/10/%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E7%9A%84JavaScript%E7%BC%96%E7%A8%8B%E9%A2%98/"/>
+    <id>http://blog.zhangyulei.site/2016/10/10/一道简单的JavaScript编程题/</id>
+    <published>2016-10-10T07:33:35.000Z</published>
+    <updated>2016-10-11T01:37:00.000Z</updated>
+    
+    <content type="html">&lt;p&gt;之前做的一道关于JavaScript的编程题，现在拿出来尝试用多种方法来解决下。题目如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;}
+试用console.log() 输出结果 Hello my beautiful life!
+&lt;/code&gt;&lt;/pre&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h5 id=&quot;1_u3001__u76F4_u63A5_u5229_u7528for_in&quot;&gt;&lt;a href=&quot;#1_u3001__u76F4_u63A5_u5229_u7528for_in&quot; class=&quot;headerlink&quot; title=&quot;1、 直接利用for in&quot;&gt;&lt;/a&gt;1、 直接利用for in&lt;/h5&gt;&lt;p&gt;首先想到的肯定是通过for in 获取属性值然后拼接，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;};
+function conobj(obj){
+    var string = &amp;quot;&amp;quot;;
+    for(var item in obj){
+        string+=obj[item] + &amp;quot; &amp;quot;;
+    }
+    console.log(string);
+ }
+conobj(obj); 
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;2_u3001__u7ED9Object_u6DFB_u52A0_u65B9_u6CD5&quot;&gt;&lt;a href=&quot;#2_u3001__u7ED9Object_u6DFB_u52A0_u65B9_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;2、 给Object添加方法&quot;&gt;&lt;/a&gt;2、 给Object添加方法&lt;/h5&gt;&lt;p&gt;或者给Object添加个方法，然后在方法中对属性值进行拼接，代码类似，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;};
+Object.prototype.conobj = function(){
+    var str = &amp;quot;&amp;quot;;
+    for(var item in this){
+        if(typeof this[item] == &amp;quot;string&amp;quot;){
+            str += this[item] + &amp;quot; &amp;quot;;
+        } 
+    }
+console.log(str);
+}    
+obj.conobj();
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上述两种方法类似，都是通过for in 获取对象属性，然后通过属性获取属性值进行字符串拼接，记得加空格，不同的是第二种方法对this对象进行for循环时需要过滤下，不然会把对象的函数作为值进行拼接。&lt;/p&gt;
+&lt;h5 id=&quot;3_u3001__u8F6C_u6362_u4E3A_u5B57_u7B26_u4E32_u8FDB_u884C_u5206_u5272&quot;&gt;&lt;a href=&quot;#3_u3001__u8F6C_u6362_u4E3A_u5B57_u7B26_u4E32_u8FDB_u884C_u5206_u5272&quot; class=&quot;headerlink&quot; title=&quot;3、 转换为字符串进行分割&quot;&gt;&lt;/a&gt;3、 转换为字符串进行分割&lt;/h5&gt;&lt;p&gt;或者先把对象转换为字符串利用JSON.stringify，然后利用多次的split分割出属性值，进行拼接，相比上两种有点复杂，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;};
+function conobj(obj){
+    var arr2str = JSON.stringify(obj);
+    var arr = arr2str.slice(1, arr2str.length-1).split(&amp;quot;,&amp;quot;);
+    var string =&amp;quot;&amp;quot;;
+    for(var i=0;i&amp;lt;arr.length;i++){
+        var temp = arr[i].split(&amp;quot;:&amp;quot;)[1];
+        string+= temp.slice(1, temp.length-1)+ &amp;quot; &amp;quot;;
+    }
+console.log(string);
+}
+conobj(obj);
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&quot;4_u3001__u5229_u7528_u6B63_u5219_u5339_u914D&quot;&gt;&lt;a href=&quot;#4_u3001__u5229_u7528_u6B63_u5219_u5339_u914D&quot; class=&quot;headerlink&quot; title=&quot;4、 利用正则匹配&quot;&gt;&lt;/a&gt;4、 利用正则匹配&lt;/h5&gt;&lt;p&gt;构造出正则表达式使用全局模式匹配找出对象属性值连接起来，具体代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;};
+function conobj(obj){
+    var str = JSON.stringify(obj);
+    var pattern = /&amp;quot;\d{1}&amp;quot;:\s*&amp;quot;([a-zA-Z]+!?)&amp;quot;/gi;
+    var string = &amp;quot;&amp;quot;;
+    var matches;
+    var i = 4;
+    while(i&amp;gt;0){
+        matches = pattern.exec(str);
+        string += matches[1] + &amp;apos; &amp;apos;;
+        i--;
+    }
+    console.log(string);
+ };
+ conobj(obj);
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前做的一道关于JavaScript的编程题，现在拿出来尝试用多种方法来解决下。题目如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var obj = {1: &amp;quot;Hello&amp;quot;, 2: &amp;quot;my&amp;quot;, 3: &amp;quot;beautiful&amp;quot;, 4: &amp;quot;life!&amp;quot;}
+试用console.log() 输出结果 Hello my beautiful life!
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript Promise 知多少</title>
+    <link href="http://blog.zhangyulei.site/2016/09/06/JavaScript%20Promise-%E7%9F%A5%E5%A4%9A%E5%B0%91/"/>
+    <id>http://blog.zhangyulei.site/2016/09/06/JavaScript Promise-知多少/</id>
+    <published>2016-09-06T07:35:17.000Z</published>
+    <updated>2016-09-06T08:13:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;随着ECMAScript 6盛行，关于Promise的相关的文章也越来越多起来。之前看到一篇关于JavaScript Promise的写得很不错，现备录下：&lt;a href=&quot;http://liubin.org/promises-book/#omake-message&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://liubin.org/promises-book/#omake-message&lt;/a&gt;，感兴趣的可以直接去网页看看。&lt;br&gt;下面仅仅是我在读别人文章时的一点点简单记录。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1_u3001_Promise_u662F_u4EC0_u4E48&quot;&gt;&lt;a href=&quot;#1_u3001_Promise_u662F_u4EC0_u4E48&quot; class=&quot;headerlink&quot; title=&quot;1、 Promise是什么&quot;&gt;&lt;/a&gt;1、 Promise是什么&lt;/h4&gt;&lt;p&gt;最开始接触Promise是从关于ECMAScript 6文章中看到的，提到异步编程然后提到了Promise对象。&lt;br&gt;&lt;strong&gt;简单来说Promise就是为异步编程提供统一的接口，&lt;/strong&gt;采取规定之外的写法都会出错。&lt;/p&gt;
+&lt;h4 id=&quot;2_u3001_Promise_u6D41_u7A0B&quot;&gt;&lt;a href=&quot;#2_u3001_Promise_u6D41_u7A0B&quot; class=&quot;headerlink&quot; title=&quot;2、 Promise流程&quot;&gt;&lt;/a&gt;2、 Promise流程&lt;/h4&gt;&lt;p&gt;参考文章的示例代码。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;asyncFunction&lt;/span&gt;&lt;/span&gt;() {                                                          
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; new Promise(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (resolve, reject) {                 
+        &lt;span class=&quot;built_in&quot;&gt;set&lt;/span&gt;Timeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt; () {                 
+            resolve(&lt;span class=&quot;string&quot;&gt;&#39;Async Hello world&#39;&lt;/span&gt;);                 
+        }, 16);                     
+    });                         
+}                     
+asyncFunction().then(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (value) {                         
+    console.log(value);    // =&amp;gt; &lt;span class=&quot;string&quot;&gt;&#39;Async Hello world&#39;&lt;/span&gt;                      
+}).catch(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (error) {                    
+    console.log(error);                         
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先声明一个asyncFunction函数，asyncFunction()执行后返回一个Promise对象，然后调用它的then方法设置resolve后的回调函数，catch方法来设置发生错误时的回调函数。   &lt;/p&gt;
+&lt;p&gt;该promise对象会在setTimeout之后的16ms时被resolve, 这时 then 的回调函数会被调用，并输出 ‘Async Hello world’ 。                                     &lt;/p&gt;
+&lt;h4 id=&quot;3_u3001Promise_u4E09_u79CD_u72B6_u6001&quot;&gt;&lt;a href=&quot;#3_u3001Promise_u4E09_u79CD_u72B6_u6001&quot; class=&quot;headerlink&quot; title=&quot;3、Promise三种状态&quot;&gt;&lt;/a&gt;3、Promise三种状态&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;“has-resolution” - Fulfilled&lt;br&gt;resolve(成功)时。此时会调用 onFulfilled&lt;/li&gt;
+&lt;li&gt;“has-rejection” - Rejected&lt;br&gt;reject(失败)时。此时会调用 onRejected&lt;/li&gt;
+&lt;li&gt;“unresolved” - Pending&lt;br&gt;既不是resolve也不是reject的状态。也就是promise对象刚被创建后的初始化状态等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pending可以向Rejected或Fulfilled转化。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着ECMAScript 6盛行，关于Promise的相关的文章也越来越多起来。之前看到一篇关于JavaScript Promise的写得很不错，现备录下：&lt;a href=&quot;http://liubin.org/promises-book/#omake-message&quot;&gt;http://liubin.org/promises-book/#omake-message&lt;/a&gt;，感兴趣的可以直接去网页看看。&lt;br&gt;下面仅仅是我在读别人文章时的一点点简单记录。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/tags/JavaScript/"/>
+    
+      <category term="Promise" scheme="http://blog.zhangyulei.site/tags/Promise/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>redis 常用操作</title>
+    <link href="http://blog.zhangyulei.site/2016/09/04/redis-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.zhangyulei.site/2016/09/04/redis-常用操作/</id>
+    <published>2016-09-04T12:43:39.000Z</published>
+    <updated>2016-09-04T12:53:26.000Z</updated>
+    
+    <content type="html">&lt;p&gt;目前只是用到几条最简单的指令，&lt;/p&gt;
+&lt;h4 id=&quot;1_u3001_u6E05_u9664_u7F13_u5B58&quot;&gt;&lt;a href=&quot;#1_u3001_u6E05_u9664_u7F13_u5B58&quot; class=&quot;headerlink&quot; title=&quot;1、清除缓存&quot;&gt;&lt;/a&gt;1、清除缓存&lt;/h4&gt;&lt;p&gt;flushdb&lt;/p&gt;
+&lt;h4 id=&quot;2_u3001_u67E5_u770B_u5DF2_u6709_u7684key&quot;&gt;&lt;a href=&quot;#2_u3001_u67E5_u770B_u5DF2_u6709_u7684key&quot; class=&quot;headerlink&quot; title=&quot;2、查看已有的key&quot;&gt;&lt;/a&gt;2、查看已有的key&lt;/h4&gt;&lt;p&gt;keys *&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;目前只是用到几条最简单的指令，&lt;/p&gt;
+&lt;h4 id=&quot;1_u3001_u6E05_u9664_u7F13_u5B58&quot;&gt;&lt;a href=&quot;#1_u3001_u6E05_u9664_u7F13_u5B58&quot; class=&quot;headerlink&quot; title=&quot;1、清除缓存&quot;
+    
+    </summary>
+    
+      <category term="redis" scheme="http://blog.zhangyulei.site/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="http://blog.zhangyulei.site/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mongodb 常用操作</title>
+    <link href="http://blog.zhangyulei.site/2016/09/04/mongodb-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.zhangyulei.site/2016/09/04/mongodb-常用操作/</id>
+    <published>2016-09-04T12:43:03.000Z</published>
+    <updated>2016-09-04T12:57:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。&lt;/p&gt;
+&lt;h4 id=&quot;1_u3001_u663E_u793A_u6570_u636E_u5E93&quot;&gt;&lt;a href=&quot;#1_u3001_u663E_u793A_u6570_u636E_u5E93&quot; class=&quot;headerlink&quot; title=&quot;1、显示数据库&quot;&gt;&lt;/a&gt;1、显示数据库&lt;/h4&gt;&lt;p&gt;show dbs   — 显示当前所有数据库&lt;/p&gt;
+&lt;h4 id=&quot;2_u3001_u79FB_u9664_u67D0_u4E00_u4E2A_u6587_u6863&quot;&gt;&lt;a href=&quot;#2_u3001_u79FB_u9664_u67D0_u4E00_u4E2A_u6587_u6863&quot; class=&quot;headerlink&quot; title=&quot;2、移除某一个文档&quot;&gt;&lt;/a&gt;2、移除某一个文档&lt;/h4&gt;&lt;p&gt;db.collection.remove({});&lt;/p&gt;
+&lt;h4 id=&quot;3-_u67E5_u627E_u6587_u6863&quot;&gt;&lt;a href=&quot;#3-_u67E5_u627E_u6587_u6863&quot; class=&quot;headerlink&quot; title=&quot;3.查找文档&quot;&gt;&lt;/a&gt;3.查找文档&lt;/h4&gt;&lt;p&gt;db.collection.find({});&lt;br&gt;如果参数为空，返回所有的数据；可以加一个参数，进行过滤选择&lt;/p&gt;
+&lt;h4 id=&quot;4_u3001_u63D2_u5165_u6587_u6863&quot;&gt;&lt;a href=&quot;#4_u3001_u63D2_u5165_u6587_u6863&quot; class=&quot;headerlink&quot; title=&quot;4、插入文档&quot;&gt;&lt;/a&gt;4、插入文档&lt;/h4&gt;&lt;p&gt;db.collection.insert(Json数据);&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。&lt;/p&gt;
+&lt;h4 id=&quot;1_u3001_u663E_u793A_u6570_u636E_u5E93&quot;&gt;&lt;a href=&quot;#1_u3001_u663E_u793A_u6570_u636E_u5E
+    
+    </summary>
+    
+      <category term="mongodb" scheme="http://blog.zhangyulei.site/categories/mongodb/"/>
+    
+    
+      <category term="mongodb" scheme="http://blog.zhangyulei.site/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="http://blog.zhangyulei.site/2016/08/27/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://blog.zhangyulei.site/2016/08/27/正则表达式/</id>
+    <published>2016-08-27T15:32:20.000Z</published>
+    <updated>2016-08-27T16:05:04.000Z</updated>
+    
+    <content type="html">&lt;p&gt;在表单验证或者处理字符串中需要使用到正则，这里记录下，方便以后用到时查看。                   &lt;/p&gt;
+&lt;h4 id=&quot;1-__u5E38_u7528_u5143_u5B57_u7B26&quot;&gt;&lt;a href=&quot;#1-__u5E38_u7528_u5143_u5B57_u7B26&quot; class=&quot;headerlink&quot; title=&quot;1. 常用元字符&quot;&gt;&lt;/a&gt;1. 常用元字符&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;.  匹配除换行符以外的任意字符                                                                  &lt;/li&gt;
+&lt;li&gt;\w 匹配字母或数字或下划线或汉字                                                              &lt;/li&gt;
+&lt;li&gt;\s 匹配任意的空白符                                                                                   &lt;/li&gt;
+&lt;li&gt;\d 匹配数字                                                                                    &lt;/li&gt;
+&lt;li&gt;\b 匹配单词的开始或结束                                                                               &lt;/li&gt;
+&lt;li&gt;^     匹配字符串的开始                                                                                 &lt;/li&gt;
+&lt;li&gt;$     匹配字符串的结束                                                                                          &lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;                                                                           
+&lt;h4 id=&quot;2-__u5E38_u7528_u9650_u5B9A_u7B26&quot;&gt;&lt;a href=&quot;#2-__u5E38_u7528_u9650_u5B9A_u7B26&quot; class=&quot;headerlink&quot; title=&quot;2. 常用限定符&quot;&gt;&lt;/a&gt;2. 常用限定符&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;* 重复零次或更多次                                                                                      &lt;/li&gt;
+&lt;li&gt;+ 重复一次或更多次                                                                                      &lt;/li&gt;
+&lt;li&gt;?     重复零次或一次                                                                                  &lt;/li&gt;
+&lt;li&gt;{n} 重复n次                                                                                        &lt;/li&gt;
+&lt;li&gt;{n,} 重复n次或更多次                                                                               &lt;/li&gt;
+&lt;li&gt;{n,m}    重复n到m次               &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;3-__u5176_u4ED6&quot;&gt;&lt;a href=&quot;#3-__u5176_u4ED6&quot; class=&quot;headerlink&quot; title=&quot;3. 其他&quot;&gt;&lt;/a&gt;3. 其他&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;[0-9] 匹配从0到9                                                                           &lt;/li&gt;
+&lt;li&gt;[a-zA-Z] 匹配大小写字符                                                                  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在表单验证或者处理字符串中需要使用到正则，这里记录下，方便以后用到时查看。                   &lt;/p&gt;
+&lt;h4 id=&quot;1-__u5E38_u7528_u5143_u5B57_u7B26&quot;&gt;&lt;a href=&quot;#1-__u5E38_u7528_u5143_u5B57_u7B26&quot; class=&quot;headerlink&quot; title=&quot;1. 常用元字符&quot;&gt;&lt;/a&gt;1. 常用元字符&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;.  匹配除换行符以外的任意字符                                                                  &lt;/li&gt;
+&lt;li&gt;\w 匹配字母或数字或下划线或汉字                                                              &lt;/li&gt;
+&lt;li&gt;\s 匹配任意的空白符                                                                                   &lt;/li&gt;
+&lt;li&gt;\d 匹配数字                                                                                    &lt;/li&gt;
+&lt;li&gt;\b 匹配单词的开始或结束                                                                               &lt;/li&gt;
+&lt;li&gt;^     匹配字符串的开始                                                                                 &lt;/li&gt;
+&lt;li&gt;$     匹配字符串的结束                                                                                          &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="正则表达式" scheme="http://blog.zhangyulei.site/categories/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="正则" scheme="http://blog.zhangyulei.site/tags/%E6%AD%A3%E5%88%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gulp压缩js、css</title>
+    <link href="http://blog.zhangyulei.site/2016/08/22/gulp%E5%8E%8B%E7%BC%A9js%E3%80%81css/"/>
+    <id>http://blog.zhangyulei.site/2016/08/22/gulp压缩js、css/</id>
+    <published>2016-08-22T14:14:15.000Z</published>
+    <updated>2016-08-22T14:30:16.000Z</updated>
+    
+    <content type="html">&lt;p&gt;利用gulp工具可以压缩js、css文件，首先确保pc端安装了Node，然后根据依赖模块按照gulp、gulp-minify-css、gulp-concat、gulp-uglify、gulp-uglify。&lt;br&gt;命令行运行 &lt;strong&gt;npm install gulp -g(global环境)&lt;/strong&gt; / &lt;strong&gt;npm install gulp –save-dev (项目环境)&lt;/strong&gt; 依次安装。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;创建gulpfile.js文件，代码如下：                &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var gulp = require(&lt;span class=&quot;string&quot;&gt;&#39;gulp&#39;&lt;/span&gt;),    
+    minifycss = require(&lt;span class=&quot;string&quot;&gt;&#39;gulp-minify-css&#39;&lt;/span&gt;),    
+    concat = require(&lt;span class=&quot;string&quot;&gt;&#39;gulp-concat&#39;&lt;/span&gt;),    
+    uglify = require(&lt;span class=&quot;string&quot;&gt;&#39;gulp-uglify&#39;&lt;/span&gt;),    
+    rename = require(&lt;span class=&quot;string&quot;&gt;&#39;gulp-uglify&#39;&lt;/span&gt;);    
+//压缩css    
+gulp.task(&lt;span class=&quot;string&quot;&gt;&#39;minifycss&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {    
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; gulp.src(&lt;span class=&quot;string&quot;&gt;&#39;css/*.css&#39;&lt;/span&gt;)      //压缩的文件    
+        .pipe(concat(&lt;span class=&quot;string&quot;&gt;&#39;index.css&#39;&lt;/span&gt;))    
+        .pipe(rename({suffix: &lt;span class=&quot;string&quot;&gt;&#39;.min&#39;&lt;/span&gt;}))        //输出文件夹                
+        .pipe(minifycss())            
+        .pipe(gulp.dest(&lt;span class=&quot;string&quot;&gt;&#39;min&#39;&lt;/span&gt;));         //执行压缩            
+});            
+//压缩js                
+gulp.task(&lt;span class=&quot;string&quot;&gt;&#39;minifyjs&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {                
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; gulp.src(&lt;span class=&quot;string&quot;&gt;&#39;js/*.js&#39;&lt;/span&gt;)            
+        .pipe(concat(&lt;span class=&quot;string&quot;&gt;&#39;main.js&#39;&lt;/span&gt;))    //合并所有js到main.js               
+        .pipe(rename({suffix: &lt;span class=&quot;string&quot;&gt;&#39;.min&#39;&lt;/span&gt;}))   //rename压缩后的文件名            
+        .pipe(uglify())    //压缩            
+        .pipe(gulp.dest(&lt;span class=&quot;string&quot;&gt;&#39;min&#39;&lt;/span&gt;));  //输出            
+});                
+//开始执行                    
+gulp.task(&lt;span class=&quot;string&quot;&gt;&#39;default&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {                
+    gulp.start(&lt;span class=&quot;string&quot;&gt;&#39;minifycss&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;minifyjs&#39;&lt;/span&gt;);            
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;命令行输入“gulp”执行gulpfile.js文件即可。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;利用gulp工具可以压缩js、css文件，首先确保pc端安装了Node，然后根据依赖模块按照gulp、gulp-minify-css、gulp-concat、gulp-uglify、gulp-uglify。&lt;br&gt;命令行运行 &lt;strong&gt;npm install gulp -g(global环境)&lt;/strong&gt; / &lt;strong&gt;npm install gulp –save-dev (项目环境)&lt;/strong&gt; 依次安装。
+    
+    </summary>
+    
+      <category term="Node" scheme="http://blog.zhangyulei.site/categories/Node/"/>
+    
+    
+      <category term="Node" scheme="http://blog.zhangyulei.site/tags/Node/"/>
+    
+      <category term="gulp" scheme="http://blog.zhangyulei.site/tags/gulp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css3札记</title>
+    <link href="http://blog.zhangyulei.site/2016/07/25/css3%E6%9C%AD%E8%AE%B0/"/>
+    <id>http://blog.zhangyulei.site/2016/07/25/css3札记/</id>
+    <published>2016-07-25T10:01:50.000Z</published>
+    <updated>2016-08-18T14:28:14.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-_background-position&quot;&gt;&lt;a href=&quot;#1-_background-position&quot; class=&quot;headerlink&quot; title=&quot;1. background-position&quot;&gt;&lt;/a&gt;1. background-position&lt;/h3&gt;&lt;p&gt;background-position：&lt;br&gt;第一个值是水平位置，第二个值是垂直位置。&lt;br&gt;左上角是 0% 0%。右下角是 100% 100%。&lt;br&gt;如果您仅规定了一个值，另一个值将是 50%。&lt;br&gt;其他值：center&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-_placeholder_u6837_u5F0F_u4FEE_u6539&quot;&gt;&lt;a href=&quot;#2-_placeholder_u6837_u5F0F_u4FEE_u6539&quot; class=&quot;headerlink&quot; title=&quot;2. placeholder样式修改&quot;&gt;&lt;/a&gt;2. placeholder样式修改&lt;/h3&gt;&lt;p&gt;比如修改input中placeholder样式，如下：       &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;input[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=text]::-webkit-input-placeholder {                  
+    color: rgb(191,191,191);                
+    font-size: 12px;                    
+}                    
+input[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=text]:-moz-placeholder {                    
+    color: rgb(191,191,191);                   
+    font-size: 12px;                
+}
+nput[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=text]::-moz-placeholder {               
+    color: rgb(191,191,191);               
+    font-size: 12px;                 
+}
+input[&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=text]:-ms-input-placeholder {                
+    color: rgb(191,191,191);                 
+    font-size: 12px;                 
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;3-_animation_u52A8_u753B&quot;&gt;&lt;a href=&quot;#3-_animation_u52A8_u753B&quot; class=&quot;headerlink&quot; title=&quot;3. animation动画&quot;&gt;&lt;/a&gt;3. animation动画&lt;/h3&gt;&lt;p&gt;举一个简单的例子吧，        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.lu {        
+  animation: lunbo 9s ease-in-out infinite normal;        
+}        
+@keyframes lunbo {    
+  5%,30% {margin-top:0;}    
+  35%,60%{margin-top:-98px;}    
+  65%,90%{margin-top:-196px;}    
+  95%,100%{margin-top:0;}    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;animation定义了一个在9s内完成的动画，不同的时间段内margin-top变化。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-_background-position&quot;&gt;&lt;a href=&quot;#1-_background-position&quot; class=&quot;headerlink&quot; title=&quot;1. background-position&quot;&gt;&lt;/a&gt;1. background-position&lt;/h3&gt;&lt;p&gt;background-position：&lt;br&gt;第一个值是水平位置，第二个值是垂直位置。&lt;br&gt;左上角是 0% 0%。右下角是 100% 100%。&lt;br&gt;如果您仅规定了一个值，另一个值将是 50%。&lt;br&gt;其他值：center&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css3" scheme="http://blog.zhangyulei.site/categories/css3/"/>
+    
+    
+      <category term="css3" scheme="http://blog.zhangyulei.site/tags/css3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Angular札记</title>
+    <link href="http://blog.zhangyulei.site/2016/07/20/Angular%E6%9C%AD%E8%AE%B0/"/>
+    <id>http://blog.zhangyulei.site/2016/07/20/Angular札记/</id>
+    <published>2016-07-20T05:10:33.000Z</published>
+    <updated>2016-10-12T06:15:22.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-__u81EA_u5B9A_u4E49_u6307_u4EE4_u4F20_u53C2&quot;&gt;&lt;a href=&quot;#1-__u81EA_u5B9A_u4E49_u6307_u4EE4_u4F20_u53C2&quot; class=&quot;headerlink&quot; title=&quot;1. 自定义指令传参&quot;&gt;&lt;/a&gt;1. 自定义指令传参&lt;/h3&gt;&lt;p&gt;比如自定义指令judgeScore：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;judge-score score=&lt;span class=&quot;string&quot;&gt;&quot;\{help.help_score\}&quot;&lt;/span&gt;&amp;gt;&amp;lt;/judge-score&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;**这里双大括号表示传递的是值，即把help.help_score值传递给score属性&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;在自定义指令中这样定义：        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;app.directive(&lt;span class=&quot;string&quot;&gt;&#39;judgeScore&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){                       
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; {             
+        restrict: &lt;span class=&quot;string&quot;&gt;&#39;E&#39;&lt;/span&gt;,              
+        scope: {                   
+            score: &lt;span class=&quot;string&quot;&gt;&#39;@&#39;&lt;/span&gt;               
+        },                   
+        link: controller                  
+    };                  
+    &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; controller(scope,element){                     
+        //监测score值变化，然后调用函数                     
+        scope.&lt;span class=&quot;variable&quot;&gt;$watch&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;score&#39;&lt;/span&gt;,&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(val){                       
+            //进行处理               
+            //val就是help.help_score                
+            scope.upDateScore(val);                 
+        })                
+    };                  
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;2-__24routeParams&quot;&gt;&lt;a href=&quot;#2-__24routeParams&quot; class=&quot;headerlink&quot; title=&quot;2. $routeParams&quot;&gt;&lt;/a&gt;2. $routeParams&lt;/h3&gt;&lt;p&gt;可以通过$routeParams获取地址栏的参数，比如：&lt;br&gt;localhost:9999/:university&lt;br&gt;当请求地址时localhost:9999/kaoyan时&lt;br&gt;$routeParams.university = kaoyan&lt;br&gt;&lt;strong&gt;$routeParams&lt;/strong&gt;需要添加到引用中。&lt;/p&gt;
+&lt;h3 id=&quot;3-__u8FC7_u6EE4_u5668&quot;&gt;&lt;a href=&quot;#3-__u8FC7_u6EE4_u5668&quot; class=&quot;headerlink&quot; title=&quot;3. 过滤器&quot;&gt;&lt;/a&gt;3. 过滤器&lt;/h3&gt;&lt;p&gt;过滤器用来格式化需要展示给用户的数据。AngularJS有很多实用的内置过滤器，同时也提供了方面的途径可以创建自己过滤器。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-__u81EA_u5B9A_u4E49_u6307_u4EE4_u4F20_u53C2&quot;&gt;&lt;a href=&quot;#1-__u81EA_u5B9A_u4E49_u6307_u4EE4_u4F20_u53C2&quot; class=&quot;headerlink&quot; title=&quot;1. 自定义指令传参&quot;&gt;&lt;/a&gt;1. 自定义指令传参&lt;/h3&gt;&lt;p&gt;比如自定义指令judgeScore：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;judge-score score=&lt;span class=&quot;string&quot;&gt;&quot;\{help.help_score\}&quot;&lt;/span&gt;&amp;gt;&amp;lt;/judge-score&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;**这里双大括号表示传递的是值，即把help.help_score值传递给score属性&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Angular" scheme="http://blog.zhangyulei.site/categories/Angular/"/>
+    
+    
+      <category term="Angular" scheme="http://blog.zhangyulei.site/tags/Angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>发射猫首页开发css样式问题总结</title>
+    <link href="http://blog.zhangyulei.site/2016/07/11/%E5%8F%91%E5%B0%84%E7%8C%AB%E9%A6%96%E9%A1%B5%E5%BC%80%E5%8F%91css%E6%A0%B7%E5%BC%8F%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://blog.zhangyulei.site/2016/07/11/发射猫首页开发css样式问题总结/</id>
+    <published>2016-07-11T12:06:30.000Z</published>
+    <updated>2016-07-25T09:48:30.000Z</updated>
+    
+    <content type="html">&lt;p&gt;其实很多时候只是看文档、看书、看博客，自己不用代码加以实践，时间一长就会忘掉，还是得多多复习才是。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1-__u884C_u5185_u5143_u7D20span&quot;&gt;&lt;a href=&quot;#1-__u884C_u5185_u5143_u7D20span&quot; class=&quot;headerlink&quot; title=&quot;1. 行内元素span&quot;&gt;&lt;/a&gt;1. 行内元素span&lt;/h4&gt;&lt;p&gt;行内元素，比如span，是不能设置宽度和高度，对于外间距margin-top、margin-bottom也是没有效果，但是margin-left有效果。&lt;br&gt;可以添加display:inline-block(或其他)将行内元素变成块元素，那样margin-top、margin-bottom、宽度高度都会生效。&lt;/p&gt;
+&lt;h4 id=&quot;2-__u7ED9_u4F2A_u5143_u7D20_u6DFB_u52A0_u4F2A_u7C7B&quot;&gt;&lt;a href=&quot;#2-__u7ED9_u4F2A_u5143_u7D20_u6DFB_u52A0_u4F2A_u7C7B&quot; class=&quot;headerlink&quot; title=&quot;2. 给伪元素添加伪类&quot;&gt;&lt;/a&gt;2. 给伪元素添加伪类&lt;/h4&gt;&lt;p&gt;比如有如下伪元素：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;help&lt;/span&gt;::before {/* 这里是样式 */}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;给上面的伪元素添加hover伪类时应该像如下写：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;help&lt;/span&gt;:hover::before {/* 这里是样式*/}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;添加其他伪类类似。&lt;/p&gt;
+&lt;h4 id=&quot;3-__u8C37_u6B4C_u6D4F_u89C8_u5668_u5B57_u4F53_u663E_u793A_u95EE_u9898&quot;&gt;&lt;a href=&quot;#3-__u8C37_u6B4C_u6D4F_u89C8_u5668_u5B57_u4F53_u663E_u793A_u95EE_u9898&quot; class=&quot;headerlink&quot; title=&quot;3. 谷歌浏览器字体显示问题&quot;&gt;&lt;/a&gt;3. 谷歌浏览器字体显示问题&lt;/h4&gt;&lt;p&gt;在谷歌浏览器中对于那些小于12px的一律显示12px，虽然可以通过css3的一些方法显示小于12px的字体，但是还是建议字体尽量大于12px。&lt;/p&gt;
+&lt;h4 id=&quot;4-_Bootstrap_u4E2D_u7684input_u9634_u5F71&quot;&gt;&lt;a href=&quot;#4-_Bootstrap_u4E2D_u7684input_u9634_u5F71&quot; class=&quot;headerlink&quot; title=&quot;4. Bootstrap中的input阴影&quot;&gt;&lt;/a&gt;4. Bootstrap中的input阴影&lt;/h4&gt;&lt;p&gt;默认情况下Bootstrap中的input输入框点击时周围会出现蓝色阴影，这是因为input增加了如下样式:    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;input:focus{       
+  box-shadow:  XXXX    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果想要去掉蓝色阴影，直接用box-shadow: none。    &lt;/p&gt;
+&lt;h4 id=&quot;5-_Bootstrap_u4E2D_u8868_u5355_u5782_u76F4_u5BF9_u9F50_u95EE_u9898&quot;&gt;&lt;a href=&quot;#5-_Bootstrap_u4E2D_u8868_u5355_u5782_u76F4_u5BF9_u9F50_u95EE_u9898&quot; class=&quot;headerlink&quot; title=&quot;5. Bootstrap中表单垂直对齐问题&quot;&gt;&lt;/a&gt;5. Bootstrap中表单垂直对齐问题&lt;/h4&gt;&lt;p&gt;有的时候在Bootstrap的form表单中我们总是垂直对不齐其中的label和input标签，可能是因为我们在form那缺少如下class样式：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;class: form-horizontal
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;6-_u767E_u5206_u6BD4_u95EE_u9898&quot;&gt;&lt;a href=&quot;#6-_u767E_u5206_u6BD4_u95EE_u9898&quot; class=&quot;headerlink&quot; title=&quot;6.百分比问题&quot;&gt;&lt;/a&gt;6.百分比问题&lt;/h4&gt;&lt;p&gt;如下代码：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;div style=&lt;span class=&quot;string&quot;&gt;&quot;padding-left:20%&quot;&lt;/span&gt;&amp;gt;        
+  &amp;lt;form style=&lt;span class=&quot;string&quot;&gt;&quot;width:30%&quot;&lt;/span&gt;&amp;gt;&amp;lt;/form&amp;gt;        
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里form中的30%其实是剩下80%中的30%，相当于之前div大小的24%。      &lt;/p&gt;
+&lt;h4 id=&quot;7-_li_u5217_u8868_u9664_u53BB_u7B2C_u4E00_u4E2A_u4EE5_u5916_u8D4B_u4E88css_u6837_u5F0F&quot;&gt;&lt;a href=&quot;#7-_li_u5217_u8868_u9664_u53BB_u7B2C_u4E00_u4E2A_u4EE5_u5916_u8D4B_u4E88css_u6837_u5F0F&quot; class=&quot;headerlink&quot; title=&quot;7. li列表除去第一个以外赋予css样式&quot;&gt;&lt;/a&gt;7. li列表除去第一个以外赋予css样式&lt;/h4&gt;&lt;p&gt;对li列表除去第一个以外剩下的li赋予相同css样式，样式如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;li+li {/* 这里是样式*/}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;8-_border_u8FB9_u6846_u95EE_u9898&quot;&gt;&lt;a href=&quot;#8-_border_u8FB9_u6846_u95EE_u9898&quot; class=&quot;headerlink&quot; title=&quot;8. border边框问题&quot;&gt;&lt;/a&gt;8. border边框问题&lt;/h4&gt;&lt;p&gt;有如下样式：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;border: 10px solid &lt;span class=&quot;comment&quot;&gt;#333;        &lt;/span&gt;
+border-style: inset(内嵌)/outset(外凸);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其实border-style就是border中的solid，如果像上面那样添加了border样式，又添加了border-style样式，那么后加的border-style会覆盖之前的border中solid属性。  &lt;/p&gt;
+&lt;h4 id=&quot;9-td_u76F8_u5BF9_u8DDD_u79BB&quot;&gt;&lt;a href=&quot;#9-td_u76F8_u5BF9_u8DDD_u79BB&quot; class=&quot;headerlink&quot; title=&quot;9.td相对距离&quot;&gt;&lt;/a&gt;9.td相对距离&lt;/h4&gt;&lt;p&gt;table td里面如果设置width：48.6%时，本来想相对tr的48.6%，如果想设置相对当前td的48.6%，可以将td设置成块，比如display：inline-block或display：block。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;其实很多时候只是看文档、看书、看博客，自己不用代码加以实践，时间一长就会忘掉，还是得多多复习才是。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript学习知识点小结</title>
+    <link href="http://blog.zhangyulei.site/2016/07/01/JavaScript%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E5%B0%8F%E7%BB%93/"/>
+    <id>http://blog.zhangyulei.site/2016/07/01/JavaScript学习知识点小结/</id>
+    <published>2016-07-01T02:58:17.000Z</published>
+    <updated>2016-08-15T07:53:10.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F&quot;&gt;&lt;a href=&quot;#1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F&quot; class=&quot;headerlink&quot; title=&quot;1. 如何将一个函数直接作用在一个字符串对象上?&quot;&gt;&lt;/a&gt;1. 如何将一个函数直接作用在一个字符串对象上?&lt;/h4&gt;&lt;p&gt;比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;String.prototype.spacify = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){        
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; this.split(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;).join(&lt;span class=&quot;string&quot;&gt;&#39; &#39;&lt;/span&gt;);      
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h4 id=&quot;2-__u51FD_u6570_u58F0_u660E_u548C_u51FD_u6570_u8868_u8FBE_u5F0F_u7684_u533A_u522B&quot;&gt;&lt;a href=&quot;#2-__u51FD_u6570_u58F0_u660E_u548C_u51FD_u6570_u8868_u8FBE_u5F0F_u7684_u533A_u522B&quot; class=&quot;headerlink&quot; title=&quot;2. 函数声明和函数表达式的区别&quot;&gt;&lt;/a&gt;2. 函数声明和函数表达式的区别&lt;/h4&gt;&lt;p&gt;函数声明必须带有标示符(Identifier)(就是大家常说的函数名称),而函数表达式则可以省略这个标示符。&lt;br&gt;函数声明:&lt;br&gt;　 function 函数名称 (参数：可选){ 函数体 }&lt;br&gt;函数表达式：&lt;br&gt;　 function 函数名称（可选）(参数：可选){ 函数体 }&lt;br&gt;如何判断是函数声明还是函数表达式呢？ECMAScript是通过上下文来区分的，如果function foo(){}是作为赋值表达式的一部分的话，那它就是一个函数表达式，如果function foo(){}被包含在一个函数体内，或者位于程序的最顶部的话，那它就是一个函数声明。&lt;br&gt;比如：     &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;unction &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt;&lt;/span&gt;(){} // 声明，因为它是程序的一部分      
+var bar = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt;&lt;/span&gt;(){}; // 表达式，因为它是赋值表达式的一部分    
+new &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;bar&lt;/span&gt;&lt;/span&gt;(){}; // 表达式，因为它是new表达式    
+(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){    
+   &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;bar&lt;/span&gt;&lt;/span&gt;(){} // 声明，因为它是函数体的一部分    
+})();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;3-_Arguments_u7406_u89E3&quot;&gt;&lt;a href=&quot;#3-_Arguments_u7406_u89E3&quot; class=&quot;headerlink&quot; title=&quot;3. Arguments理解&quot;&gt;&lt;/a&gt;3. Arguments理解&lt;/h4&gt;&lt;p&gt;如何定义一个log(‘hello word’);函数实现控制台的输出，传入参数不固定，比如log(‘hello’, ‘world’)？&lt;br&gt;可以这样：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;/span&gt;(){        
+  console.log.apply(console, arguments);      
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果希望在那个输出的字符串前统一加上(app) 这样的字符串，类似于这样:’(app) hello world’&lt;br&gt;应该知道arguments是一个伪数组，我们需要先将它转换成正常的数组，我们可以使用Array.prototype.slice,代码如下:        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;/span&gt;(){        
+    var args = Array.prototype.slice.call(arguments);    
+    args.unshift(&lt;span class=&quot;string&quot;&gt;&#39;(app)&#39;&lt;/span&gt;);    
+    console.log.apply(console, args);    
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;4-_context&quot;&gt;&lt;a href=&quot;#4-_context&quot; class=&quot;headerlink&quot; title=&quot;4. context&quot;&gt;&lt;/a&gt;4. context&lt;/h4&gt;&lt;p&gt;每个函数都有一个执行context(语句)，包括函数可以访问的所有的变量，因此context包含arguments和定义变量。&lt;br&gt;如下代码：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var User = {      
+  count: 1,    
+  getCount: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {    
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; this.count;    
+  }    
+};    
+var func = User.getCount;      
+console.log(func());  //&lt;span class=&quot;string&quot;&gt;&#39;undefined&#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对于上面这个问题，怎么解决，就是使用Function.prototype.bind，代码如下:      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var func = User.getCount.bind(User);        
+console.log(func());  //1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果老的浏览器不支持这种办法，怎么解决(办法如下)：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Function.prototype.bind = Function.prototype.bind || &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(context) {        
+    var self = this;      
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){       
+        &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; self.apply(context, arguments);        
+    };      
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;5-__u6784_u9020_u51FD_u6570_u7684_u65B9_u6CD5_u548C_u539F_u578Bprototype_u5C5E_u6027_u4E0A_u65B9_u6CD5_u533A_u522B&quot;&gt;&lt;a href=&quot;#5-__u6784_u9020_u51FD_u6570_u7684_u65B9_u6CD5_u548C_u539F_u578Bprototype_u5C5E_u6027_u4E0A_u65B9_u6CD5_u533A_u522B&quot; class=&quot;headerlink&quot; title=&quot;5. 构造函数的方法和原型prototype属性上方法区别&quot;&gt;&lt;/a&gt;5. 构造函数的方法和原型prototype属性上方法区别&lt;/h4&gt;&lt;p&gt;定义在构造函数内部的方法,会在它的每一个实例上都克隆这个方法;&lt;br&gt;定义在构造函数的prototype属性上的方法会让它的所有示例都共享这个方法,但是不会在每个实例的内部重新定义这个方法。&lt;br&gt;如果我们的应用需要创建很多新的对象,并且这些对象还有许多的方法,为了节省内存,我们建议把这些方法都定义在构造函数的prototype属性上。&lt;/p&gt;
+&lt;h4 id=&quot;6-__u5B9A_u4E49_u5728_u51FD_u6570_u7684prototype_u4E0A_u7684_u5C5E_u6027_u4E0D_u4F1A_u88AB_u5E8F_u5217_u5316&quot;&gt;&lt;a href=&quot;#6-__u5B9A_u4E49_u5728_u51FD_u6570_u7684prototype_u4E0A_u7684_u5C5E_u6027_u4E0D_u4F1A_u88AB_u5E8F_u5217_u5316&quot; class=&quot;headerlink&quot; title=&quot;6. 定义在函数的prototype上的属性不会被序列化&quot;&gt;&lt;/a&gt;6. 定义在函数的prototype上的属性不会被序列化&lt;/h4&gt;&lt;p&gt;参考代码如下：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; A(name) {    
+   this.name = name;    
+}    
+A.prototype.sayWhat = &lt;span class=&quot;string&quot;&gt;&#39;say what...&#39;&lt;/span&gt;;    
+var a = new A(&lt;span class=&quot;string&quot;&gt;&#39;dreamapple&#39;&lt;/span&gt;);    
+console.log(JSON.stringify(a)); //{&lt;span class=&quot;string&quot;&gt;&quot;name&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;dreamapple&quot;&lt;/span&gt;}，没有输出 &lt;span class=&quot;string&quot;&gt;&quot;sayWhat&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;say what...&quot;&lt;/span&gt;    
+console.log(a.sayWhat);//say what...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;7-__u6570_u7EC4_u53BB_u91CD&quot;&gt;&lt;a href=&quot;#7-__u6570_u7EC4_u53BB_u91CD&quot; class=&quot;headerlink&quot; title=&quot;7. 数组去重&quot;&gt;&lt;/a&gt;7. 数组去重&lt;/h4&gt;&lt;p&gt;思路：&lt;br&gt;  1.创建一个新的数组存放结果&lt;br&gt;  2.创建一个空对象&lt;br&gt;  3.for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它放到结果数组中，同时把这个元素的内容作为对象的一个属性,并赋值为1，存入到第2步建立的对象中。&lt;br&gt;说明：至于如何对比，就是每次从原数组中取出一个元素，然后到对象中去访问这个属性，如果能访问到值，则说明重复。&lt;br&gt;参考代码：     &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Array.prototype.unique = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){       
+        var res = [];      
+        var json = {};      
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(var i = 0; i &amp;lt; this.length; i++){        
+            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(!json[this[i]]){       
+                res.push(this[i]);            
+                json[this[i]]=1;        
+            }         
+        }          
+        &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; res;            
+}          
+var arr = [&lt;span class=&quot;string&quot;&gt;&#39;1&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;2&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;3&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;a&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;b&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;2&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;d&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;1&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;3&#39;&lt;/span&gt;];             
+console.log(arr.unique());  //[&lt;span class=&quot;string&quot;&gt;&quot;1&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;2&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;3&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;a&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;b&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;d&quot;&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;8-_hasOwnProperty_u5C5E_u6027&quot;&gt;&lt;a href=&quot;#8-_hasOwnProperty_u5C5E_u6027&quot; class=&quot;headerlink&quot; title=&quot;8. hasOwnProperty属性&quot;&gt;&lt;/a&gt;8. hasOwnProperty属性&lt;/h4&gt;&lt;p&gt;如果已经被占用，可以用其他函数的hasOwnProperty并用call绑定上下文进行校验，代码如下：     &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var foo = {      
+    hasOwnProperty: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {      
+        &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;     
+    },     
+    bar: &lt;span class=&quot;string&quot;&gt;&#39;Here be dragons&#39;&lt;/span&gt;     
+};             
+foo.hasOwnProperty(&lt;span class=&quot;string&quot;&gt;&#39;bar&#39;&lt;/span&gt;); // 总是返回 &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;            
+// 使用其它对象的 hasOwnProperty，并将其上下文设置为foo                
+({}).hasOwnProperty.call(foo, &lt;span class=&quot;string&quot;&gt;&#39;bar&#39;&lt;/span&gt;); // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;9-_this_u76F4_u63A5_u8C03_u7528_u51FD_u6570&quot;&gt;&lt;a href=&quot;#9-_this_u76F4_u63A5_u8C03_u7528_u51FD_u6570&quot; class=&quot;headerlink&quot; title=&quot;9. this直接调用函数&quot;&gt;&lt;/a&gt;9. this直接调用函数&lt;/h4&gt;&lt;p&gt;this直接调用函数时，this指向全局对象，如下：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var foo = {             
+     &lt;span class=&quot;string&quot;&gt;&#39;name&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;zhangyueli&#39;&lt;/span&gt;,         
+     &lt;span class=&quot;string&quot;&gt;&#39;method&#39;&lt;/span&gt;: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){             
+        console.log(this);   // 指向foo       
+        &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;data&lt;/span&gt;&lt;/span&gt;(){          
+            console.log(this);   // 指向window          
+        }           
+        data();           
+      }                
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以再method方法内部创建一个局部变量that指向foo对象，如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;var foo = {        
+     &lt;span class=&quot;string&quot;&gt;&#39;name&#39;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;zhangyueli&#39;&lt;/span&gt;,            
+     &lt;span class=&quot;string&quot;&gt;&#39;method&#39;&lt;/span&gt;: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){       
+        var that=this;   //局部变量that      
+        &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;data&lt;/span&gt;&lt;/span&gt;(){       
+            //使用that指向foo对象；       
+        }       
+        data();     
+     }       
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;10-__u95ED_u5305&quot;&gt;&lt;a href=&quot;#10-__u95ED_u5305&quot; class=&quot;headerlink&quot; title=&quot;10. 闭包&quot;&gt;&lt;/a&gt;10. 闭包&lt;/h4&gt;&lt;p&gt;闭包：当前作用域总是能够访问外部作用域中的变量。&lt;br&gt;为什么不可以在外部访问私有变量？&lt;br&gt;因为JavaScript中不可以对作用域进行引用或赋值，因此没有办法在外部访问私有变量。&lt;br&gt;循环闭包常见错误，代码如下：       &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(var i = 0; i &amp;lt; 10; i++) {      
+    &lt;span class=&quot;built_in&quot;&gt;set&lt;/span&gt;Timeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {         
+        console.log(i);            
+     }, 1000);          
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面会输出数字10十次；为了正确获得循环序号，最好使用匿名包装器(即自执行匿名函数)：        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(var i = 0; i &amp;lt; 10; i++) {            
+    (&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(e) {          
+        &lt;span class=&quot;built_in&quot;&gt;set&lt;/span&gt;Timeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {           
+            console.log(e);             
+        }, 1000);         
+    })(i);          
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;11-_arguments_u5BF9_u8C61&quot;&gt;&lt;a href=&quot;#11-_arguments_u5BF9_u8C61&quot; class=&quot;headerlink&quot; title=&quot;11. arguments对象&quot;&gt;&lt;/a&gt;11. arguments对象&lt;/h4&gt;&lt;p&gt;arguments变量不是一个数组(Array)。它不从Array.prototype继承，实际上它是一个对象。&lt;br&gt;所以无法对arguments变量使用标准的数组方法，比如push，pop或者slice。但可以使用下面的代码将其转化为一个真正的数组。&lt;/p&gt;
+&lt;p&gt;Array.prototype.slice.call(arguments);&lt;br&gt;//这个转化比较慢，在性能不好的代码中不推荐&lt;/p&gt;
+&lt;p&gt;另外arguments对象对其内部属性以及函数形式参数创建getter和setter方法；因此改变形参的值会影响到arguments对象的值，反之亦然,如下：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; foo(a, b, c) {              
+    arguments[0] = 2;                
+    a; // 2                                                                       
+    b = 4;          
+    arguments[1]; // 4       
+    var d = c;        
+    d = 9;         
+    c; // 3         
+}       
+foo(1, 2, 3);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;传递参数：下面是将参数从一个函数传递到另一个函数的推荐做法。            &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt;&lt;/span&gt;() {        
+    bar.apply(null, arguments);          
+}      
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; bar(a, b, c) {             
+    // 干活         
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;12-__u6784_u9020_u51FD_u6570&quot;&gt;&lt;a href=&quot;#12-__u6784_u9020_u51FD_u6570&quot; class=&quot;headerlink&quot; title=&quot;12. 构造函数&quot;&gt;&lt;/a&gt;12. 构造函数&lt;/h4&gt;&lt;p&gt;JavaScript中通过new关键字方式调用的函数都被认为是构造函数。         &lt;/p&gt;
+&lt;p&gt;在构造函数内部，也就是被调用的函数内，this指向新创建的对象Object。&lt;br&gt;这个新创建的对象的prototype被指向到构造函数的prototype。              &lt;/p&gt;
+&lt;p&gt;如果被调用的函数没有显式的return表达式，则隐式的会返回this对象，也就是新创建的对象(new Foo())。           &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Foo&lt;/span&gt;&lt;/span&gt;() {             
+    this.bla = 1;           
+}        
+Foo.prototype.test = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {          
+    console.log(this.bla);               
+};        
+var &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; = new Foo();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面代码把Foo作为构造函数调用，并设置新创建对象(new Foo())的prototype为 Foo.prototype。&lt;br&gt;显式的return表达式将会影响返回结果，但仅限返回的是一个对象，如下代码：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Bar&lt;/span&gt;&lt;/span&gt;() {          
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; 2;           
+}        
+new Bar(); // 返回新创建的对象，即Bar{}           
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Test&lt;/span&gt;&lt;/span&gt;() {          
+     this.value = 2;            
+     &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; {        
+        foo: 1          
+     };         
+}           
+new Test(); // 返回的对象即，{foo：1}        
+//这里得到的 new Test()是函数返回的对象，而不是通过new关键字新创建的对象，因此：      
+(new Test()).value === undefined        
+(new Test()).foo === 1        
+//如果 new 被遗漏了，则函数不会返回新创建的对象。          
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Foo&lt;/span&gt;&lt;/span&gt;() {           
+     this.bla = 1; // 获取设置全局参数          
+}        
+Foo(); // undefined
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;13-__u4F7F_u7528_u5DE5_u5382_u6A21_u5F0F_u521B_u5EFA_u65B0_u5BF9_u8C61&quot;&gt;&lt;a href=&quot;#13-__u4F7F_u7528_u5DE5_u5382_u6A21_u5F0F_u521B_u5EFA_u65B0_u5BF9_u8C61&quot; class=&quot;headerlink&quot; title=&quot;13. 使用工厂模式创建新对象&quot;&gt;&lt;/a&gt;13. 使用工厂模式创建新对象&lt;/h4&gt;&lt;p&gt;为了创建新对象，我们可以创建一个工厂方法，并且在方法内构造一个新对象。         &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Foo&lt;/span&gt;&lt;/span&gt;() {       
+    var obj = {};         
+    obj.value = &lt;span class=&quot;string&quot;&gt;&#39;blub&#39;&lt;/span&gt;;      
+    var private = 2;        
+    obj.someMethod = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(value) {       
+        this.value = value;        
+    }         
+    obj.getPrivate = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {       
+        &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; private;       
+    }        
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; obj;       
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;虽然上面的方式比起new的调用方式不容易出错，并且可以充分利用私有变量带来的便利，但是随之而来的是一些不好的地方。&lt;br&gt;会占用更多的内存，因为新创建的对象不能共享原型上的方法。&lt;br&gt;为了实现继承，工厂方法需要从另外一个对象拷贝所有属性，或者把一个对象作为新创建对象的原型。&lt;br&gt;放弃原型链仅仅是因为防止遗漏new带来的问题，这似乎和语言本身的思想相违背。&lt;/p&gt;
+&lt;h4 id=&quot;14-__u4F5C_u7528_u57DF_u4E0E_u547D_u540D_u7A7A_u95F4&quot;&gt;&lt;a href=&quot;#14-__u4F5C_u7528_u57DF_u4E0E_u547D_u540D_u7A7A_u95F4&quot; class=&quot;headerlink&quot; title=&quot;14. 作用域与命名空间&quot;&gt;&lt;/a&gt;14. 作用域与命名空间&lt;/h4&gt;&lt;p&gt;尽管JavaScript支持一对花括号创建的代码段，但是并不支持块级作用域；而仅仅支持函数作用域。      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;test&lt;/span&gt;&lt;/span&gt;() { // 一个作用域            
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(var i = 0; i &amp;lt; 10; i++) { // 不是一个作用域           
+        // count         
+    }         
+    console.log(i); // 10          
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;隐式的全局变量：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;// 脚本 A        
+foo = &lt;span class=&quot;string&quot;&gt;&#39;42&#39;&lt;/span&gt;;  //全局变量foo         
+// 脚本 B          
+var foo = &lt;span class=&quot;string&quot;&gt;&#39;42&#39;&lt;/span&gt;  //当前作用域下得变量foo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;局部变量，JavaScript中局部变量只可能通过两种方式声明，一个是作为函数参数(函数里面的参数)，&lt;br&gt;另一个是通过var关键字声明。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;// 全局变量         
+var foo = 1;         
+var bar = 2;            
+var i = 2;        
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;(i) {         
+     // 函数 &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; 内的局部作用域          
+     i = 5;  //局部变量已经在&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;(i)中声明了        
+     var foo = 3;         
+     bar = 4;           
+}          
+&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;(10);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;foo和i是函数test内的局部变量，而对bar的赋值将会覆盖全局作用域内的同名变量。&lt;br&gt;&lt;strong&gt;变量声明提升（Hoisting）&lt;/strong&gt;&lt;br&gt;JavaScript 会提升变量声明。这意味着 var 表达式和 function 声明都将会被提升到当前作用域的顶部。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;bar();        
+var bar = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {};          
+var someValue = 42;           
+&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;();           
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;(data) {      
+     &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;) {        
+        goo = 1;        
+     } &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; {         
+        var goo = 2;          
+     }         
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(var i = 0; i &amp;lt; 100; i++) {          
+        var e = data[i];        
+    }       
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面代码在运行之前将会被转化。JavaScript 将会把 var 表达式和 function 声明提升到当前作用域的顶部。如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;// var 表达式被移动到这里          
+var bar, someValue; // 缺省值是 &lt;span class=&quot;string&quot;&gt;&#39;undefined&#39;&lt;/span&gt;          
+
+// 函数声明也会提升        
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;(data) {               
+    var goo, i, e; // 没有块级作用域，这些变量被移动到函数顶部         
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;) {         
+        goo = 1;          
+    } &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; {         
+        goo = 2;           
+    }          
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(i = 0; i &amp;lt; 100; i++) {           
+        e = data[i];           
+    }            
+}         
+bar(); // 出错：TypeError，因为 bar 依然是 &lt;span class=&quot;string&quot;&gt;&#39;undefined&#39;&lt;/span&gt;        
+someValue = 42; // 赋值语句不会被提升规则（hoisting）影响          
+bar = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {};          
+&lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;没有块级作用域不仅导致 var 表达式被从循环内移到外部，而且使一些 if 表达式更难看懂。&lt;br&gt;在原来代码中，if 表达式看起来修改了全局变量 goo，实际上在提升规则被应用后，却是在修改局部变量。 　　　　&lt;/p&gt;
+&lt;h4 id=&quot;15-__u540D_u79F0_u89E3_u6790_u987A_u5E8F&quot;&gt;&lt;a href=&quot;#15-__u540D_u79F0_u89E3_u6790_u987A_u5E8F&quot; class=&quot;headerlink&quot; title=&quot;15. 名称解析顺序&quot;&gt;&lt;/a&gt;15. 名称解析顺序&lt;/h4&gt;&lt;p&gt;比如，当访问函数内的 foo 变量时，JavaScript 会按照下面顺序查找：&lt;br&gt;当前作用域内是否有var foo的定义。&lt;br&gt;函数形式参数是否有使用foo名称的。&lt;br&gt;函数自身是否叫做foo。&lt;br&gt;回溯到上一级作用域，然后从头重新开始。     
+       　　    　　　　　　&lt;/p&gt;
+&lt;h4 id=&quot;16-__u547D_u540D_u7A7A_u95F4&quot;&gt;&lt;a href=&quot;#16-__u547D_u540D_u7A7A_u95F4&quot; class=&quot;headerlink&quot; title=&quot;16. 命名空间&quot;&gt;&lt;/a&gt;16. 命名空间&lt;/h4&gt;&lt;p&gt;只有一个全局作用域导致的常见错误是命名冲突。在 JavaScript中，这可以通过匿名包装器轻松解决。    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {           
+    // 函数创建一个命名空间              
+    window.foo = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {         
+        // 对外公开的函数，创建了闭包        
+    };           
+})(); // 立即执行此匿名函数
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;匿名函数被认为是 表达式；因此为了可调用性，它们首先会被执行。             &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;( // 小括号内的函数首先被执行             
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;() {}                
+    ) // 并且返回函数对象         
+() // 调用上面的执行结果，也就是函数对象
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;17-_Array_u6784_u9020_u6570_u7EC4&quot;&gt;&lt;a href=&quot;#17-_Array_u6784_u9020_u6570_u7EC4&quot; class=&quot;headerlink&quot; title=&quot;17. Array构造数组&quot;&gt;&lt;/a&gt;17. Array构造数组&lt;/h4&gt;&lt;p&gt;new Array(3) // 结果: []，此数组长度为 3&lt;br&gt;由于只有一个参数传递到构造函数中（指的是 new Array(3); 这种调用方式），并且这个参数是数字，构造函数会返回一个length属性被设置为此参数的空数组。&lt;br&gt;需要特别注意的是，此时只有length属性被设置，真正的数组并没有生成。     &lt;/p&gt;
+&lt;h4 id=&quot;18-__u76F8_u7B49_u4E0E_u6BD4_u8F83&quot;&gt;&lt;a href=&quot;#18-__u76F8_u7B49_u4E0E_u6BD4_u8F83&quot; class=&quot;headerlink&quot; title=&quot;18. 相等与比较&quot;&gt;&lt;/a&gt;18. 相等与比较&lt;/h4&gt;&lt;p&gt;有两种方式判断两个值是否相等：&lt;br&gt;a.等于操作符由两个等号组成：==&lt;br&gt;JavaScript是弱类型语言，这就意味着，等于操作符会为了比较两个值而进行强制类型转换。        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;           ==   &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;           // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;     
+0            ==   &lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;            // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;           
+0            ==   &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;           // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;         
+&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;        ==   &lt;span class=&quot;string&quot;&gt;&quot;false&quot;&lt;/span&gt;       // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;          
+&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;        ==   &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;           // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;         
+&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;        ==   undefined     // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;         
+&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;        ==   null          // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;        
+null         ==   undefined     // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;        
+&lt;span class=&quot;string&quot;&gt;&quot; \t\r\n&quot;&lt;/span&gt;    ==   0             // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点：复杂转换规则，会导致难以追踪问题；此外强制转换也会带来性能消耗。比如一个字符串为了和一个数字进行比较，必须事先被强制转换为数字。&lt;br&gt;b.严格等于操作符由三个等号组成：===,严格等于操作符不会进行强制类型转换。&lt;br&gt;注意： 等于操作符当其中一个操作数为对象时，这里的等于操作符比较的不是值是否相等，而是是否属于同一个身份，也就是只有对象的同一个实例才会被认为是相等的。   &lt;/p&gt;
+&lt;h4 id=&quot;19-_typeof_u64CD_u4F5C_u7B26&quot;&gt;&lt;a href=&quot;#19-_typeof_u64CD_u4F5C_u7B26&quot; class=&quot;headerlink&quot; title=&quot;19. typeof操作符&quot;&gt;&lt;/a&gt;19. typeof操作符&lt;/h4&gt;&lt;p&gt;特殊情况， [1,2,3] 类型Array， typeof [1,2,3] — object&lt;br&gt;Class一列表示对象的内部属性[[Class]]的值，JavaScript标准文档中只给出了一种获取[[Class]]的值得方法，那就是使用Object.prototype.toString：        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; is(&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;, obj) {          
+    var class = Object.prototype.toString.call(obj).slice(8, -1);       
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; obj !== undefined &amp;amp;&amp;amp; obj !== null &amp;amp;&amp;amp; class === &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;;        
+}       
+is(&lt;span class=&quot;string&quot;&gt;&#39;String&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;test&#39;&lt;/span&gt;); // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;         
+is(&lt;span class=&quot;string&quot;&gt;&#39;String&#39;&lt;/span&gt;, new String(&lt;span class=&quot;string&quot;&gt;&#39;test&#39;&lt;/span&gt;)); // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Object.prototype.toString 返回一种标准格式字符串，所以上例可以通过 slice 截取指定位置的字符串，如下所示：         &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Object.prototype.toString.call([])    // &lt;span class=&quot;string&quot;&gt;&quot;[object Array]&quot;&lt;/span&gt;           
+Object.prototype.toString.call({})    // &lt;span class=&quot;string&quot;&gt;&quot;[object Object]&quot;&lt;/span&gt;        
+Object.prototype.toString.call(2)    // &lt;span class=&quot;string&quot;&gt;&quot;[object Number]&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 ECMAScript5中,为了方便，对null和undefined调用Object.prototype.toString 方法,其返回值由Object变成了Null和Undefined。&lt;/p&gt;
+&lt;h4 id=&quot;20-_instanceof_u64CD_u4F5C_u7B26&quot;&gt;&lt;a href=&quot;#20-_instanceof_u64CD_u4F5C_u7B26&quot; class=&quot;headerlink&quot; title=&quot;20. instanceof操作符&quot;&gt;&lt;/a&gt;20. instanceof操作符&lt;/h4&gt;&lt;p&gt;instanceof 操作符用来比较两个操作数的构造函数。只有在比较自定义的对象时才有意义。&lt;br&gt;如果用来比较内置类型，将会和typeof操作符 一样用处不大。&lt;br&gt;比较自定义对象         &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Foo&lt;/span&gt;&lt;/span&gt;() {}       
+&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;Bar&lt;/span&gt;&lt;/span&gt;() {}         
+Bar.prototype = new Foo();         
+new Bar() instanceof Bar; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;       
+new Bar() instanceof Foo; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;      
+// 如果仅仅设置 Bar.prototype 为函数 Foo 本身，而不是 Foo 构造函数的一个实例        
+Bar.prototype = Foo;        
+new Bar() instanceof Foo; // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;       
+instanceof 比较内置类型          
+new String(&lt;span class=&quot;string&quot;&gt;&#39;foo&#39;&lt;/span&gt;) instanceof String; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;      
+new String(&lt;span class=&quot;string&quot;&gt;&#39;foo&#39;&lt;/span&gt;) instanceof Object; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;       
+&lt;span class=&quot;string&quot;&gt;&#39;foo&#39;&lt;/span&gt; instanceof String; // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;      
+&lt;span class=&quot;string&quot;&gt;&#39;foo&#39;&lt;/span&gt; instanceof Object; // &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;21-__u7C7B_u578B_u8F6C_u5316&quot;&gt;&lt;a href=&quot;#21-__u7C7B_u578B_u8F6C_u5316&quot; class=&quot;headerlink&quot; title=&quot;21. 类型转化&quot;&gt;&lt;/a&gt;21. 类型转化&lt;/h4&gt;&lt;p&gt;内置类型（比如Number和String）的构造函数在被调用时，使用或者不使用 new 的结果完全不同。       &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;new Number(10) === 10;     // False, 对象与数字的比较        
+Number(10) === 10;         // True, 数字与数字的比较        
+new Number(10) + 0 === 10; // True, 由于隐式的类型转换
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用内置类型 Number 作为构造函数将会创建一个新的Number对象,而在不使用new关键字的Number函数更像是一个数字转换器。&lt;/p&gt;
+&lt;p&gt;另外，在比较中引入对象的字面值将会导致更加复杂的强制类型转换。最好的选择是把要比较的值显式的转换为三种可能的类型之一。&lt;br&gt;a.将一个值加上空字符串可以轻松转换为字符串类型。      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt; + 10 === &lt;span class=&quot;string&quot;&gt;&#39;10&#39;&lt;/span&gt;; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;b.使用一元的加号操作符，可以把字符串转换为数字。      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;+&lt;span class=&quot;string&quot;&gt;&#39;10&#39;&lt;/span&gt; === 10; // &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;c.转换为布尔型,通过使用否操作符两次，可以把一个值转换为布尔型。         &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;!!&amp;apos;foo&amp;apos;;   // true     
+!!&amp;apos;&amp;apos;;      // false             
+!!&amp;apos; &amp;apos;;     // true  
+!!&amp;apos;0&amp;apos;;     // true    
+!!&amp;apos;1&amp;apos;;     // true  
+!!&amp;apos;-1&amp;apos;     // true     
+!!{};      // true   ***注意这里是true，但是{} == true ---false；       
+!!true;    // true              
+!![];      // true
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;22-_eval&quot;&gt;&lt;a href=&quot;#22-_eval&quot; class=&quot;headerlink&quot; title=&quot;22. eval&quot;&gt;&lt;/a&gt;22. eval&lt;/h4&gt;&lt;p&gt;eval只在被直接调用并且调用函数就是eval本身时，才在当前作用域中执行(在当前作用域中执行一段代码)，不过尽量少用。因为它会执行任意传给它的代码，在代码字符串未知或者是来自一个不信任的源时，&lt;br&gt;绝对不要使用eval函数。  &lt;/p&gt;
+&lt;p&gt;参考文献:&lt;br&gt;     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;http://bonsaiden.github.io/JavaScript-Garden/zh/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;JavaScript秘密花园&lt;/a&gt;&lt;br&gt;     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;JavaScript高级教程&lt;/p&gt;
+&lt;p&gt;　　　　　　　　&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F&quot;&gt;&lt;a href=&quot;#1-__u5982_u4F55_u5C06_u4E00_u4E2A_u51FD_u6570_u76F4_u63A5_u4F5C_u7528_u5728_u4E00_u4E2A_u5B57_u7B26_u4E32_u5BF9_u8C61_u4E0A_3F&quot; class=&quot;headerlink&quot; title=&quot;1. 如何将一个函数直接作用在一个字符串对象上?&quot;&gt;&lt;/a&gt;1. 如何将一个函数直接作用在一个字符串对象上?&lt;/h4&gt;&lt;p&gt;比如可以这样用 ‘hello world’.spacify()，这里考察对原型链的理解，可以这样写：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;String.prototype.spacify = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;/span&gt;(){        
+    &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; this.split(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;).join(&lt;span class=&quot;string&quot;&gt;&#39; &#39;&lt;/span&gt;);      
+};
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://blog.zhangyulei.site/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css样式小结</title>
+    <link href="http://blog.zhangyulei.site/2016/06/20/css%E6%A0%B7%E5%BC%8F%E5%B0%8F%E7%BB%93/"/>
+    <id>http://blog.zhangyulei.site/2016/06/20/css样式小结/</id>
+    <published>2016-06-20T12:44:26.000Z</published>
+    <updated>2016-10-15T12:34:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;自己在开发过程中遇到的一些比较特殊的css样式，总结如下：&lt;/p&gt;
+&lt;h4 id=&quot;1-__u5355_u884C_u6587_u672C_uFF0C_u8D85_u8FC7_u56FA_u5B9A_u957F_u5EA6_u7684_u6587_u5B57_u7528_u2026_u663E_u793A&quot;&gt;&lt;a href=&quot;#1-__u5355_u884C_u6587_u672C_uFF0C_u8D85_u8FC7_u56FA_u5B9A_u957F_u5EA6_u7684_u6587_u5B57_u7528_u2026_u663E_u793A&quot; class=&quot;headerlink&quot; title=&quot;1. 单行文本，超过固定长度的文字用…显示&quot;&gt;&lt;/a&gt;1. 单行文本，超过固定长度的文字用…显示&lt;/h4&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;display: inline-block;    
+max-width: 100px;     
+white-space: nowrap;    
+overflow: hidden;    
+text-overflow: ellipsis;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;思想：固定一行的长度，然后不换行，利用’text-overflow: ellipsis’样式将超过宽度的部分用…显示。&lt;br&gt;*font-family: Helvetica(一种广泛的西方字体);可以让…位于右下角。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h4 id=&quot;2-__u5C0F_u4E09_u89D2&quot;&gt;&lt;a href=&quot;#2-__u5C0F_u4E09_u89D2&quot; class=&quot;headerlink&quot; title=&quot;2. 小三角&quot;&gt;&lt;/a&gt;2. 小三角&lt;/h4&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.drg{    
+ position: relative;     
+ background: rgb(123,23,123);      
+}      
+.drg:after{    
+ position: absolute;      
+ border: 20px solid transparent;    
+ border-left: 20px solid rgb(23,123,123);    
+ left: 100%;     
+ content: &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;;        
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如图：&lt;br&gt;&lt;img src=&quot;/images/drag.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;有top、right、left、bottom四种小三角，上面的例子是left即border-left。&lt;br&gt;思想：是先把border设置成透明，然后根据需要显示对应的部分boder并用absolute进行定位。    &lt;/p&gt;
+&lt;h4 id=&quot;3-__u540C_u4E00_u884C_u56FE_u7247_u540E_u9762_u7684_u6587_u5B57_u5782_u76F4_u5BF9_u9F50&quot;&gt;&lt;a href=&quot;#3-__u540C_u4E00_u884C_u56FE_u7247_u540E_u9762_u7684_u6587_u5B57_u5782_u76F4_u5BF9_u9F50&quot; class=&quot;headerlink&quot; title=&quot;3. 同一行图片后面的文字垂直对齐&quot;&gt;&lt;/a&gt;3. 同一行图片后面的文字垂直对齐&lt;/h4&gt;&lt;p&gt;这里主要利用了vertical-align:middel，定义行内元素的基线相对于该元素所在行的基线的垂直对齐。        &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;img{         
+vertical-align: middle;    
+}    
+.font{    
+display: inline-block;    
+vertical-align: middle;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里的文字可以是单行，也可以是多行。        &lt;/p&gt;
+&lt;h4 id=&quot;4-__u5982_u4F55_u5C06_u5F39_u7A97_u91CC_u9762_u7684_u5185_u5BB9_u5C45_u4E2D_uFF1F&quot;&gt;&lt;a href=&quot;#4-__u5982_u4F55_u5C06_u5F39_u7A97_u91CC_u9762_u7684_u5185_u5BB9_u5C45_u4E2D_uFF1F&quot; class=&quot;headerlink&quot; title=&quot;4. 如何将弹窗里面的内容居中？&quot;&gt;&lt;/a&gt;4. 如何将弹窗里面的内容居中？&lt;/h4&gt;&lt;p&gt;样式如下：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.overlay article {    
+    position: absolute;     
+    left: 50%;    
+    top: 50%;    
+    margin: -200px 0 0 -200px;    
+    width: 400px;    
+    height: 400px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;5-_u65B0_u52A0_u4E00_u4E2A_u5F39_u7A97_u906E_u7F69_u5C42&quot;&gt;&lt;a href=&quot;#5-_u65B0_u52A0_u4E00_u4E2A_u5F39_u7A97_u906E_u7F69_u5C42&quot; class=&quot;headerlink&quot; title=&quot;5.新加一个弹窗遮罩层&quot;&gt;&lt;/a&gt;5.新加一个弹窗遮罩层&lt;/h4&gt;&lt;p&gt;相比absolute，利用fixed实现更好，可以使得遮罩层完全覆盖页面布局区域，具体样式如下：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.overlay {      
+ position: fixed;    
+ left: 0;    
+ right: 0;    
+ top: 0;    
+ bottom: 0;    
+ background: rgba(0,0,0,0.8);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;6-vertical-align&quot;&gt;&lt;a href=&quot;#6-vertical-align&quot; class=&quot;headerlink&quot; title=&quot;6.vertical-align&quot;&gt;&lt;/a&gt;6.vertical-align&lt;/h4&gt;&lt;p&gt;vertical-align:middle可以让行内元素，比如span、img垂直居中。         &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;nav&amp;gt;    
+     &amp;lt;img src=&lt;span class=&quot;string&quot;&gt;&quot;images/banshu.jpg&quot;&lt;/span&gt;&amp;gt;    
+     &amp;lt;span&amp;gt;这是文字&amp;lt;/span&amp;gt;    
+     &amp;lt;span class=&lt;span class=&quot;string&quot;&gt;&quot;block&quot;&lt;/span&gt;&amp;gt;这是块&amp;lt;/span&amp;gt;    
+&amp;lt;/nav&amp;gt;    
+
+nav {                    
+     height: 60px;    
+     line-height: 60px;        
+     background: red;        
+}        
+nav img {        
+     width: 30px;        
+     height: 30px;        
+}        
+nav .block {        
+     display: inline-block;        
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上代码会使图片和文字一样垂直居中。     &lt;/p&gt;
+&lt;h4 id=&quot;7-line-height&quot;&gt;&lt;a href=&quot;#7-line-height&quot; class=&quot;headerlink&quot; title=&quot;7.line-height&quot;&gt;&lt;/a&gt;7.line-height&lt;/h4&gt;&lt;p&gt;line-heigth是不包括border和padding，height是line-height,border-top(bottom),padding-top(bottom)三者之和。&lt;/p&gt;
+&lt;h4 id=&quot;8-a_3Anth-child_28_29&quot;&gt;&lt;a href=&quot;#8-a_3Anth-child_28_29&quot; class=&quot;headerlink&quot; title=&quot;8.a:nth-child()&quot;&gt;&lt;/a&gt;8.a:nth-child()&lt;/h4&gt;&lt;p&gt;a:nth-child(2)从第二个元素开始,不仅仅是从a元素开始算的，比如：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;div&amp;gt;    
+     &amp;lt;span&amp;gt;商家分类：&amp;lt;/span&amp;gt;    
+     &amp;lt;a&amp;gt;全部商家&amp;lt;/a&amp;gt;        
+     &amp;lt;a&amp;gt;品牌商家&amp;lt;/a&amp;gt;        
+     &amp;lt;a&amp;gt;快餐便当&amp;lt;/a&amp;gt;        
+     &amp;lt;a&amp;gt;特色菜系&amp;lt;/a&amp;gt;        
+     &amp;lt;a&amp;gt;小吃夜宵&amp;lt;/a&amp;gt;        
+     &amp;lt;a&amp;gt;甜品饮品&amp;lt;/a&amp;gt;        
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;a:nth-child(2)的指的是第一个a标签”全部商家”;    &lt;/p&gt;
+&lt;h4 id=&quot;9-float&quot;&gt;&lt;a href=&quot;#9-float&quot; class=&quot;headerlink&quot; title=&quot;9.float&quot;&gt;&lt;/a&gt;9.float&lt;/h4&gt;&lt;p&gt;float浮动，有none，left，right三个值，padding的值会对元素float的布局造成影响，比如：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;div class=&lt;span class=&quot;string&quot;&gt;&quot;float&quot;&lt;/span&gt;&amp;gt;浮动元素&amp;lt;/div&amp;gt;                
+.float{                
+   &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;:left;            
+   padding: 20px;            
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;float开始的位置top：20px;left:20px;    &lt;/p&gt;
+&lt;h4 id=&quot;10-max-height&quot;&gt;&lt;a href=&quot;#10-max-height&quot; class=&quot;headerlink&quot; title=&quot;10.max-height&quot;&gt;&lt;/a&gt;10.max-height&lt;/h4&gt;&lt;p&gt;max-height可以设置最大高度，有的时候需要增加overflow:auto，来增加高度到840px；&lt;/p&gt;
+&lt;h4 id=&quot;11-_u4E24_u5217_u5E03_u5C40&quot;&gt;&lt;a href=&quot;#11-_u4E24_u5217_u5E03_u5C40&quot; class=&quot;headerlink&quot; title=&quot;11.两列布局&quot;&gt;&lt;/a&gt;11.两列布局&lt;/h4&gt;&lt;p&gt;第一种方法：使用float:left;这个大家基本都知道，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.left {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+.right{
+    background: yellow;
+    margin-left: 120px;
+}
+
+...
+
+&amp;lt;div class=&amp;quot;left&amp;quot;&amp;gt;
+    111
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;right&amp;quot;&amp;gt;
+    222
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其实还有一种新的通过position: absolute;实现两列布局的方法，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.left {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+.right{
+    background: yellow;
+    margin-left: 120px;
+}
+
+...
+
+&amp;lt;div class=&amp;quot;left&amp;quot;&amp;gt;
+    111
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;right&amp;quot;&amp;gt;
+    222
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自己在开发过程中遇到的一些比较特殊的css样式，总结如下：&lt;/p&gt;
+&lt;h4 id=&quot;1-__u5355_u884C_u6587_u672C_uFF0C_u8D85_u8FC7_u56FA_u5B9A_u957F_u5EA6_u7684_u6587_u5B57_u7528_u2026_u663E_u793A&quot;&gt;&lt;a href=&quot;#1-__u5355_u884C_u6587_u672C_uFF0C_u8D85_u8FC7_u56FA_u5B9A_u957F_u5EA6_u7684_u6587_u5B57_u7528_u2026_u663E_u793A&quot; class=&quot;headerlink&quot; title=&quot;1. 单行文本，超过固定长度的文字用…显示&quot;&gt;&lt;/a&gt;1. 单行文本，超过固定长度的文字用…显示&lt;/h4&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;display: inline-block;    
+max-width: 100px;     
+white-space: nowrap;    
+overflow: hidden;    
+text-overflow: ellipsis;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;思想：固定一行的长度，然后不换行，利用’text-overflow: ellipsis’样式将超过宽度的部分用…显示。&lt;br&gt;*font-family: Helvetica(一种广泛的西方字体);可以让…位于右下角。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css权威指南学习笔记-四</title>
+    <link href="http://blog.zhangyulei.site/2016/04/06/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/"/>
+    <id>http://blog.zhangyulei.site/2016/04/06/css权威指南学习笔记-四/</id>
+    <published>2016-04-06T08:09:53.000Z</published>
+    <updated>2016-04-07T14:21:36.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6&quot;&gt;&lt;a href=&quot;#u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6&quot; class=&quot;headerlink&quot; title=&quot;第六章 界面组件&quot;&gt;&lt;/a&gt;第六章 界面组件&lt;/h2&gt;&lt;p&gt;界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。&lt;/p&gt;
+&lt;h3 id=&quot;6-1__u5BFC_u822A_u83DC_u5355&quot;&gt;&lt;a href=&quot;#6-1__u5BFC_u822A_u83DC_u5355&quot; class=&quot;headerlink&quot; title=&quot;6.1 导航菜单&quot;&gt;&lt;/a&gt;6.1 导航菜单&lt;/h3&gt;&lt;p&gt;这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。&lt;br&gt;主要有：   &lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;纵向菜单–(&lt;em&gt;非首位子元素 li + li&lt;/em&gt;,表示任何跟在li之后的li)默认列表是纵向布局的。&lt;/li&gt;
+&lt;li&gt;横向菜单–将纵向菜单的列表项&lt;strong&gt;浮动&lt;/strong&gt;就可以变成横向菜单。&lt;/li&gt;
+&lt;li&gt;下拉菜单–多层嵌套列表(这里有几个嵌套技巧，回头实现下把demo地址附在这里)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;6-2__u8868_u5355&quot;&gt;&lt;a href=&quot;#6-2__u8868_u5355&quot; class=&quot;headerlink&quot; title=&quot;6.2 表单&quot;&gt;&lt;/a&gt;6.2 表单&lt;/h3&gt;&lt;h4 id=&quot;6-2-1_HTML_u8868_u5355_u5143_u7D20&quot;&gt;&lt;a href=&quot;#6-2-1_HTML_u8868_u5355_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;6.2.1 HTML表单元素&quot;&gt;&lt;/a&gt;6.2.1 HTML表单元素&lt;/h4&gt;&lt;p&gt;for属性与id属性通过相同的值关联起来后，用户点击标注文本也可以选择单选按钮和复选框。比如：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;label &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;user_name&quot;&lt;/span&gt;&amp;gt;User Name&amp;lt;/label&amp;gt;    
+&amp;lt;!-- 创建一个文本字段 --&amp;gt;    
+&amp;lt;input &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text&quot;&lt;/span&gt; id=&lt;span class=&quot;string&quot;&gt;&quot;user_name&quot;&lt;/span&gt; name=&lt;span class=&quot;string&quot;&gt;&quot;user_name&quot;&lt;/span&gt; /&amp;gt;    
+&amp;lt;p&amp;gt;Please select a user name&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常用的表单元素：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;form元素，所有表单的标记都包含在一个form元素中，form这里有两个必要的属性：action和method。&lt;/li&gt;
+&lt;li&gt;提交表单，表单中的数据是以“名=值”的形式发送给服务器的，比如“username=zefeng”，每个控件都是这么一个名/值对形式。这里的“名”就是在控件name属性中设定的名字。“值”是你给予的值。(对于选框，1表示选中，0表示未选中)&lt;/li&gt;
+&lt;li&gt;控件组，可以把一组相关的表单控件组织到一个控件组元素fieldset，fieldset的第一个子元素一定得是legend文本元素，其中包含这个控件组的标题。&lt;/li&gt;
+&lt;li&gt;控件与标注，表单包含一或多个控件。每个表单控件都有一个对应的label文本元素，用于描述控件代表的数据。&lt;/li&gt;
+&lt;li&gt;控件类型-input，text-基本的单行文本框；password-文本显示为掩码；checkbox-复选框(分组办法是为它们设定相同的name属性)；radio-单选按钮(分组办法是为它们设定相同的name属性)；submit-提交按钮；time、data、search-html5文本框的变体；还有多行文本区textarea；选项列表(select元素)会创建一个下拉列表，每个备选项都用option文本元素来完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;6-2-2__u8868_u5355_u6807_u8BB0_u7B56_u7565&quot;&gt;&lt;a href=&quot;#6-2-2__u8868_u5355_u6807_u8BB0_u7B56_u7565&quot; class=&quot;headerlink&quot; title=&quot;6.2.2 表单标记策略&quot;&gt;&lt;/a&gt;6.2.2 表单标记策略&lt;/h4&gt;&lt;p&gt;书里推荐用块级section元素来充当这个角色，这样既方便组织控件，又方便为行内表单控件及其标注设定样式。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/css3过渡.jpg&quot; alt=&quot;&quot;&gt;;&lt;/p&gt;
+&lt;h3 id=&quot;6-3__u5F39_u51FA_u5C42&quot;&gt;&lt;a href=&quot;#6-3__u5F39_u51FA_u5C42&quot; class=&quot;headerlink&quot; title=&quot;6.3 弹出层&quot;&gt;&lt;/a&gt;6.3 弹出层&lt;/h3&gt;&lt;p&gt;弹出层指的是在鼠标悬停于某个元素之上时显示的一个界面组件。主要用到z-index属性和动态生成HTML元素。&lt;/p&gt;
+&lt;p&gt;这里有个利用css创建三角形的样式代码：      &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;div {
+    border:12px solid;    
+    border-color:transparent red transparent transparent;    
+    height:0px;    
+    width:0px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上代码的意思，通过增加盒子的边框，将盒子的宽和高都设定成0，同时将其他三个边框设定成transparent,就可以用css造出一个三角形。&lt;/p&gt;
+&lt;h2 id=&quot;u7B2C_u4E03_u7AE0_CSS3_u5B9E_u6218&quot;&gt;&lt;a href=&quot;#u7B2C_u4E03_u7AE0_CSS3_u5B9E_u6218&quot; class=&quot;headerlink&quot; title=&quot;第七章 CSS3实战&quot;&gt;&lt;/a&gt;第七章 CSS3实战&lt;/h2&gt;&lt;p&gt;关于弧形角，这里借助书里的一个图片说明下:&lt;br&gt;&lt;img src=&quot;/images/border-radius.jpg&quot; alt=&quot;&quot;&gt;    &lt;/p&gt;
+&lt;p&gt;对于box-shadow,如下说明：&lt;br&gt;&lt;img src=&quot;/images/box-shadow.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;u7B2C_u516B_u7AE0__u54CD_u5E94_u5F0F_u8BBE_u8BA1&quot;&gt;&lt;a href=&quot;#u7B2C_u516B_u7AE0__u54CD_u5E94_u5F0F_u8BBE_u8BA1&quot; class=&quot;headerlink&quot; title=&quot;第八章 响应式设计&quot;&gt;&lt;/a&gt;第八章 响应式设计&lt;/h2&gt;&lt;p&gt;响应式设计的要素：     &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;媒体查询-是一种css语法，可以根据浏览器的特性，一般是屏幕或浏览器宽度提供css规则。&lt;/li&gt;
+&lt;li&gt;流式布局-使用em或百分比等相对单位设定页面总体结构，让布局能够随着屏幕大小而缩放&lt;/li&gt;
+&lt;li&gt;弹性图片-是使用相对单位确保图片再大也不会超过其容器(max-width:100%)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;8-1__u5A92_u4F53_u67E5_u8BE2&quot;&gt;&lt;a href=&quot;#8-1__u5A92_u4F53_u67E5_u8BE2&quot; class=&quot;headerlink&quot; title=&quot;8.1 媒体查询&quot;&gt;&lt;/a&gt;8.1 媒体查询&lt;/h3&gt;&lt;p&gt;媒体查询时css代码容器，其中的css只在某些条件具备时才会应用。可以用两种方式来写：@media规则和&amp;lt;link&amp;gt;标签的media属性。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;@media规则使用如下：&lt;/strong&gt;    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;/*只在屏幕宽度不大于 568 像素时应用*/
+@media screen and (max-width:568px) {    
+    .column {&lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;:none; width:96%; margin:0 auto;}    
+}         
+@media &lt;span class=&quot;built_in&quot;&gt;print&lt;/span&gt; {    
+    nav {    
+        display:none;    
+    }    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;媒体特性-媒体特性也就是媒体某一方面的特征，一般带有 min-或 max-前缀。最常用的媒体特性如下：    &lt;/p&gt;
+&lt;p&gt;min-device-width 和 max-device-width：匹配设备屏幕的尺寸；&lt;br&gt;min-width 和 max-width：匹配视口的宽度，例如浏览器窗口宽度；&lt;br&gt;orientation（值为 portrait 和 landscape）：匹配设备是横屏还是竖屏。    &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;如果想通过媒体查询来根据用户对浏览器窗口的缩放重新调整布局，应该使用 min-width 和&lt;br&gt;max-width。&lt;/em&gt;    &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;lt;link&amp;gt;标签的media属性使用如下：&lt;/strong&gt;  &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;link &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/css&quot;&lt;/span&gt; media=&lt;span class=&quot;string&quot;&gt;&quot;print&quot;&lt;/span&gt; href=&lt;span class=&quot;string&quot;&gt;&quot;css/print_styles.css&quot;&lt;/span&gt; /&amp;gt;     
+&amp;lt;link &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;text/css&quot;&lt;/span&gt; media=&lt;span class=&quot;string&quot;&gt;&quot;screen and (max-width:568px)&quot;&lt;/span&gt;href=&lt;span class=&quot;string&quot;&gt;&quot;css/iphone_styles.css&quot;&lt;/span&gt; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的css样式会根据media属性中的指定的条件应用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用&amp;lt;meta&amp;gt;标签设定视口&lt;/strong&gt;      &lt;/p&gt;
+&lt;p&gt;如果你想让自己的页面布局适合这些小屏幕，首先就要覆盖这种自动缩小的设定。方法是在页面的&lt;head&gt;标签里添加一个&lt;meta&gt;标签：&lt;/head&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;meta name=&lt;span class=&quot;string&quot;&gt;&quot;viewport&quot;&lt;/span&gt; content=&lt;span class=&quot;string&quot;&gt;&quot;width=device-width; maximumscale=1.0&quot;&lt;/span&gt; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;meta标签告诉浏览器按照屏幕宽度来显示网页，不要缩小网页。&lt;/p&gt;
+&lt;h2 id=&quot;u5176_u4ED6&quot;&gt;&lt;a href=&quot;#u5176_u4ED6&quot; class=&quot;headerlink&quot; title=&quot;其他&quot;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;h4 id=&quot;u6761_u4EF6_u6CE8_u91CA&quot;&gt;&lt;a href=&quot;#u6761_u4EF6_u6CE8_u91CA&quot; class=&quot;headerlink&quot; title=&quot;条件注释&quot;&gt;&lt;/a&gt;条件注释&lt;/h4&gt;&lt;p&gt;对于IE浏览器单独应用的样式：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;!--[&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; lte IE 8]&amp;gt; &amp;lt;!-- IE 条件注释 --&amp;gt;    
+&amp;lt;link src=&lt;span class=&quot;string&quot;&gt;&quot;ie_only.css&quot;&lt;/span&gt; rel=&lt;span class=&quot;string&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; /&amp;gt;    
+&amp;lt;![endif]--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上只在IE浏览器中执行。加载条件可以使用 lte（less than or equal to，小于等于）、 lt（less than，小于）、 gte（greaterthan or equal to，大于等于）、 gt（greater than，大于），甚至只写一个浏览器版本号如 IE 6。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6&quot;&gt;&lt;a href=&quot;#u7B2C_u516D_u7AE0__u754C_u9762_u7EC4_u4EF6&quot; class=&quot;headerlink&quot; title=&quot;第六章 界面组件&quot;&gt;&lt;/a&gt;第六章 界面组件&lt;/h2&gt;&lt;p&gt;界面组件是对HTML提供的常见用户界面(UI)元素的称呼，包括列表和表单。&lt;/p&gt;
+&lt;h3 id=&quot;6-1__u5BFC_u822A_u83DC_u5355&quot;&gt;&lt;a href=&quot;#6-1__u5BFC_u822A_u83DC_u5355&quot; class=&quot;headerlink&quot; title=&quot;6.1 导航菜单&quot;&gt;&lt;/a&gt;6.1 导航菜单&lt;/h3&gt;&lt;p&gt;这里主要是利用列表元素(ul或ol)来分组链接，因为默认情况下，列表项是块级元素，它们会上下堆叠。&lt;br&gt;主要有：   &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="css权威指南学习笔记" scheme="http://blog.zhangyulei.site/categories/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css权威指南学习笔记(三)</title>
+    <link href="http://blog.zhangyulei.site/2016/03/30/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89/"/>
+    <id>http://blog.zhangyulei.site/2016/03/30/css权威指南学习笔记-三/</id>
+    <published>2016-03-30T08:49:30.000Z</published>
+    <updated>2016-04-04T16:00:00.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C&quot;&gt;&lt;a href=&quot;#u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C&quot; class=&quot;headerlink&quot; title=&quot;第四章 字体和文本&quot;&gt;&lt;/a&gt;第四章 字体和文本&lt;/h2&gt;&lt;h3 id=&quot;4-1__u5B57_u4F53&quot;&gt;&lt;a href=&quot;#4-1__u5B57_u4F53&quot; class=&quot;headerlink&quot; title=&quot;4.1 字体&quot;&gt;&lt;/a&gt;4.1 字体&lt;/h3&gt;&lt;p&gt;网页中的字体有三个来源：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户机器中安装的字体。&lt;/li&gt;
+&lt;li&gt;保存在第三方网站上的字体，可以使用link标签链接到页面上。&lt;/li&gt;
+&lt;li&gt;保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;与字体样式相关的6个属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;font-family，字体族，用于设定元素中的文本使用什么字体，font-family是可以继承的属性。为了防止字体无效，在指定文本的字体时，需要多列出几种后备字体，以防第一种字体无效，这个字体的列表也叫字体栈。例如：body {font-family:”trebuchet ms”, tahoma, sans-serif;}，&lt;em&gt;注意字体名多于一个单词(有空格)，应该加上引号&lt;/em&gt;。&lt;br&gt;有以下5类通用字体类&lt;br&gt;serif，也就是衬线字体，在每个字符笔画的末端会有一些装饰线；&lt;br&gt;sans-serif，也就是无衬线字体，字符笔画的末端没有装饰线；&lt;br&gt;monospace，也就是等宽字体，顾名思义，就是每个字符的宽度相等；&lt;br&gt;cursive，也就是草书体或手写体；&lt;br&gt;fantasy，不能归入其他类别的字体&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;font-size，表示字体大小。这里有两种表示形式，一种是绝对字体大小，使用像素，派卡等；另一种是相对字体大小，使用百分比、em或rem。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;font-style，字体样式值：italic(斜体)、oblique(斜体)、normal(常规值，会取消所有的特殊样式)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;font-weight，字体粗细，可能的值：100、200  900,或者lighter、normal、bold和bolder。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;font-variant，字体变化，值：small-caps、normal。small-caps会导致所有小写英文字母变成小型大写字母。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;font(简写属性)：规则有必须声明font-size和font-family的值，所有值必须按如下顺序&lt;br&gt;1.font-weight、font-style、font-variant不分先后&lt;br&gt;2.然后是font-size&lt;br&gt;3.最后是font-family&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;4-2__u6587_u672C_u5C5E_u6027&quot;&gt;&lt;a href=&quot;#4-2__u6587_u672C_u5C5E_u6027&quot; class=&quot;headerlink&quot; title=&quot;4.2 文本属性&quot;&gt;&lt;/a&gt;4.2 文本属性&lt;/h3&gt;&lt;p&gt;常用的文本属性主要有：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;text-indent–文本缩进，例如p{text-indent:3em},正负均可    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;letter-spacing–字符间距，值任何长度值(正、负值均可)，例如:p{letter-spacing:.2rem}    &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;word-spacing–单词间距，例如：p{word-spacing:.2rem},单词间距与字符间距非常相似，区别在于它只调整单词间距，而不影响字符间距。css把任何两边有空白的字符和字符串都视作“单词”。(纯汉字文本一段中没有空格，因为word-spacing对中文网页几乎没有用)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;text-decoration–文本装饰，值：underline(下划线)、overline(上划线)、line-through(划线在文本中间)、blink(给文本添加闪烁效果)、none。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;text-align–文本对齐，值：left、right、center(也可以用来在较大的元素中居中较小的固定宽度的元素或图片)、justify(两端对齐)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;line-height–行高，值：任意数字值，实例 p:{line-height:1.5},css中的行高平均分布在一行文本的上方和下方。举个例子，如果字体大小是12像素，行高是20像素，浏览器会在文本上方和下方各加4像素的空白，以凑足20像素的行高。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;text-transform–文本转换，值：none、uppercase(转换成大写)、lowercase(转换成小写)、capitalize(每个词的首字母大写)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;vertical-align–垂直对齐，值任意长度值以及sub、super、top、middle、bottom等。vertical-align以基线为参照上下移动文本，但这个属性只影响行内元素，如果你想在垂直方向上对齐块级元素，必须把其display属性设定为inline。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;4-3_Web_u5B57_u4F53_u5927_u63ED_u79D8&quot;&gt;&lt;a href=&quot;#4-3_Web_u5B57_u4F53_u5927_u63ED_u79D8&quot; class=&quot;headerlink&quot; title=&quot;4.3 Web字体大揭秘&quot;&gt;&lt;/a&gt;4.3 Web字体大揭秘&lt;/h3&gt;&lt;p&gt;@font-face规则为设计师提供了系统自带字体以外的广泛选择，浏览器可以从Web服务器下载字体。&lt;br&gt;设定Web字体的方式有以下三种：   &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用公共字体库。例如Google Web Fonts提供的在线公共字体库。打开 &lt;a href=&quot;http://www.google.com/webfonts，找到想要的字体，单击&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.google.com/webfonts，找到想要的字体，单击&lt;/a&gt; Add to Collection 按钮，然后单击页面底部的 Use 按钮。然后Google 就会生成一个指向你刚刚选定字体的&lt;link&gt;标签，直接把它复制粘贴到你的 HTML 文件中即可。比如：&lt;link href=&quot;http://fonts.googleapis.com/css?family=Anton|Niconne|Prata&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用打包的@font-face包。Font Squirrel（&lt;a href=&quot;http://www.fontsquirrel.com）提供了很多现成的字体包，每个字体包中都包含所有必要格式的字体和为每款浏览器提供正确格式的&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.fontsquirrel.com）提供了很多现成的字体包，每个字体包中都包含所有必要格式的字体和为每款浏览器提供正确格式的&lt;/a&gt; CSS 代码。 &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用生成的@font-face包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;举个例子，如果你想在伪元素中添加十六进制值&amp;#x201C;（左双引号），则&lt;br&gt;需要改写成如下形式：&lt;br&gt;e::before {content:”\201C”;}&lt;br&gt;就是在数字前面加了一个反斜杠。相应地，右双引号的十六进制值改写后是\201D。&lt;/p&gt;
+&lt;h2 id=&quot;u7B2C_u4E94_u7AE0__u9875_u9762_u5E03_u5C40&quot;&gt;&lt;a href=&quot;#u7B2C_u4E94_u7AE0__u9875_u9762_u5E03_u5C40&quot; class=&quot;headerlink&quot; title=&quot;第五章 页面布局&quot;&gt;&lt;/a&gt;第五章 页面布局&lt;/h2&gt;&lt;p&gt;主要介绍“用内部DIV创建浮动的栏”，这是多年来一直被业内用于创建多栏布局的经典技术。如今，不仅仅可以使用box-sizing属性代替内部DIV，也可以使用让元素行为跟表格一样的css3的display属性。&lt;/p&gt;
+&lt;h3 id=&quot;5-1__u5E03_u5C40_u7684_u57FA_u672C_u6982_u5FF5&quot;&gt;&lt;a href=&quot;#5-1__u5E03_u5C40_u7684_u57FA_u672C_u6982_u5FF5&quot; class=&quot;headerlink&quot; title=&quot;5.1 布局的基本概念&quot;&gt;&lt;/a&gt;5.1 布局的基本概念&lt;/h3&gt;&lt;p&gt;多栏布局有三种基本实现方案：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;固定宽度–布局的大小不会随着用户调整浏览器窗口大小而变化，一般是900到1100像素宽，其中960像素最常见的。&lt;/li&gt;
+&lt;li&gt;流动–布局的大小会随着用户调整浏览器窗口大小而变化。&lt;/li&gt;
+&lt;li&gt;弹性–布局与流动布局类似，在浏览器窗口变宽时，不仅布局变宽，而且所有内容元素的大小也会变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一般是控制布局宽度。而让内容决定布局高度。&lt;/p&gt;
+&lt;h3 id=&quot;5-2__u4E09_u680F-_u56FA_u5B9A_u5BBD_u5EA6_u5E03_u5C40&quot;&gt;&lt;a href=&quot;#5-2__u4E09_u680F-_u56FA_u5B9A_u5BBD_u5EA6_u5E03_u5C40&quot; class=&quot;headerlink&quot; title=&quot;5.2 三栏-固定宽度布局&quot;&gt;&lt;/a&gt;5.2 三栏-固定宽度布局&lt;/h3&gt;&lt;p&gt;可以设定一个固定宽度的div标签，两边 margin:auto，实现居中；&lt;br&gt;然后div标签里面用float容器控制三栏布局，三栏加起来的宽度为div标签的宽度。可以这样设计布局：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&amp;lt;div id=&lt;span class=&quot;string&quot;&gt;&quot;wrapper&quot;&lt;/span&gt;&amp;gt;    
+    &amp;lt;header&amp;gt;    
+    &amp;lt;/header&amp;gt;    
+    &amp;lt;nav&amp;gt;    
+    &amp;lt;/nav&amp;gt;    
+    &amp;lt;article&amp;gt;    
+    &amp;lt;/article&amp;gt;    
+    &amp;lt;aside&amp;gt;    
+    &amp;lt;/aside&amp;gt;    
+    &amp;lt;footer&amp;gt;     
+    &amp;lt;/footer&amp;gt;    
+&amp;lt;/div\&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;应用的样式如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;\* {margin:0; padding:0;}    
+\&lt;span class=&quot;comment&quot;&gt;#wrapper {width:960px; margin:0 auto; border:1px solid;}    &lt;/span&gt;
+header {background:&lt;span class=&quot;comment&quot;&gt;#f00;}    &lt;/span&gt;
+nav {    
+   width:150px;    
+   &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;:left;    
+   background:&lt;span class=&quot;comment&quot;&gt;#dcd9c0;    &lt;/span&gt;
+}    
+nav li {    
+   list-style-type:none;    
+}    
+article {    
+   width:600px;    
+   &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;:left;    
+   background:&lt;span class=&quot;comment&quot;&gt;#ffed53;    &lt;/span&gt;
+}    
+aside {    
+   width:210px;    
+   &lt;span class=&quot;built_in&quot;&gt;float&lt;/span&gt;:left;    
+   background:&lt;span class=&quot;comment&quot;&gt;#3f7ccf;    &lt;/span&gt;
+}    
+footer {clear:both; background:&lt;span class=&quot;comment&quot;&gt;#000;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;u4E3A_u680F_u8BBE_u5B9A_u5185_u8FB9_u8DDD_u548C_u8FB9_u6846&quot;&gt;&lt;a href=&quot;#u4E3A_u680F_u8BBE_u5B9A_u5185_u8FB9_u8DDD_u548C_u8FB9_u6846&quot; class=&quot;headerlink&quot; title=&quot;为栏设定内边距和边框&quot;&gt;&lt;/a&gt;为栏设定内边距和边框&lt;/h4&gt;&lt;p&gt;注意这里，因为我们div标签宽度一定的，如果调整各栏中的内容，布局就可能超过容器宽度，而右边的栏就可能滑到左边的栏下方。为固定宽度的元素添加水平外边距、边框和内边距，会导致元素盒子变宽。&lt;/p&gt;
+&lt;p&gt;我们有三种方法可以防止这种情况发生：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从设定的元素宽度中减去添加的水平外边距、边框和内边距的宽度和&lt;/li&gt;
+&lt;li&gt;在容器内部的元素上添加内边距或外边距，前提是这些元素没有明确设定宽度，他们内容随着内、外边距的增加而缩小。&lt;strong&gt;就像盒模型定义所说的，没有宽度的元素在水平方向上会适应其父元素，其内容会随着外边距、边框和内边距的增加而减少。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用css3的box-sizing属性切换盒子缩放方式，比如section{box-sizing:border-box};&lt;/strong&gt;应用box-sizing属性后，给section添加的边框和内边距都不会增大盒子，相反会导致内容变窄。注意box-sizing属性在IE6和IE7不支持需要单独处理下。可以通过名叫borderBoxModel.js的腻子脚本实现单独处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;CSS_u9009_u62E9_u7B26_u7684_u5B9E_u9645_u5E94_u7528&quot;&gt;&lt;a href=&quot;#CSS_u9009_u62E9_u7B26_u7684_u5B9E_u9645_u5E94_u7528&quot; class=&quot;headerlink&quot; title=&quot;CSS选择符的实际应用&quot;&gt;&lt;/a&gt;CSS选择符的实际应用&lt;/h4&gt;&lt;p&gt;类应该标记具有相同特征的元素。对于那些唯一性的标签，更好的办法是添加一个ID，相当于页面每个部分的路标。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;注意： 每一栏中的垂直间距是由父元素的内边距生成的，为什么要用父元素呢？原因就是父元素没有上下边框的情况下，子元素的上下边距会折叠的，即当我设置了margin的值，但是浏览器解析为0。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;人造栏技术–通过给各栏添加背景图片和背景色使得背景随着内容的增加实现垂直repeat，背景图片会覆盖背景色，从而造成各栏高度一样。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C&quot;&gt;&lt;a href=&quot;#u7B2C_u56DB_u7AE0__u5B57_u4F53_u548C_u6587_u672C&quot; class=&quot;headerlink&quot; title=&quot;第四章 字体和文本&quot;&gt;&lt;/a&gt;第四章 字体和文本&lt;/h2&gt;&lt;h3 id=&quot;4-1__u5B57_u4F53&quot;&gt;&lt;a href=&quot;#4-1__u5B57_u4F53&quot; class=&quot;headerlink&quot; title=&quot;4.1 字体&quot;&gt;&lt;/a&gt;4.1 字体&lt;/h3&gt;&lt;p&gt;网页中的字体有三个来源：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户机器中安装的字体。&lt;/li&gt;
+&lt;li&gt;保存在第三方网站上的字体，可以使用link标签链接到页面上。&lt;/li&gt;
+&lt;li&gt;保存在Web服务器上的字体，这些字体可以使用@font-face规则随着网页一起发送给浏览器。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="css权威指南学习笔记" scheme="http://blog.zhangyulei.site/categories/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css权威指南学习笔记(二)</title>
+    <link href="http://blog.zhangyulei.site/2016/03/29/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/"/>
+    <id>http://blog.zhangyulei.site/2016/03/29/css权威指南学习笔记-二/</id>
+    <published>2016-03-29T07:56:06.000Z</published>
+    <updated>2016-04-05T07:58:08.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20&quot;&gt;&lt;a href=&quot;#u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;第三章 定位元素&quot;&gt;&lt;/a&gt;第三章 定位元素&lt;/h2&gt;&lt;p&gt;可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;3-1__u7406_u89E3_u76D2_u6A21_u578B&quot;&gt;&lt;a href=&quot;#3-1__u7406_u89E3_u76D2_u6A21_u578B&quot; class=&quot;headerlink&quot; title=&quot;3.1 理解盒模型&quot;&gt;&lt;/a&gt;3.1 理解盒模型&lt;/h3&gt;&lt;p&gt;推荐把下面这条规则作为样式表的第一条规则(为了重置默认样式):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;* {margin:0; padding:0;}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;每个元素在页面上会生成一个盒子。属性主要有三组:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;边框，设置边框，border-width(thin,medium,thick),border-style(none,hidden,dotted,dashed,solid,double,groove,ridge,inset,outset)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;内边距，设置盒子内容和边距的间距，加在声明的盒子宽度之上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;外边距，设置盒子和相邻元素的间距，margin{12px 10px 6px},最后一个字没有写(左边的值)，那就使用对边的值，这里是右边值10px。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;叠加外边距-只是垂直外边距，水平外间距是相邻外边距之和。&lt;strong&gt;垂直方向上的外边距会叠加。比如布局时有三段文字用p标签分开，第一段的下外边距是margin-bottom:30px；第二段上外边距是margin-top:50px，那么这两段之间实际距离是50px，它们会重叠，然后取最大值&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;外边距的单位。文本元素设置外边距时，一般左右外边距可以使用像素，上下边距以em为单位。例如: p{ font-size:1em; margin:.75em 30px}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;3-2__u76D2_u5B50_u6709_u591A_u5927&quot;&gt;&lt;a href=&quot;#3-2__u76D2_u5B50_u6709_u591A_u5927&quot; class=&quot;headerlink&quot; title=&quot;3.2 盒子有多大&quot;&gt;&lt;/a&gt;3.2 盒子有多大&lt;/h3&gt;&lt;p&gt;这里记住几个结论:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有(就是没有设置width的)宽度的元素始终会扩展到填满其父元素的宽度为止。添加水平边距，内边距和外边距，会导致内容宽度减少，减少量等于水平边框，内边距和外边距的和。&lt;/li&gt;
+&lt;li&gt;为设定了宽度的盒子添加边框，内边距和外边距，会导致盒子扩展得更宽。实际上，盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;3-3__u6D6E_u52A8_u4E0E_u6E05_u9664&quot;&gt;&lt;a href=&quot;#3-3__u6D6E_u52A8_u4E0E_u6E05_u9664&quot; class=&quot;headerlink&quot; title=&quot;3.3 浮动与清除&quot;&gt;&lt;/a&gt;3.3 浮动与清除&lt;/h3&gt;&lt;p&gt;浮动是把元素从常规文档流中拿出来，脱离常规文档流，主要目的是为了实现文本围绕图片的效果，然而这个属性也成了创建多栏布局最简单的方式(多个元素float:left)。使用clear(left,right,both)可以实现浮动元素清除。&lt;br&gt;&lt;strong&gt;围住浮动元素的三种方法&lt;/strong&gt;：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为父元素应用overflow:hidden，以强制它包围浮动元素。&lt;/li&gt;
+&lt;li&gt;同时浮动父元素，即也让父元素浮动起来–float:left,width:100%;&lt;/li&gt;
+&lt;li&gt;给父元素的最后添加一个非浮动的子元素，然后清除该子元素。比如新加一个 &lt;div\ class=&quot;clear_me&quot;&gt;&lt;/div\&gt;, .clear_me {clear:left}；还可以用一个css来添加清除元素的方法。首先给父元素添加一个类 clearfix,然后设置：    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.clearfix:after {&lt;br&gt;    content: “.”;&lt;br&gt;    display:block;&lt;br&gt;    height:0;&lt;br&gt;    visibility:hidden;&lt;br&gt;    clear:both;&lt;br&gt;}    &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;没有父元素时如何清除—可以对需要清除的元素添加上面的.clearfix类；&lt;/p&gt;
+&lt;h3 id=&quot;3-4__u5B9A_u4F4D&quot;&gt;&lt;a href=&quot;#3-4__u5B9A_u4F4D&quot; class=&quot;headerlink&quot; title=&quot;3.4 定位&quot;&gt;&lt;/a&gt;3.4 定位&lt;/h3&gt;&lt;p&gt;css布局核心是position属性，它有四个值：static、relative、absolute、fixed。默认是静态定位&lt;br&gt;主要有:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;相对定位(position:relative)–相对的是它原来在文档流的位置(或者默认位置)。可以使用top、right、bottom和left属性来改变它的位置了。多数只用top、left即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;绝对定位(position:absolute)–绝对定位会把元素彻底从文档流中拿出来，它完全脱离了常规文档流，现在是相对顶级元素body(默认是body)在定位。用top、left定位。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;固定定位(position:fixed)–同样会使元素移出文档流。固定定位元素的定位上下文是视口(浏览器窗口或手持设备的屏幕)，因此它不会随着页面滚动而移动。用top、left定位。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;定位上下文–绝对定位元素默认的定位上下文是body，但实际上，绝对定位元素的任何祖先元素都可以成为它的上下文，只要你把absolute对应的祖先元素的position设定成relative即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;3-5__u663E_u793A_u5C5E_u6027&quot;&gt;&lt;a href=&quot;#3-5__u663E_u793A_u5C5E_u6027&quot; class=&quot;headerlink&quot; title=&quot;3.5 显示属性&quot;&gt;&lt;/a&gt;3.5 显示属性&lt;/h3&gt;&lt;p&gt;所有元素都有display属性，但大多数元素display属性的默认值不是block，就是inline。    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;块级元素(display:block)–段落、标题、列表等，在浏览器中上下堆叠显示。&lt;/li&gt;
+&lt;li&gt;行内元素(display:inline)–a、span、img，在浏览器中左右并排显示，只有前一行没有空间时才会显示到下一行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;display:none会使该元素及所有包含在其中的元素，都不会在页面中显示。与之相对的是visibility属性，它有两个值:visible(默认值)和hidden。&lt;/p&gt;
+&lt;h3 id=&quot;3-6__u80CC_u666F&quot;&gt;&lt;a href=&quot;#3-6__u80CC_u666F&quot; class=&quot;headerlink&quot; title=&quot;3.6 背景&quot;&gt;&lt;/a&gt;3.6 背景&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;前景色color即影响文本，也影响边框&lt;/strong&gt;。&lt;br&gt;背景有背景颜色(background-color)和背景图片(background-image),背景图片叠加在背景颜色之上。css背景属性有:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;背景颜色(background-color)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景图片(background-image)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景重复(background-repeat)–对应四个值，repeat-y和repeat-x，no-repeat，默认值是repeat;另外css3还规定另外两个值，分别是：&lt;br&gt;background-repeat:round：为保证图片不被剪切，通过调整图片大小来适应背景区域。&lt;br&gt;background-repeat:space：为保证图片不被剪切，通过在图片间添加空白来适应背景区域。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景位置(background-position)–用于控制背景位置的属性。background-position属性有5个关键字值，分别是 top、left、bottom、right和 center，这些关键字中的任意两个组合起来都可以作为该属性的值。比如， top right 表示把图片放在元素的右上角位置， center center 把图片放在元素的中心位置。可以用百分比设定位置，例如：background-position:50% 50%；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景尺寸(background-size)–这个属性用来控制背景图片的尺寸。&lt;br&gt;50%–缩放图片，使其填充背景区的一半。&lt;br&gt;100px 50px– 把图片调整到100像素宽，50像素高&lt;br&gt;cover–拉大图片。使其完全填满背景区；保持宽高比&lt;br&gt;contain–缩放图片，使其恰好适应背景区；保持宽高比；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景粘附(background-attachment)–该属性控制滚动元素内的背景图片是否随元素滚动而移动。这个属性的默认值是scroll，即背景图片随着元素移动，如果改成fixed，那么背景图片不会随着元素滚动而移动。&lt;/li&gt;
+&lt;li&gt;background-clip–控制背景绘制区域的范围，比如可以让背景颜色和背景图片只出现在内容区，而不出现在内边距区域。默认背景绘制区域是扩展到边框外边界的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;background-origin–控制背景定位区域的原点，可以设定为元素盒子左上角以外的位置。比如，可以设定以内容区左上角作为原点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;background-break–控制分离元素的显示效果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;背景渐变–有两种一种是线性渐变，一种是放射性渐变。线性渐变从元素的一端延伸到另一端，放射性渐变则从元素内一点向四周发散。&lt;br&gt;线性渐变–  .gradient { background: linear-gradient(方向, 起始颜色, (中间颜色可多种,)终止颜色)}，默认是从上到下，方向值可以为left(从左到右)，-45deg(左上到右下)&lt;br&gt;放射性渐变–参数指定形状、位置、尺寸、颜色和不透明度。比如：.gradient { background: radial-gradient(50px 30px, circle, #fff, #64d2dd, $4947ba)},50px 30px 指圆心，circle渐变形状，剩下的是过渡颜色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;css3还可以给元素背景添加多个背景图片，多张图片可以在背景中叠加起来，css规则中先列出的图片在上层。可以这样写：    &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;background:&lt;br&gt;url(1.jpg) 30px -10px no-repeat,&lt;br&gt;url(2.jpg) …,&lt;br&gt;url(3.jpg) …;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这些背景属性可以简写：background:url() center #fff no-repeat contain fixed等。&lt;br&gt;VSP–厂商前缀，以下css3属性必须加VPS:&lt;br&gt;border-image translate&lt;br&gt;linear-gradient transition&lt;br&gt;radial-gradient background*&lt;br&gt;transform background-image*&lt;br&gt;transform-origin&lt;br&gt;* 针对背景图片或渐变    &lt;/p&gt;
+&lt;p&gt;比如以transform属性为例，标准语法是这样的:&lt;br&gt;transform: skewX(-45deg);&lt;br&gt;为了保证大多数浏览器能够使用，你得这样声明：&lt;br&gt;-moz-transform:skewX(-45deg); /* Firefox */&lt;br&gt;-webkit-transform:skewX(-45deg); /* Chrome 及 Safari*/&lt;br&gt;-ms-transform:skewX(-45deg); /* 微软 Internet Explorer */&lt;br&gt;-o-transform:skewX(-45deg); /* Opera */&lt;br&gt;transform:skewX(-45deg); /* 最后是 W3C 标准属性 */    &lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20&quot;&gt;&lt;a href=&quot;#u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;第三章 定位元素&quot;&gt;&lt;/a&gt;第三章 定位元素&lt;/h2&gt;&lt;p&gt;可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css权威指南学习笔记" scheme="http://blog.zhangyulei.site/categories/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>居中的css:完全指南(翻译)</title>
+    <link href="http://blog.zhangyulei.site/2016/03/22/%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B8%83%E5%B1%80-%E7%BF%BB%E8%AF%91/"/>
+    <id>http://blog.zhangyulei.site/2016/03/22/水平垂直布局-翻译/</id>
+    <published>2016-03-22T11:46:00.000Z</published>
+    <updated>2016-04-07T14:39:10.000Z</updated>
+    
+    <content type="html">&lt;p&gt;这里主要参考的是CHRIS COYIER写的一篇的文章(&lt;a href=&quot;https://css-tricks.com/centering-css-complete-guide/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;点击查看&lt;/a&gt;)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;1__u6C34_u5E73&quot;&gt;&lt;a href=&quot;#1__u6C34_u5E73&quot; class=&quot;headerlink&quot; title=&quot;1 水平&quot;&gt;&lt;/a&gt;1 水平&lt;/h2&gt;&lt;p&gt;水平居中有行内元素和块元素，行内元素有文字、图片、链接等；块元素主要是div、p等block元素。&lt;/p&gt;
+&lt;h3 id=&quot;1-1__u884C_u5185_u5143_u7D20&quot;&gt;&lt;a href=&quot;#1-1__u884C_u5185_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;1.1 行内元素&quot;&gt;&lt;/a&gt;1.1 行内元素&lt;/h3&gt;&lt;p&gt;对于行内元素可以使用如下实现水平居中(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;)：   &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist1_1 {    
+    text-align: center;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这种方法对于inline，inline-block，inline-table等都有效。&lt;/p&gt;
+&lt;h3 id=&quot;1-2__u5757_u5143_u7D20&quot;&gt;&lt;a href=&quot;#1-2__u5757_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;1.2 块元素&quot;&gt;&lt;/a&gt;1.2 块元素&lt;/h3&gt;&lt;p&gt;对于一个块元素，可以设置其margin-left和margin-right自动，就像这样(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;)：  &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist1_2 .div1 {    
+    margin: 0px auto;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;无论块元素的宽度是否已知，都可以实现水平居中。&lt;/p&gt;
+&lt;h3 id=&quot;1-3__u591A_u4E2A_u5757_u5143_u7D20&quot;&gt;&lt;a href=&quot;#1-3__u591A_u4E2A_u5757_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;1.3 多个块元素&quot;&gt;&lt;/a&gt;1.3 多个块元素&lt;/h3&gt;&lt;p&gt;如果有多个块元素需要水平居中时，有两种办法可以实现。一种是借助inline-block，另一种是借助flex。对于第一种方法可以使用如下方式(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;)，设置块元素display:inline-block,其父元素水平居中：   &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;..blocklist1_3 .div1 {    
+    text-align: center;    
+}    
+.blocklist1_3 .div1 div {    
+    display: inline-block;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用flex的话需要给块的父元素添加如下样式(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list1_3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;)：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist1_3 .div2 {    
+    display: flex;    
+    justify-content: center;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;u8865_u5145_28_u65B0_u52A0_29&quot;&gt;&lt;a href=&quot;#u8865_u5145_28_u65B0_u52A0_29&quot; class=&quot;headerlink&quot; title=&quot;补充(新加)&quot;&gt;&lt;/a&gt;补充(新加)&lt;/h3&gt;&lt;p&gt;对于那些没有宽度的块元素，可以设置其为 display:inline-block；然后给其父元素添加 text-align:center，实现水平居中。&lt;/p&gt;
+&lt;h2 id=&quot;2__u5782_u76F4&quot;&gt;&lt;a href=&quot;#2__u5782_u76F4&quot; class=&quot;headerlink&quot; title=&quot;2 垂直&quot;&gt;&lt;/a&gt;2 垂直&lt;/h2&gt;&lt;p&gt;垂直居中也分有行内元素和块元素，不过相比水平居中，垂直居中这里需要讨论的情况有点多，下面我们一一分析。&lt;/p&gt;
+&lt;h3 id=&quot;2-1__u884C_u5185_u5143_u7D20&quot;&gt;&lt;a href=&quot;#2-1__u884C_u5185_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;2.1 行内元素&quot;&gt;&lt;/a&gt;2.1 行内元素&lt;/h3&gt;&lt;h4 id=&quot;2-1-1__u5355_u884C&quot;&gt;&lt;a href=&quot;#2-1-1__u5355_u884C&quot; class=&quot;headerlink&quot; title=&quot;2.1.1 单行&quot;&gt;&lt;/a&gt;2.1.1 单行&lt;/h4&gt;&lt;p&gt;对于单行的行内元素，我们只需要设置其padding-top和padding-bottom值相等即可(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_1 .div1 {    
+    padding-top: 20px;    
+    padding-bottom: 20px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果我们不能设置padding的话，而行内元素的高度(height=50px)已知时，可以设置line-height=height,实现元素的垂直居中(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;在线查看demo&lt;/a&gt;)：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_1 .div2 {    
+    line-height: 50px;    
+    height: 50px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;2-1-2__u591A_u884C&quot;&gt;&lt;a href=&quot;#2-1-2__u591A_u884C&quot; class=&quot;headerlink&quot; title=&quot;2.1.2 多行&quot;&gt;&lt;/a&gt;2.1.2 多行&lt;/h4&gt;&lt;p&gt;对于多行元素我们有四种方式可以实现垂直居中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a.可以像上面那样通过设置padding-top和padding-bottom的值相等来实现垂直居中(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo-1&lt;/a&gt;)：    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_2 .div1 {   
+    padding: 20px 0px;  
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;b.可以借助vertical-align属性来实现垂直居中(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo-2&lt;/a&gt;)：    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_2 .div2 {   
+    display: table;    
+}    
+.blocklist2_1_2 .div2&amp;gt;div {    
+    display: table-cell;    
+    vertical-align: middle;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;c.可以借助flex技术来实现垂直居中，只需添加如下样式(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo-3&lt;/a&gt;)：    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_2 .div3 {    
+    display: flex;    
+    justify-content: center;   
+    flex-direction: column;    
+    height: 400px;   
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;d.将一个全高度的伪元素放置在容器内，然后设置文本垂直对齐(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_1_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo-4&lt;/a&gt;)：    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_1_2 .div4 {    
+    position:relative;    
+}    
+.blocklist2_1_2 .div4::before {    
+    content: &lt;span class=&quot;string&quot;&gt;&#39; &#39;&lt;/span&gt;;    
+    display: inline-block;    
+    height: 100%;    
+    width: 1%;    
+    vertical-align: middle;    
+}    
+.blocklist2_1_2 .div4&amp;gt;div {    
+    display: inline-block;    
+    vertical-align: middle;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;2-2__u5757_u5143_u7D20&quot;&gt;&lt;a href=&quot;#2-2__u5757_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;2.2 块元素&quot;&gt;&lt;/a&gt;2.2 块元素&lt;/h3&gt;&lt;h4 id=&quot;2-2-1__u5757_u5143_u7D20_u9AD8_u5EA6_u5DF2_u77E5&quot;&gt;&lt;a href=&quot;#2-2-1__u5757_u5143_u7D20_u9AD8_u5EA6_u5DF2_u77E5&quot; class=&quot;headerlink&quot; title=&quot;2.2.1 块元素高度已知&quot;&gt;&lt;/a&gt;2.2.1 块元素高度已知&lt;/h4&gt;&lt;p&gt;在网页布局中有的时候我们知道元素的高度，有的时候我们不知道。对于已知高度的块元素可以这样设置来实现垂直居中(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;)：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_2_1 .div {    
+    position: relative;    
+}   
+.blocklist2_2_1 .div div {    
+    position: absoulte;
+    top: 50%;    
+    height: 100px;
+    margin-top: -70px; //这里70px是height*1/2 + padding    
+    padding: 20px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;2-2-2__u5757_u5143_u7D20_u9AD8_u5EA6_u672A_u77E5&quot;&gt;&lt;a href=&quot;#2-2-2__u5757_u5143_u7D20_u9AD8_u5EA6_u672A_u77E5&quot; class=&quot;headerlink&quot; title=&quot;2.2.2 块元素高度未知&quot;&gt;&lt;/a&gt;2.2.2 块元素高度未知&lt;/h4&gt;&lt;p&gt;有时候我们是不知道块元素的高度的，这时候可以使用transform来实现(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;):    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_2_2 .div {    
+    position: relative;    
+}    
+.blocklist2_2_2 .div div {    
+    transform: translateY(-50%);    
+    top: 50%;    
+    position: absoulte;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;2-2-3__u5229_u7528flex_u5B9E_u73B0&quot;&gt;&lt;a href=&quot;#2-2-3__u5229_u7528flex_u5B9E_u73B0&quot; class=&quot;headerlink&quot; title=&quot;2.2.3 利用flex实现&quot;&gt;&lt;/a&gt;2.2.3 利用flex实现&lt;/h4&gt;&lt;p&gt;除了以上两种办法，还可以使用flex实现(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list2_2_3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;):    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist2_2_3 .div {    
+    display: flex;    
+    flex-direction: column;    
+    justify-content: center;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;3__u6C34_u5E73_u5782_u76F4&quot;&gt;&lt;a href=&quot;#3__u6C34_u5E73_u5782_u76F4&quot; class=&quot;headerlink&quot; title=&quot;3 水平垂直&quot;&gt;&lt;/a&gt;3 水平垂直&lt;/h2&gt;&lt;p&gt;有的时候我们不仅希望水平居中还希望垂直居中，可以结合以上提到的例子进行组合实现，主要分为以下三个方面：&lt;/p&gt;
+&lt;h3 id=&quot;3-1__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u5DF2_u77E5&quot;&gt;&lt;a href=&quot;#3-1__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u5DF2_u77E5&quot; class=&quot;headerlink&quot; title=&quot;3.1 元素高度、宽度已知&quot;&gt;&lt;/a&gt;3.1 元素高度、宽度已知&lt;/h3&gt;&lt;p&gt;当元素高度和宽度已知时，可以将元素绝对定位，偏移中心50%，然后使用负的margin值实现，如下(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;):    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist3_1 .div {    
+    position: relative;    
+}    
+.blocklist3_1 .div div {    
+    position: absoulte;
+    top: 50%;    
+    left: 50%;    
+    margin: -120px 0px 0px -220px;    //height一半，width一半，另外加上padding值
+    height: 200px;    
+    width: 400px;    
+    padding: 20px;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;3-2__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u672A_u77E5&quot;&gt;&lt;a href=&quot;#3-2__u5143_u7D20_u9AD8_u5EA6_u3001_u5BBD_u5EA6_u672A_u77E5&quot; class=&quot;headerlink&quot; title=&quot;3.2 元素高度、宽度未知&quot;&gt;&lt;/a&gt;3.2 元素高度、宽度未知&lt;/h3&gt;&lt;p&gt;如果元素的高度和宽度未知呢，我们可以使用变换属性，在两个方向赋予50%的负值，如下(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;):    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist3_2 .div {   
+    position: relative;    
+}    
+.blocklist3_2 .div div {    
+    position: absolute;     
+    top: 50%;    
+    left: 50%;    
+    transform: translate(-50%, -50%);    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;3-3__u5229_u7528flexbox_u5B9E_u73B0&quot;&gt;&lt;a href=&quot;#3-3__u5229_u7528flexbox_u5B9E_u73B0&quot; class=&quot;headerlink&quot; title=&quot;3.3 利用flexbox实现&quot;&gt;&lt;/a&gt;3.3 利用flexbox实现&lt;/h3&gt;&lt;p&gt;用flex实现时需要使用两个中心属性(&lt;a href=&quot;http://yulei521.github.io/segmentFault_question_demo/layout.html#list3_3&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;demo&lt;/a&gt;)：    &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;.blocklist3_3 .div {     
+    display: flex;    
+    justify-content: center;    
+    align-items: center;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里主要参考的是CHRIS COYIER写的一篇的文章(&lt;a href=&quot;https://css-tricks.com/centering-css-complete-guide/&quot;&gt;点击查看&lt;/a&gt;)，主要讲了关于css水平、垂直居中的一些方法,每个方法后面都有一个demo，可以在线查看效果。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+      <category term="居中" scheme="http://blog.zhangyulei.site/tags/%E5%B1%85%E4%B8%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css权威指南学习笔记(一)</title>
+    <link href="http://blog.zhangyulei.site/2016/03/18/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
+    <id>http://blog.zhangyulei.site/2016/03/18/css权威指南学习笔记-一/</id>
+    <published>2016-03-18T01:56:14.000Z</published>
+    <updated>2016-04-05T07:58:56.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784&quot;&gt;&lt;a href=&quot;#u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784&quot; class=&quot;headerlink&quot; title=&quot;第一章 HTML标记与文档结构&quot;&gt;&lt;/a&gt;第一章 HTML标记与文档结构&lt;/h2&gt;&lt;p&gt;用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些&lt;em&gt;用户代理(user agent)&lt;/em&gt;能够理解的含义。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;u7B2C_u4E8C_u7AE0_CSS_u5DE5_u4F5C_u539F_u7406&quot;&gt;&lt;a href=&quot;#u7B2C_u4E8C_u7AE0_CSS_u5DE5_u4F5C_u539F_u7406&quot; class=&quot;headerlink&quot; title=&quot;第二章 CSS工作原理&quot;&gt;&lt;/a&gt;第二章 CSS工作原理&lt;/h2&gt;&lt;h3 id=&quot;2-1__u5256_u6790CSS_u89C4_u5219&quot;&gt;&lt;a href=&quot;#2-1__u5256_u6790CSS_u89C4_u5219&quot; class=&quot;headerlink&quot; title=&quot;2.1 剖析CSS规则&quot;&gt;&lt;/a&gt;2.1 剖析CSS规则&lt;/h3&gt;&lt;p&gt;css注释使用  /&lt;em&gt; 注释内容 &lt;/em&gt;/&lt;br&gt;有一种在样式表中链接到其他样式表的方法，应用@import 指令(是一种at规则)  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;@import url(css/style2.css)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;要注意的是@import指令必须出现在样式表中其他样式之前，否则@import引用的样式表不会被加载。&lt;br&gt;css规则由选择符和声明两部分组成。&lt;/p&gt;
+&lt;h4 id=&quot;u4E3A_u6587_u6863_u6DFB_u52A0_u6837_u5F0F_u7684_u4E09_u79CD_u65B9_u6CD5&quot;&gt;&lt;a href=&quot;#u4E3A_u6587_u6863_u6DFB_u52A0_u6837_u5F0F_u7684_u4E09_u79CD_u65B9_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;为文档添加样式的三种方法&quot;&gt;&lt;/a&gt;为文档添加样式的三种方法&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;行内样式，写在元素标签里&lt;/li&gt;
+&lt;li&gt;嵌入样式，写在style标签里&lt;/li&gt;
+&lt;li&gt;链接样式，写在单独的css样式表中    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;优先级：行内样式&amp;gt;嵌入样式&amp;gt;链接样式    &lt;/p&gt;
+&lt;h3 id=&quot;CSS_u89C4_u5219_u547D_u540D_u60EF_u4F8B&quot;&gt;&lt;a href=&quot;#CSS_u89C4_u5219_u547D_u540D_u60EF_u4F8B&quot; class=&quot;headerlink&quot; title=&quot;CSS规则命名惯例&quot;&gt;&lt;/a&gt;CSS规则命名惯例&lt;/h3&gt;&lt;p&gt;css规则由选择符和声明两部分组成，声明又由属性和值两部分组成。如下图：&lt;br&gt;&lt;img src=&quot;/images/css2-1.jpg&quot; alt=&quot;&quot;&gt;    &lt;/p&gt;
+&lt;h3 id=&quot;2-2__u9009_u62E9_u7B26&quot;&gt;&lt;a href=&quot;#2-2__u9009_u62E9_u7B26&quot; class=&quot;headerlink&quot; title=&quot;2.2 选择符&quot;&gt;&lt;/a&gt;2.2 选择符&lt;/h3&gt;&lt;p&gt;所有用于特定元素的选择符有三种：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;上下文选择符。基于祖先或同胞元素选择一个元素。&lt;/li&gt;
+&lt;li&gt;ID和类选择符。基于id和class属性的值选择元素。&lt;/li&gt;
+&lt;li&gt;属性选择符。基于属性的有无和特征选择元素。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-2-1__u4E0A_u4E0B_u6587_u9009_u62E9_u7B26&quot;&gt;&lt;a href=&quot;#2-2-1__u4E0A_u4E0B_u6587_u9009_u62E9_u7B26&quot; class=&quot;headerlink&quot; title=&quot;2.2.1 上下文选择符&quot;&gt;&lt;/a&gt;2.2.1 上下文选择符&lt;/h4&gt;&lt;p&gt;这种“基于位置”变换某个标签样式的问题，可以用上下文选择符来解决。&lt;br&gt;上下文选择符的格式:    &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;标签1 标签2 {声明}    &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其中标签2就是我们想要选择的目标，而且只有在标签1是其祖先元素(不一定是父元素)的情况下才会被选中。&lt;br&gt;&lt;strong&gt;上下文选择符&lt;/strong&gt;，严格来讲叫后代组合式选择符，就是一组以空格分隔的标签名。用于选择作为指定祖先元素后代的标签。    &lt;/p&gt;
+&lt;h5 id=&quot;u8FD8_u6709_u4E00_u4E9B_u7279_u6B8A_u7684_u4E0A_u4E0B_u6587_u9009_u62E9_u7B26_uFF0C_u5982_u4E0B_uFF1A&quot;&gt;&lt;a href=&quot;#u8FD8_u6709_u4E00_u4E9B_u7279_u6B8A_u7684_u4E0A_u4E0B_u6587_u9009_u62E9_u7B26_uFF0C_u5982_u4E0B_uFF1A&quot; class=&quot;headerlink&quot; title=&quot;还有一些特殊的上下文选择符，如下：&quot;&gt;&lt;/a&gt;还有一些特殊的上下文选择符，如下：&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;子选择符 &amp;gt;&lt;br&gt;标签1 &amp;gt; 标签2，标签2必须是标签1的子元素，标签1必须是标签2的父元素。注意：这个选择符中的标签1不能是标签2的父元素之外的其他祖先元素。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;紧邻同胞选择符 +&lt;br&gt;标签1 + 标签2，标签2必须紧跟在其同胞标签1的后面。而且标签1和标签2属于同一个父元素。是标签2的样式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;一般同胞选择符 ~&lt;br&gt;标签1 ~标签2，标签2必须跟(不一定紧跟)在其同胞标签1后面。而且标签1和标签2属于同一个父元素。是标签2的样式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;通用选择符 *&lt;br&gt;表示匹配任何元素。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-2-2_ID_u548C_u7C7B_u9009_u62E9_u7B26&quot;&gt;&lt;a href=&quot;#2-2-2_ID_u548C_u7C7B_u9009_u62E9_u7B26&quot; class=&quot;headerlink&quot; title=&quot;2.2.2 ID和类选择符&quot;&gt;&lt;/a&gt;2.2.2 ID和类选择符&lt;/h4&gt;&lt;p&gt;ID和类选择符为我们选择元素提供了另一套手段，利用它们可以不用考虑文档的层次结构，只要你在HTML标记中为元素添加了id和class属性，就可以在css选择符中使用ID和类名，直接选中文档中特定的区域。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;类属性&lt;br&gt;就是HTML元素的class属性，body标签中包含任何HTML元素都可以添加这个属性。类选择符 .类名。选择同时存在两个类名的元素，可以这样写：    &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.class1.class2 { 样式 };&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ID属性&lt;br&gt;ID与类的写法相似，而且表示ID选择符的#(井号)的用法，也跟表示类选择符的.(句号)类似。&lt;br&gt;#ID值 {css声明样式}。&lt;br&gt;另外ID可以用于页内导航，例如:&lt;br&gt;&amp;lt;a href=”#ID值”&gt;&amp;lt;/a&gt;。&lt;br&gt;如果链接的href属性里只有一个#，那么点击该链接会返回页面顶部，像这样&amp;lt;a href=”#”&gt;回到顶部&lt;a\&gt;。    &lt;/a\&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;ID_u548C_u7C7B_u533A_u522B&quot;&gt;&lt;a href=&quot;#ID_u548C_u7C7B_u533A_u522B&quot; class=&quot;headerlink&quot; title=&quot;ID和类区别&quot;&gt;&lt;/a&gt;ID和类区别&lt;/h4&gt;&lt;p&gt;ID的用途是在页面标记中唯一标识一个特定的元素。它能够为我们编写css规则提供必要的上下文，排除无关的标记，而只选择该上下文的标签。    &lt;/p&gt;
+&lt;p&gt;类是可以应用给任意多个页面中的任意多个HTML元素的公共标识符，以便我们为这些元素应用相同的css样式。而且，使用类也让为不同标签名的元素应用相同的样式成为可能。&lt;/p&gt;
+&lt;h4 id=&quot;2-2-3__u5C5E_u6027_u9009_u62E9_u7B26&quot;&gt;&lt;a href=&quot;#2-2-3__u5C5E_u6027_u9009_u62E9_u7B26&quot; class=&quot;headerlink&quot; title=&quot;2.2.3 属性选择符&quot;&gt;&lt;/a&gt;2.2.3 属性选择符&lt;/h4&gt;&lt;p&gt;是基于HTML标签的属性选择元素。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;属性名选择符&lt;br&gt;标签名[属性名],选择任何带有属性名的标签名。比如：&lt;br&gt;img[title] {样式}—给带有title属性的img元素添加样式，至于title属性什么值无关紧要，只有有这个属性即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;属性值选择符&lt;br&gt;标签名[属性名=”属性值”]，选择任何带有值为属性值的属性名的标签名。&lt;br&gt;比如：img[title=”red flower”]{样式}—-在图片的title的值为red flower的情况下，才会为图片添加边框。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-3__u4F2A_u7C7B&quot;&gt;&lt;a href=&quot;#2-3__u4F2A_u7C7B&quot; class=&quot;headerlink&quot; title=&quot;2.3 伪类&quot;&gt;&lt;/a&gt;2.3 伪类&lt;/h3&gt;&lt;p&gt;一个冒号(:)表示伪类，两个冒号(::)表示css3新增的伪元素。伪类实际上并没有类会附加到标记中的标签上，有两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UI(用户界面)伪类会在HTML元素处于某个状态时(比如鼠标指针位于链接上)，为该元素应用css样式。&lt;/li&gt;
+&lt;li&gt;结构化伪类会在标记中存在某种结构上的关系时(如某个元素是一组元素中的第一个或最后一个)，为响应元素应用css样式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-3-1_UI_u4F2A_u7C7B&quot;&gt;&lt;a href=&quot;#2-3-1_UI_u4F2A_u7C7B&quot; class=&quot;headerlink&quot; title=&quot;2.3.1 UI伪类&quot;&gt;&lt;/a&gt;2.3.1 UI伪类&lt;/h4&gt;&lt;p&gt;UI伪类会基于特定HTML元素的状态应用样式。有：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;链接伪类，针对链接的伪类一共有四个。&lt;br&gt;link—链接就在那等着用户点击&lt;br&gt;visited—用户已经点过这个链接&lt;br&gt;hover—鼠标指针正悬停在链接上&lt;br&gt;active—链接正在被点击&lt;br&gt;&lt;strong&gt;顺序可变，否则会得不到预期效果，可以这样记–LoVe？HA！&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;:focus伪类，表单中的文本字段在用户点击它时会获得焦点，然后用户才能在其中输入字符。例如：&lt;br&gt;input:focus {border:input solid blue};&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;:target伪类，如果用户点击一个指向页面中其他元素的链接，则那个元素就是目标(target),可以用:target伪类选中它。&lt;br&gt;例如:&lt;br&gt;#more_info:target {样式}&lt;br&gt;对于下面这个链接&lt;br&gt;&amp;lt;a href=”#more_info”&gt;More Information&lt;br&gt;位于页面其他地方、ID为more_info的那个元素就是目标。该元素可能是这样的：&lt;br&gt;&amp;lt;h2 id=”more_info”&gt;这是：target类显示样式地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-3-2__u7ED3_u6784_u5316_u4F2A_u7C7B&quot;&gt;&lt;a href=&quot;#2-3-2__u7ED3_u6784_u5316_u4F2A_u7C7B&quot; class=&quot;headerlink&quot; title=&quot;2.3.2 结构化伪类&quot;&gt;&lt;/a&gt;2.3.2 结构化伪类&lt;/h4&gt;&lt;p&gt;结构化伪类可以根据标记的结构应用样式，比如根据某些元素的父元素或前面的同胞元素是什么。主要有：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;:first-child和：last-child&lt;br&gt;:first-child代表一组同胞元素中的第一个元素，而：last-child代表最后一个，&lt;br&gt;li:first-child {样式}&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;:nth-child&lt;br&gt;e:nth-child(n)，e表示元素名，n表示一个数值(也可以使用odd代表奇数或even代表偶数)。例如：&lt;br&gt;li:nth-child(3)–会选择一组列表中的每个第三项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-4__u4F2A_u5143_u7D20&quot;&gt;&lt;a href=&quot;#2-4__u4F2A_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;2.4 伪元素&quot;&gt;&lt;/a&gt;2.4 伪元素&lt;/h3&gt;&lt;p&gt;伪元素是指文档中若有实无的元素。主要有：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;::first-letter伪元素&lt;br&gt;例如： p::first-letter {font-size:300%},可以使得段首字符放大效果。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;::first-line伪元素&lt;br&gt;例如： p::first-line{color:red},可以使得段的第一行字体颜色成为红色。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;::before和::after伪元素&lt;br&gt;用于在特定元素前面或后面添加特殊的内容，例如:对于&lt;/p&gt;&lt;p class=&quot;age&quot; \=&quot;&quot;&gt;25,添加如下样式&lt;br&gt;p.age::before {content:”Age”;}&lt;br&gt;p.age::after {content:” years.”;}&lt;br&gt;能得到以下结果：&lt;br&gt;Age: 25 years.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-5__u7EE7_u627F&quot;&gt;&lt;a href=&quot;#2-5__u7EE7_u627F&quot; class=&quot;headerlink&quot; title=&quot;2.5 继承&quot;&gt;&lt;/a&gt;2.5 继承&lt;/h3&gt;&lt;p&gt;css有很多属性是可以继承的，其中相当一部分都跟文本有关，比如颜色、字体、字号。然而，也有很多css属性不能继承，因为继承这些属性没有意义，主要有元素盒子的定位和显示方式，比如边框、外边距、内边距等。&lt;/p&gt;
+&lt;h3 id=&quot;2-6__u5C42_u53E0&quot;&gt;&lt;a href=&quot;#2-6__u5C42_u53E0&quot; class=&quot;headerlink&quot; title=&quot;2.6 层叠&quot;&gt;&lt;/a&gt;2.6 层叠&lt;/h3&gt;&lt;p&gt;层叠就是样式表中的层叠，是一种样式在文档层次中叠加的过程。&lt;br&gt;浏览器层叠各个来源样式的顺序： &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器默认样式&lt;/li&gt;
+&lt;li&gt;用户样式表&lt;/li&gt;
+&lt;li&gt;作者链接样式表(按照它们链接到页面的先后顺序)&lt;/li&gt;
+&lt;li&gt;作业嵌入样式&lt;/li&gt;
+&lt;li&gt;作者行内样式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;层叠规则：    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;找到应用给每个元素和属性的所有声明&lt;/li&gt;
+&lt;li&gt;按照顺序和权重排序，&lt;strong&gt;声明也可以有权重，空格!important分号(；)用于加重声明的权重，例如：p{color:green !important; font-size:12pt;},优先级最高。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;按特指度排序。特指度更高的优先级高，比如p.class 优先级比p 优先级高，类名选择器比普通的标签选择符具有更高的特指度。一条规则的特指度，由它的选择符中包含多少个标签、类名和ID决定。&lt;/li&gt;
+&lt;li&gt;顺序决定权重，位置靠下的(或后声明)规则胜出。&lt;/li&gt;
+&lt;li&gt;设定的样式会覆盖继承的样式。    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;还可以参考查理版要点，如下图:&lt;br&gt;&lt;img src=&quot;/images/css2-2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;u8BA1_u7B97_u7279_u6307_u5EA6&quot;&gt;&lt;a href=&quot;#u8BA1_u7B97_u7279_u6307_u5EA6&quot; class=&quot;headerlink&quot; title=&quot;计算特指度&quot;&gt;&lt;/a&gt;计算特指度&lt;/h4&gt;&lt;p&gt;有一个简单的记分规则，即对每个选择符都要按下面”ICE”公式计算三个值：I-C-E&lt;br&gt;注意：0-1-12与0-2-0相比，仍然是0-2-0的特指度更高，可以看做一个三位数。&lt;br&gt;三个字母间的端横线是分隔符，并非减号，有如下记分办法:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择符中有一个ID，就在I的位置上加1;&lt;/li&gt;
+&lt;li&gt;选择符中有一个类，就在c的位置上加1;&lt;/li&gt;
+&lt;li&gt;选择符中有一个元素(标签)名，就在E的位置加1;&lt;/li&gt;
+&lt;li&gt;得到一个三位数。此外每个选择符比前一个选择符的特指度更高，即ID&amp;gt;类&amp;gt;标签名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-7__u89C4_u5219_u58F0_u660E&quot;&gt;&lt;a href=&quot;#2-7__u89C4_u5219_u58F0_u660E&quot; class=&quot;headerlink&quot; title=&quot;2.7 规则声明&quot;&gt;&lt;/a&gt;2.7 规则声明&lt;/h3&gt;&lt;p&gt;css属性值主要分以下三类:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文本值&lt;br&gt;例如，font-weight:bold声明中的bold就一个文本值，文本值也叫关键字。&lt;/li&gt;
+&lt;li&gt;数字值&lt;br&gt;数字值后面都有一个单位，例如英寸或点。数字值主要分两类:绝对值和相对值。&lt;/li&gt;
+&lt;li&gt;颜色值&lt;br&gt;颜色值可以用RGB、HSL和十六进制值表示。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784&quot;&gt;&lt;a href=&quot;#u7B2C_u4E00_u7AE0_HTML_u6807_u8BB0_u4E0E_u6587_u6863_u7ED3_u6784&quot; class=&quot;headerlink&quot; title=&quot;第一章 HTML标记与文档结构&quot;&gt;&lt;/a&gt;第一章 HTML标记与文档结构&lt;/h2&gt;&lt;p&gt;用HTML标记某些内容的目的是为了赋予网页语义，就是给你的网页内容赋予某些&lt;em&gt;用户代理(user agent)&lt;/em&gt;能够理解的含义。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里用户代理主要指浏览器，屏幕阅读器，Web爬虫等；    &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;html5相比html而言，新规定了一批结构化的标签，对相关内容进行分组，可以更好规范网页的整体结构。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css权威指南学习笔记" scheme="http://blog.zhangyulei.site/categories/css%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>px,pt,em,rem区别</title>
+    <link href="http://blog.zhangyulei.site/2016/03/14/px-pt-em-rem%E5%8C%BA%E5%88%AB/"/>
+    <id>http://blog.zhangyulei.site/2016/03/14/px-pt-em-rem区别/</id>
+    <published>2016-03-14T14:58:06.000Z</published>
+    <updated>2016-07-19T12:47:46.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;pt_u4E0Epx&quot;&gt;&lt;a href=&quot;#pt_u4E0Epx&quot; class=&quot;headerlink&quot; title=&quot;pt与px&quot;&gt;&lt;/a&gt;pt与px&lt;/h3&gt;&lt;p&gt;在html设计字体的css样式中，有些字体设置成14pt，而不是14px，那pt是什么，和px又有什么关系呢？&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;pt(point)是印刷行业常用的单位，等于1/72英寸，表示绝对长度。px(pixel)指的是像素，是屏幕上显示数据的最基本的点，表示相对大小。不同分辨率下相同长度的px元素显示会不一样，比如同样是14px大小的字，在1366*768显示屏下会显示的小，在1024*768尺寸的显示器下会相对大点。&lt;/p&gt;
+&lt;p&gt;px和pt转换规则很简单，默认的显示设置中把文字定义为96DPI，由公式px=pt*DPI/72，可得pt=px*3/4。&lt;/p&gt;
+&lt;h3 id=&quot;em_u548Crem&quot;&gt;&lt;a href=&quot;#em_u548Crem&quot; class=&quot;headerlink&quot; title=&quot;em和rem&quot;&gt;&lt;/a&gt;em和rem&lt;/h3&gt;&lt;p&gt;em是相对长度单位，相对于当前对象内文本的字体尺寸，即em的计算是基于父级元素font-size的。比如：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:14px&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:2em&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;我这里的字体显示大小是28px(14px*2)&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:18px&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:2em&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;我这里显示字体大小是36px(18px*2),而不是上面计算的28px&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;rem是css3新增的一个相对单位，与em的区别在于，它是相对于html根元素的。还是上面那个例子，如果换做rem，结果如下(浏览器中默认font-size:16px)：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:14px&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:2rem&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;我这里的字体显示大小是32px(16px*2)&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:18px&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;font-size:2rem&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;我这里显示字体大小是32px(16px*2),因为我是根据html根元素的font-size=16px大小进行计算的&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;pt_u4E0Epx&quot;&gt;&lt;a href=&quot;#pt_u4E0Epx&quot; class=&quot;headerlink&quot; title=&quot;pt与px&quot;&gt;&lt;/a&gt;pt与px&lt;/h3&gt;&lt;p&gt;在html设计字体的css样式中，有些字体设置成14pt，而不是14px，那pt是什么，和px又有什么关系呢？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://blog.zhangyulei.site/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端学习资料总结</title>
+    <link href="http://blog.zhangyulei.site/2016/03/02/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://blog.zhangyulei.site/2016/03/02/前端面试总结/</id>
+    <published>2016-03-02T02:20:02.000Z</published>
+    <updated>2016-04-11T00:56:40.000Z</updated>
+    
+    <content type="html">&lt;p&gt;关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;u56FD_u5185IT_u516C_u53F8_u524D_u7AEF_u56E2_u961F&quot;&gt;&lt;a href=&quot;#u56FD_u5185IT_u516C_u53F8_u524D_u7AEF_u56E2_u961F&quot; class=&quot;headerlink&quot; title=&quot;国内IT公司前端团队&quot;&gt;&lt;/a&gt;国内IT公司前端团队&lt;/h2&gt;&lt;h3 id=&quot;u767E_u5EA6&quot;&gt;&lt;a href=&quot;#u767E_u5EA6&quot; class=&quot;headerlink&quot; title=&quot;百度&quot;&gt;&lt;/a&gt;百度&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;FEX: &lt;a href=&quot;http://fex.baidu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fex.baidu.com/&lt;/a&gt;(&lt;a href=&quot;https://github.com/fex-team/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;EFE: &lt;a href=&quot;http://efe.baidu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://efe.baidu.com/&lt;/a&gt;(&lt;a href=&quot;https://github.com/ecomfe&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;)&lt;h3 id=&quot;u963F_u91CC_u5DF4_u5DF4&quot;&gt;&lt;a href=&quot;#u963F_u91CC_u5DF4_u5DF4&quot; class=&quot;headerlink&quot; title=&quot;阿里巴巴&quot;&gt;&lt;/a&gt;阿里巴巴&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;淘宝前端: &lt;a href=&quot;http://taobaofed.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://taobaofed.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;淘宝手机前端: &lt;a href=&quot;https://github.com/amfe/article&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/amfe/article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;淘宝: &lt;a href=&quot;http://ued.taobao.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ued.taobao.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;天猫前端:&lt;a href=&quot;https://tmallfe.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://tmallfe.github.io/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;阿里妈妈:&lt;a href=&quot;http://thx.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://thx.github.io/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Alinode:&lt;a href=&quot;http://alinode.aliyun.com/blog&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://alinode.aliyun.com/blog&lt;/a&gt;&lt;h3 id=&quot;u817E_u8BAF&quot;&gt;&lt;a href=&quot;#u817E_u8BAF&quot; class=&quot;headerlink&quot; title=&quot;腾讯&quot;&gt;&lt;/a&gt;腾讯&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;腾讯IMWeb社区: &lt;a href=&quot;http://imweb.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://imweb.io/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;腾讯AlloyTeam: &lt;a href=&quot;http://www.alloyteam.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.alloyteam.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;腾讯ISUX: &lt;a href=&quot;http://isux.tencent.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://isux.tencent.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;腾讯TID: &lt;a href=&quot;http://tid.tenpay.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tid.tenpay.com/&lt;/a&gt;&lt;h3 id=&quot;360&quot;&gt;&lt;a href=&quot;#360&quot; class=&quot;headerlink&quot; title=&quot;360&quot;&gt;&lt;/a&gt;360&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;奇舞团: &lt;a href=&quot;http://www.75team.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.75team.com/&lt;/a&gt;&lt;h3 id=&quot;u7F8E_u56E2&quot;&gt;&lt;a href=&quot;#u7F8E_u56E2&quot; class=&quot;headerlink&quot; title=&quot;美团&quot;&gt;&lt;/a&gt;美团&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;美团前端: &lt;a href=&quot;http://fe.meituan.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fe.meituan.com/&lt;/a&gt;&lt;h3 id=&quot;u53BB_u54EA_u513F&quot;&gt;&lt;a href=&quot;#u53BB_u54EA_u513F&quot; class=&quot;headerlink&quot; title=&quot;去哪儿&quot;&gt;&lt;/a&gt;去哪儿&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;UED: &lt;a href=&quot;http://ued.qunar.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ued.qunar.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;移动前端: &lt;a href=&quot;http://ued.qunar.com/mobile/blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ued.qunar.com/mobile/blog/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u524D_u7AEF_u7B80_u5386&quot;&gt;&lt;a href=&quot;#u524D_u7AEF_u7B80_u5386&quot; class=&quot;headerlink&quot; title=&quot;前端简历&quot;&gt;&lt;/a&gt;前端简历&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JS前端开发简历模板: &lt;a href=&quot;http://www.kancloud.cn/jikeytang/qq/81142&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.kancloud.cn/jikeytang/qq/81142&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/23150301&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一份优秀的前端开发工程师简历是怎样的？(知乎)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://get.ftqq.com/744.get&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何写好技术简历&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u524D_u7AEF_u9762_u8BD5_u9898&quot;&gt;&lt;a href=&quot;#u524D_u7AEF_u9762_u8BD5_u9898&quot; class=&quot;headerlink&quot; title=&quot;前端面试题&quot;&gt;&lt;/a&gt;前端面试题&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JS前端开发面试题: &lt;a href=&quot;http://www.kancloud.cn/jikeytang/qq/81143&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.kancloud.cn/jikeytang/qq/81143&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2016年Web前端面试题题目汇总:&lt;a href=&quot;http://www.cnblogs.com/bigboyLin/p/5272902.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/bigboyLin/p/5272902.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;JavaScript问题集锦:&lt;br&gt;&lt;a href=&quot;https://github.com/creeperyang/blog/issues/2?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/creeperyang/blog/issues/2?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u524D_u7AEF_u63A8_u8350_u4F5C_u54C1&quot;&gt;&lt;a href=&quot;#u524D_u7AEF_u63A8_u8350_u4F5C_u54C1&quot; class=&quot;headerlink&quot; title=&quot;前端推荐作品&quot;&gt;&lt;/a&gt;前端推荐作品&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JS前端开发推荐作品: &lt;a href=&quot;http://www.kancloud.cn/jikeytang/qq/81141&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.kancloud.cn/jikeytang/qq/81141&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;实例索引:&lt;a href=&quot;http://fgm.cc/learn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://fgm.cc/learn/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u5B66_u4E60_u8D44_u6599&quot;&gt;&lt;a href=&quot;#u5B66_u4E60_u8D44_u6599&quot; class=&quot;headerlink&quot; title=&quot;学习资料&quot;&gt;&lt;/a&gt;学习资料&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/phodal/growth-ebook&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Growth:深入浅出全栈工程师-电子书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/AutumnsWind/Front-end-tutorial&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;最全的资源教程-前端涉及的所有知识体系&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;u6280_u672F_u535A_u5BA2&quot;&gt;&lt;a href=&quot;#u6280_u672F_u535A_u5BA2&quot; class=&quot;headerlink&quot; title=&quot;技术博客&quot;&gt;&lt;/a&gt;技术博客&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;百度efe:&lt;a href=&quot;http://efe.baidu.com/blog/isomorphic/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://efe.baidu.com/blog/isomorphic/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;JS&quot;&gt;&lt;a href=&quot;#JS&quot; class=&quot;headerlink&quot; title=&quot;JS&quot;&gt;&lt;/a&gt;JS&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一堆超赞的JS插件:&lt;a href=&quot;http://awei.oss-cn-shenzhen.aliyuncs.com/libs.html?hmsr=toutiao.io&amp;amp;utm_medium=toutiao.io&amp;amp;utm_source=toutiao.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;链接地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于网上前端资料的整理，国内外著名的IT团队项目站点，前端简历，面试总结。(持续更新)&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="http://blog.zhangyulei.site/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="面试" scheme="http://blog.zhangyulei.site/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown 语法</title>
+    <link href="http://blog.zhangyulei.site/2016/02/10/markdown-%E8%AF%AD%E6%B3%95/"/>
+    <id>http://blog.zhangyulei.site/2016/02/10/markdown-语法/</id>
+    <published>2016-02-10T14:25:21.000Z</published>
+    <updated>2016-09-03T14:31:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;markdown兼容html，目标是实现易读易写。&lt;/p&gt;
+&lt;h5 id=&quot;1_u3001_u7279_u6B8A_u5B57_u7B26_u8F6C_u5316&quot;&gt;&lt;a href=&quot;#1_u3001_u7279_u6B8A_u5B57_u7B26_u8F6C_u5316&quot; class=&quot;headerlink&quot; title=&quot;1、特殊字符转化&quot;&gt;&lt;/a&gt;1、特殊字符转化&lt;/h5&gt;&lt;p&gt;特殊字符需要使用\进行转译。&lt;/p&gt;
+&lt;h5 id=&quot;2_u3001_u6807_u9898&quot;&gt;&lt;a href=&quot;#2_u3001_u6807_u9898&quot; class=&quot;headerlink&quot; title=&quot;2、标题&quot;&gt;&lt;/a&gt;2、标题&lt;/h5&gt;&lt;p&gt;一般使用#表示&lt;/p&gt;
+&lt;h5 id=&quot;3_u3001_u94FE_u63A5_u548C_u63D2_u5165_u56FE_u7247&quot;&gt;&lt;a href=&quot;#3_u3001_u94FE_u63A5_u548C_u63D2_u5165_u56FE_u7247&quot; class=&quot;headerlink&quot; title=&quot;3、链接和插入图片&quot;&gt;&lt;/a&gt;3、链接和插入图片&lt;/h5&gt;&lt;p&gt;[]()表示插入链接，[]是链接地址，()是显示的链接字符串;&lt;br&gt;![]()表示插入图片，[]是图片链接地址,()是显示的文字，可以为空。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;参考地址：&lt;a href=&quot;http://wowubuntu.com/markdown/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wowubuntu.com/markdown/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;markdown兼容html，目标是实现易读易写。&lt;/p&gt;
+&lt;h5 id=&quot;1_u3001_u7279_u6B8A_u5B57_u7B26_u8F6C_u5316&quot;&gt;&lt;a href=&quot;#1_u3001_u7279_u6B8A_u5B57_u7B26_u8F6C_u5316&quot; class=&quot;headerlink&quot; title=&quot;1、特殊字符转化&quot;&gt;&lt;/a&gt;1、特殊字符转化&lt;/h5&gt;&lt;p&gt;特殊字符需要使用\进行转译。&lt;/p&gt;
+&lt;h5 id=&quot;2_u3001_u6807_u9898&quot;&gt;&lt;a href=&quot;#2_u3001_u6807_u9898&quot; class=&quot;headerlink&quot; title=&quot;2、标题&quot;&gt;&lt;/a&gt;2、标题&lt;/h5&gt;&lt;p&gt;一般使用#表示&lt;/p&gt;
+&lt;h5 id=&quot;3_u3001_u94FE_u63A5_u548C_u63D2_u5165_u56FE_u7247&quot;&gt;&lt;a href=&quot;#3_u3001_u94FE_u63A5_u548C_u63D2_u5165_u56FE_u7247&quot; class=&quot;headerlink&quot; title=&quot;3、链接和插入图片&quot;&gt;&lt;/a&gt;3、链接和插入图片&lt;/h5&gt;&lt;p&gt;[]()表示插入链接，[]是链接地址，()是显示的链接字符串;&lt;br&gt;![]()表示插入图片，[]是图片链接地址,()是显示的文字，可以为空。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="markdown" scheme="http://blog.zhangyulei.site/categories/markdown/"/>
+    
+    
+      <category term="markdown" scheme="http://blog.zhangyulei.site/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习hexo搭建站点所遇问题小结2</title>
+    <link href="http://blog.zhangyulei.site/2016/01/28/%E5%AD%A6%E4%B9%A0hexo%E6%90%AD%E5%BB%BA%E7%AB%99%E7%82%B9%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%932/"/>
+    <id>http://blog.zhangyulei.site/2016/01/28/学习hexo搭建站点所遇问题小结2/</id>
+    <published>2016-01-28T07:51:06.000Z</published>
+    <updated>2016-01-28T08:42:14.000Z</updated>
+    
+    <content type="html">&lt;p&gt;在学习搭建hexo过程中遇到的问题，这里总结备忘下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;u65B0_u5EFA_u4E00_u4E2A-md_u6587_u4EF6_u5934_u90E8_u4FE1_u606F_u7684_u542B_u4E49&quot;&gt;&lt;a href=&quot;#u65B0_u5EFA_u4E00_u4E2A-md_u6587_u4EF6_u5934_u90E8_u4FE1_u606F_u7684_u542B_u4E49&quot; class=&quot;headerlink&quot; title=&quot;新建一个.md文件头部信息的含义&quot;&gt;&lt;/a&gt;新建一个.md文件头部信息的含义&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;title: &amp;#123;&amp;#123;title&amp;#125;&amp;#125; &lt;span class=&quot;comment&quot;&gt;#文章的标题，和.md文件名名字一致   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;date: &amp;#123;&amp;#123;data&amp;#125;&amp;#125; &lt;span class=&quot;comment&quot;&gt;#时间   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;categories: &lt;span class=&quot;comment&quot;&gt;# 类别&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tags: &lt;span class=&quot;comment&quot;&gt;# 标签，形式[tag1,tag2,tag3]   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;description: &lt;span class=&quot;comment&quot;&gt;#对本页的描述&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;u6587_u7AE0_u6458_u8981&quot;&gt;&lt;a href=&quot;#u6587_u7AE0_u6458_u8981&quot; class=&quot;headerlink&quot; title=&quot;文章摘要&quot;&gt;&lt;/a&gt;文章摘要&lt;/h3&gt;&lt;p&gt;文章只显示一部分即摘要，当点击按钮时才显示全部&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;以上是摘要   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!--more--&amp;gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;以下是余下全文&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;u591A_u8BF4_u642D_u5EFA_u8BC4_u8BBA_u6846&quot;&gt;&lt;a href=&quot;#u591A_u8BF4_u642D_u5EFA_u8BC4_u8BBA_u6846&quot; class=&quot;headerlink&quot; title=&quot;多说搭建评论框&quot;&gt;&lt;/a&gt;多说搭建评论框&lt;/h3&gt;&lt;p&gt;这里有好多可以选择，刚开始学习时用的是多说，搭建教程可以参考&lt;a href=&quot;/&amp;#39;http://dev.duoshuo.com/threads/541d3b2b40b5abcd2e4df0e9&amp;#39;&quot;&gt;官网&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&quot;source_u76EE_u5F55&quot;&gt;&lt;a href=&quot;#source_u76EE_u5F55&quot; class=&quot;headerlink&quot; title=&quot;source目录&quot;&gt;&lt;/a&gt;source目录&lt;/h3&gt;&lt;p&gt;source目录是存放用户资源的地方，除了markdown和html文件会被解析放到public文件夹外，其他文件会直接拷贝到public，如不想文件被解析，可以在.md文件头部添加layout:false,如下：&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;layout: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!--其他一些信息--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      学习hexo搭建站点所遇问题小结2
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://blog.zhangyulei.site/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://blog.zhangyulei.site/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>

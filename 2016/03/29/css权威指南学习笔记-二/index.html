@@ -1,0 +1,866 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="泽枫's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第三章 定位元素可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css权威指南学习笔记(二)">
+<meta property="og:url" content="http://blog.zhangyulei.site/2016/03/29/css权威指南学习笔记-二/index.html">
+<meta property="og:site_name" content="泽枫's blog">
+<meta property="og:description" content="第三章 定位元素可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。">
+<meta property="og:updated_time" content="2016-04-05T07:58:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css权威指南学习笔记(二)">
+<meta name="twitter:description" content="第三章 定位元素可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6244405630786864000,
+      author: 'Author'
+    }
+  };
+  var _hmt = _hmt || [];
+     (function() {
+     var hm = document.createElement("script");
+     hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+     var s = document.getElementsByTagName("script")[0]; 
+     s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <title> css权威指南学习笔记(二) | 泽枫's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a6bfc67fed667b3e0450c3b6e642890e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">泽枫's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个安静的web爱好者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                css权威指南学习笔记(二)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-29T15:56:06+08:00" content="2016-03-29">
+              2016-03-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/css权威指南学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">css权威指南学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/css权威指南学习笔记-二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/css权威指南学习笔记-二/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/29/css权威指南学习笔记-二/" class="leancloud_visitors" data-flag-title="css权威指南学习笔记(二)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20"><a href="#u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20" class="headerlink" title="第三章 定位元素"></a>第三章 定位元素</h2><p>可见的页面版式主要由三个属性控制:position属性、display属性、float属性。其中，position属性控制页面上元素间的位置关系，display属性控制元素是堆叠、并排还是根本看不到，float属性提供控制的方式，以便把元素组成多栏布局。<br><a id="more"></a></p>
+<h3 id="3-1__u7406_u89E3_u76D2_u6A21_u578B"><a href="#3-1__u7406_u89E3_u76D2_u6A21_u578B" class="headerlink" title="3.1 理解盒模型"></a>3.1 理解盒模型</h3><p>推荐把下面这条规则作为样式表的第一条规则(为了重置默认样式):</p>
+<blockquote>
+<p>* {margin:0; padding:0;}</p>
+</blockquote>
+<p>每个元素在页面上会生成一个盒子。属性主要有三组:    </p>
+<ul>
+<li>边框，设置边框，border-width(thin,medium,thick),border-style(none,hidden,dotted,dashed,solid,double,groove,ridge,inset,outset)。</li>
+</ul>
+<ul>
+<li>内边距，设置盒子内容和边距的间距，加在声明的盒子宽度之上。</li>
+</ul>
+<ul>
+<li>外边距，设置盒子和相邻元素的间距，margin{12px 10px 6px},最后一个字没有写(左边的值)，那就使用对边的值，这里是右边值10px。</li>
+</ul>
+<ul>
+<li>叠加外边距-只是垂直外边距，水平外间距是相邻外边距之和。<strong>垂直方向上的外边距会叠加。比如布局时有三段文字用p标签分开，第一段的下外边距是margin-bottom:30px；第二段上外边距是margin-top:50px，那么这两段之间实际距离是50px，它们会重叠，然后取最大值</strong>。</li>
+</ul>
+<ul>
+<li>外边距的单位。文本元素设置外边距时，一般左右外边距可以使用像素，上下边距以em为单位。例如: p{ font-size:1em; margin:.75em 30px}</li>
+</ul>
+<h3 id="3-2__u76D2_u5B50_u6709_u591A_u5927"><a href="#3-2__u76D2_u5B50_u6709_u591A_u5927" class="headerlink" title="3.2 盒子有多大"></a>3.2 盒子有多大</h3><p>这里记住几个结论:    </p>
+<ul>
+<li>没有(就是没有设置width的)宽度的元素始终会扩展到填满其父元素的宽度为止。添加水平边距，内边距和外边距，会导致内容宽度减少，减少量等于水平边框，内边距和外边距的和。</li>
+<li>为设定了宽度的盒子添加边框，内边距和外边距，会导致盒子扩展得更宽。实际上，盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度。</li>
+</ul>
+<h3 id="3-3__u6D6E_u52A8_u4E0E_u6E05_u9664"><a href="#3-3__u6D6E_u52A8_u4E0E_u6E05_u9664" class="headerlink" title="3.3 浮动与清除"></a>3.3 浮动与清除</h3><p>浮动是把元素从常规文档流中拿出来，脱离常规文档流，主要目的是为了实现文本围绕图片的效果，然而这个属性也成了创建多栏布局最简单的方式(多个元素float:left)。使用clear(left,right,both)可以实现浮动元素清除。<br><strong>围住浮动元素的三种方法</strong>：    </p>
+<ul>
+<li>为父元素应用overflow:hidden，以强制它包围浮动元素。</li>
+<li>同时浮动父元素，即也让父元素浮动起来–float:left,width:100%;</li>
+<li>给父元素的最后添加一个非浮动的子元素，然后清除该子元素。比如新加一个 <div\ class="clear_me"></div\>, .clear_me {clear:left}；还可以用一个css来添加清除元素的方法。首先给父元素添加一个类 clearfix,然后设置：    </li>
+</ul>
+<blockquote>
+<p>.clearfix:after {<br>    content: “.”;<br>    display:block;<br>    height:0;<br>    visibility:hidden;<br>    clear:both;<br>}    </p>
+</blockquote>
+<p>没有父元素时如何清除—可以对需要清除的元素添加上面的.clearfix类；</p>
+<h3 id="3-4__u5B9A_u4F4D"><a href="#3-4__u5B9A_u4F4D" class="headerlink" title="3.4 定位"></a>3.4 定位</h3><p>css布局核心是position属性，它有四个值：static、relative、absolute、fixed。默认是静态定位<br>主要有:    </p>
+<ul>
+<li>相对定位(position:relative)–相对的是它原来在文档流的位置(或者默认位置)。可以使用top、right、bottom和left属性来改变它的位置了。多数只用top、left即可。</li>
+</ul>
+<ul>
+<li>绝对定位(position:absolute)–绝对定位会把元素彻底从文档流中拿出来，它完全脱离了常规文档流，现在是相对顶级元素body(默认是body)在定位。用top、left定位。</li>
+</ul>
+<ul>
+<li>固定定位(position:fixed)–同样会使元素移出文档流。固定定位元素的定位上下文是视口(浏览器窗口或手持设备的屏幕)，因此它不会随着页面滚动而移动。用top、left定位。</li>
+</ul>
+<ul>
+<li>定位上下文–绝对定位元素默认的定位上下文是body，但实际上，绝对定位元素的任何祖先元素都可以成为它的上下文，只要你把absolute对应的祖先元素的position设定成relative即可。</li>
+</ul>
+<h3 id="3-5__u663E_u793A_u5C5E_u6027"><a href="#3-5__u663E_u793A_u5C5E_u6027" class="headerlink" title="3.5 显示属性"></a>3.5 显示属性</h3><p>所有元素都有display属性，但大多数元素display属性的默认值不是block，就是inline。    </p>
+<ul>
+<li>块级元素(display:block)–段落、标题、列表等，在浏览器中上下堆叠显示。</li>
+<li>行内元素(display:inline)–a、span、img，在浏览器中左右并排显示，只有前一行没有空间时才会显示到下一行。</li>
+</ul>
+<p>display:none会使该元素及所有包含在其中的元素，都不会在页面中显示。与之相对的是visibility属性，它有两个值:visible(默认值)和hidden。</p>
+<h3 id="3-6__u80CC_u666F"><a href="#3-6__u80CC_u666F" class="headerlink" title="3.6 背景"></a>3.6 背景</h3><p><strong>前景色color即影响文本，也影响边框</strong>。<br>背景有背景颜色(background-color)和背景图片(background-image),背景图片叠加在背景颜色之上。css背景属性有:    </p>
+<ul>
+<li>背景颜色(background-color)</li>
+</ul>
+<ul>
+<li>背景图片(background-image)</li>
+</ul>
+<ul>
+<li>背景重复(background-repeat)–对应四个值，repeat-y和repeat-x，no-repeat，默认值是repeat;另外css3还规定另外两个值，分别是：<br>background-repeat:round：为保证图片不被剪切，通过调整图片大小来适应背景区域。<br>background-repeat:space：为保证图片不被剪切，通过在图片间添加空白来适应背景区域。</li>
+</ul>
+<ul>
+<li>背景位置(background-position)–用于控制背景位置的属性。background-position属性有5个关键字值，分别是 top、left、bottom、right和 center，这些关键字中的任意两个组合起来都可以作为该属性的值。比如， top right 表示把图片放在元素的右上角位置， center center 把图片放在元素的中心位置。可以用百分比设定位置，例如：background-position:50% 50%；</li>
+</ul>
+<ul>
+<li>背景尺寸(background-size)–这个属性用来控制背景图片的尺寸。<br>50%–缩放图片，使其填充背景区的一半。<br>100px 50px– 把图片调整到100像素宽，50像素高<br>cover–拉大图片。使其完全填满背景区；保持宽高比<br>contain–缩放图片，使其恰好适应背景区；保持宽高比；</li>
+</ul>
+<ul>
+<li>背景粘附(background-attachment)–该属性控制滚动元素内的背景图片是否随元素滚动而移动。这个属性的默认值是scroll，即背景图片随着元素移动，如果改成fixed，那么背景图片不会随着元素滚动而移动。</li>
+<li>background-clip–控制背景绘制区域的范围，比如可以让背景颜色和背景图片只出现在内容区，而不出现在内边距区域。默认背景绘制区域是扩展到边框外边界的。</li>
+</ul>
+<ul>
+<li>background-origin–控制背景定位区域的原点，可以设定为元素盒子左上角以外的位置。比如，可以设定以内容区左上角作为原点。</li>
+</ul>
+<ul>
+<li>background-break–控制分离元素的显示效果。</li>
+</ul>
+<ul>
+<li>背景渐变–有两种一种是线性渐变，一种是放射性渐变。线性渐变从元素的一端延伸到另一端，放射性渐变则从元素内一点向四周发散。<br>线性渐变–  .gradient { background: linear-gradient(方向, 起始颜色, (中间颜色可多种,)终止颜色)}，默认是从上到下，方向值可以为left(从左到右)，-45deg(左上到右下)<br>放射性渐变–参数指定形状、位置、尺寸、颜色和不透明度。比如：.gradient { background: radial-gradient(50px 30px, circle, #fff, #64d2dd, $4947ba)},50px 30px 指圆心，circle渐变形状，剩下的是过渡颜色。</li>
+</ul>
+<p>css3还可以给元素背景添加多个背景图片，多张图片可以在背景中叠加起来，css规则中先列出的图片在上层。可以这样写：    </p>
+<blockquote>
+<p>background:<br>url(1.jpg) 30px -10px no-repeat,<br>url(2.jpg) …,<br>url(3.jpg) …;</p>
+</blockquote>
+<p>这些背景属性可以简写：background:url() center #fff no-repeat contain fixed等。<br>VSP–厂商前缀，以下css3属性必须加VPS:<br>border-image translate<br>linear-gradient transition<br>radial-gradient background*<br>transform background-image*<br>transform-origin<br>* 针对背景图片或渐变    </p>
+<p>比如以transform属性为例，标准语法是这样的:<br>transform: skewX(-45deg);<br>为了保证大多数浏览器能够使用，你得这样声明：<br>-moz-transform:skewX(-45deg); /* Firefox */<br>-webkit-transform:skewX(-45deg); /* Chrome 及 Safari*/<br>-ms-transform:skewX(-45deg); /* 微软 Internet Explorer */<br>-o-transform:skewX(-45deg); /* Opera */<br>transform:skewX(-45deg); /* 最后是 W3C 标准属性 */    </p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag">#css</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/22/水平垂直布局-翻译/" rel="next" title="居中的css:完全指南(翻译)">
+                <i class="fa fa-chevron-left"></i> 居中的css:完全指南(翻译)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/30/css权威指南学习笔记-三/" rel="prev" title="css权威指南学习笔记(三)">
+                css权威指南学习笔记(三) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/29/css权威指南学习笔记-二/"
+     data-title="css权威指南学习笔记(二)"
+     data-content=""
+     data-url="http://blog.zhangyulei.site/2016/03/29/css权威指南学习笔记-二/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/29/css权威指南学习笔记-二/"
+           data-title="css权威指南学习笔记(二)" data-url="http://blog.zhangyulei.site/2016/03/29/css权威指南学习笔记-二/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/banshu.jpg"
+               alt="泽枫" />
+          <p class="site-author-name" itemprop="name">泽枫</p>
+          <p class="site-description motion-element" itemprop="description">愿时光荏苒,岁月静好</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulei521" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yulei521?refer_flag=1001030102_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/yulei521" target="_blank">
+                  
+                    <i class="fa fa-book"></i>
+                  
+                  segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT主题</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E09_u7AE0__u5B9A_u4F4D_u5143_u7D20"><span class="nav-number">1.</span> <span class="nav-text">第三章 定位元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1__u7406_u89E3_u76D2_u6A21_u578B"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 理解盒模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2__u76D2_u5B50_u6709_u591A_u5927"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 盒子有多大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3__u6D6E_u52A8_u4E0E_u6E05_u9664"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 浮动与清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4__u5B9A_u4F4D"><span class="nav-number">1.4.</span> <span class="nav-text">3.4 定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5__u663E_u793A_u5C5E_u6027"><span class="nav-number">1.5.</span> <span class="nav-text">3.5 显示属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6__u80CC_u666F"><span class="nav-number">1.6.</span> <span class="nav-text">3.6 背景</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">泽枫</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hexo-theme-icarus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("j5YDAWwPraYyQWwrkiAsTB2q-gzGzoHsz", "kL21bxuYV4Aokn5hNvyRdfNo");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
