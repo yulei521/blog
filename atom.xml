@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.zhangyulei.site/"/>
-  <updated>2016-10-11T01:37:00.000Z</updated>
+  <updated>2017-01-16T03:28:19.282Z</updated>
   <id>http://blog.zhangyulei.site/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ubantu14.04 安装hexo</title>
+    <link href="http://blog.zhangyulei.site/2017/01/16/ubantu14-04-%E5%AE%89%E8%A3%85hexo/"/>
+    <id>http://blog.zhangyulei.site/2017/01/16/ubantu14-04-安装hexo/</id>
+    <published>2017-01-16T03:19:59.000Z</published>
+    <updated>2017-01-16T03:28:19.282Z</updated>
+    
+    <content type="html">&lt;p&gt;安装hexo需要首先安装node与npm，具体如下：&lt;/p&gt;
+&lt;h4 id=&quot;1-_u5B89_u88C5node&quot;&gt;&lt;a href=&quot;#1-_u5B89_u88C5node&quot; class=&quot;headerlink&quot; title=&quot;1.安装node&quot;&gt;&lt;/a&gt;1.安装node&lt;/h4&gt;&lt;p&gt;最好从官网直接下载源码(&lt;a href=&quot;https://nodejs.org/en/download/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://nodejs.org/en/download/&lt;/a&gt;)，然后使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;./configure &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;make &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;指令进行安装，直接使用apt-get安装版本一般比较低，或者不成功。&lt;/p&gt;
+&lt;p&gt;参考地址：&lt;a href=&quot;http://jingyan.baidu.com/article/72ee561a533c55e16138dfef.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jingyan.baidu.com/article/72ee561a533c55e16138dfef.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(通过在命令行输入node查看是否安装成功)&lt;/p&gt;
+&lt;h4 id=&quot;2-_u5B89_u88C5npm&quot;&gt;&lt;a href=&quot;#2-_u5B89_u88C5npm&quot; class=&quot;headerlink&quot; title=&quot;2.安装npm&quot;&gt;&lt;/a&gt;2.安装npm&lt;/h4&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo apt-get install npm&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;3-_u5229_u7528npm_u5B89_u88C5hexo&quot;&gt;&lt;a href=&quot;#3-_u5229_u7528npm_u5B89_u88C5hexo&quot; class=&quot;headerlink&quot; title=&quot;3.利用npm安装hexo&quot;&gt;&lt;/a&gt;3.利用npm安装hexo&lt;/h4&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo npm install --unsafe-perm --verbose -g hexo&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;```  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#### 4.安装Remarkable编辑器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Remarkable编辑器支持在ubantu下编辑markdown文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+ &lt;span class=&quot;number&quot;&gt;4.1&lt;/span&gt; 下载安装包 http://remarkableapp.github.io/linux/download.html                                              &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  安装： ```     dpkg -i remarkable_1.&lt;span class=&quot;number&quot;&gt;62&lt;/span&gt;_all.deb&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;4.2 补上依赖项：&lt;figure class=&quot;highlight&quot;&gt;&lt;figcaption&gt;&lt;span&gt;apt-get install -f ```&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;+ 4.3 &amp;#36816;&amp;#34892;&amp;#65306;``` remarkable &amp;#38;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考地址:&lt;a href=&quot;http://blog.csdn.net/gw569453350game/article/details/50403945&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/gw569453350game/article/details/50403945&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;安装hexo需要首先安装node与npm，具体如下：&lt;/p&gt;
+&lt;h4 id=&quot;1-_u5B89_u88C5node&quot;&gt;&lt;a href=&quot;#1-_u5B89_u88C5node&quot; class=&quot;headerlink&quot; title=&quot;1.安装node&quot;&gt;&lt;/a&gt;1.安装node&lt;/h4&gt;&lt;p&gt;最好从官网直接下载源码(&lt;a href=&quot;https://nodejs.org/en/download/&quot;&gt;https://nodejs.org/en/download/&lt;/a&gt;)，然后使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;./configure &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;make &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ubantu" scheme="http://blog.zhangyulei.site/categories/ubantu/"/>
+    
+    
+      <category term="hexo" scheme="http://blog.zhangyulei.site/tags/hexo/"/>
+    
+      <category term="ubantu" scheme="http://blog.zhangyulei.site/tags/ubantu/"/>
+    
+  </entry>
   
   <entry>
     <title>一道简单的JavaScript编程题</title>
@@ -1777,33 +1814,6 @@ footer {clear:both; background:&lt;span class=&quot;comment&quot;&gt;#000;}&lt;/
     
     
       <category term="markdown" scheme="http://blog.zhangyulei.site/tags/markdown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习hexo搭建站点所遇问题小结2</title>
-    <link href="http://blog.zhangyulei.site/2016/01/28/%E5%AD%A6%E4%B9%A0hexo%E6%90%AD%E5%BB%BA%E7%AB%99%E7%82%B9%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%932/"/>
-    <id>http://blog.zhangyulei.site/2016/01/28/学习hexo搭建站点所遇问题小结2/</id>
-    <published>2016-01-28T07:51:06.000Z</published>
-    <updated>2016-01-28T08:42:14.000Z</updated>
-    
-    <content type="html">&lt;p&gt;在学习搭建hexo过程中遇到的问题，这里总结备忘下。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;u65B0_u5EFA_u4E00_u4E2A-md_u6587_u4EF6_u5934_u90E8_u4FE1_u606F_u7684_u542B_u4E49&quot;&gt;&lt;a href=&quot;#u65B0_u5EFA_u4E00_u4E2A-md_u6587_u4EF6_u5934_u90E8_u4FE1_u606F_u7684_u542B_u4E49&quot; class=&quot;headerlink&quot; title=&quot;新建一个.md文件头部信息的含义&quot;&gt;&lt;/a&gt;新建一个.md文件头部信息的含义&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;title: &amp;#123;&amp;#123;title&amp;#125;&amp;#125; &lt;span class=&quot;comment&quot;&gt;#文章的标题，和.md文件名名字一致   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;date: &amp;#123;&amp;#123;data&amp;#125;&amp;#125; &lt;span class=&quot;comment&quot;&gt;#时间   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;categories: &lt;span class=&quot;comment&quot;&gt;# 类别&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tags: &lt;span class=&quot;comment&quot;&gt;# 标签，形式[tag1,tag2,tag3]   &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;description: &lt;span class=&quot;comment&quot;&gt;#对本页的描述&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;u6587_u7AE0_u6458_u8981&quot;&gt;&lt;a href=&quot;#u6587_u7AE0_u6458_u8981&quot; class=&quot;headerlink&quot; title=&quot;文章摘要&quot;&gt;&lt;/a&gt;文章摘要&lt;/h3&gt;&lt;p&gt;文章只显示一部分即摘要，当点击按钮时才显示全部&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;以上是摘要   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!--more--&amp;gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;以下是余下全文&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;u591A_u8BF4_u642D_u5EFA_u8BC4_u8BBA_u6846&quot;&gt;&lt;a href=&quot;#u591A_u8BF4_u642D_u5EFA_u8BC4_u8BBA_u6846&quot; class=&quot;headerlink&quot; title=&quot;多说搭建评论框&quot;&gt;&lt;/a&gt;多说搭建评论框&lt;/h3&gt;&lt;p&gt;这里有好多可以选择，刚开始学习时用的是多说，搭建教程可以参考&lt;a href=&quot;/&amp;#39;http://dev.duoshuo.com/threads/541d3b2b40b5abcd2e4df0e9&amp;#39;&quot;&gt;官网&lt;/a&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;source_u76EE_u5F55&quot;&gt;&lt;a href=&quot;#source_u76EE_u5F55&quot; class=&quot;headerlink&quot; title=&quot;source目录&quot;&gt;&lt;/a&gt;source目录&lt;/h3&gt;&lt;p&gt;source目录是存放用户资源的地方，除了markdown和html文件会被解析放到public文件夹外，其他文件会直接拷贝到public，如不想文件被解析，可以在.md文件头部添加layout:false,如下：&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;layout: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;!--其他一些信息--&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      学习hexo搭建站点所遇问题小结2
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://blog.zhangyulei.site/categories/hexo/"/>
-    
-    
-      <category term="hexo" scheme="http://blog.zhangyulei.site/tags/hexo/"/>
     
   </entry>
   

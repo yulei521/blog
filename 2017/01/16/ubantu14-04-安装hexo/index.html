@@ -39,7 +39,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="mongodb," />
+  <meta name="keywords" content="hexo,ubantu," />
 
 
 
@@ -57,28 +57,19 @@
 
 
 
-<meta name="description" content="最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。
-1、显示数据库show dbs   — 显示当前所有数据库
-2、移除某一个文档db.collection.remove({});
-3.查找文档db.collection.find({});如果参数为空，返回所有的数据；可以加一个参数，进行过滤选择
-4、插入文档db.collection.insert(Json数据);">
+<meta name="description" content="安装hexo需要首先安装node与npm，具体如下：
+1.安装node最好从官网直接下载源码(https://nodejs.org/en/download/)，然后使用123./configure make sudo make install">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb 常用操作">
-<meta property="og:url" content="http://blog.zhangyulei.site/2016/09/04/mongodb-常用操作/index.html">
+<meta property="og:title" content="ubantu14.04 安装hexo">
+<meta property="og:url" content="http://blog.zhangyulei.site/2017/01/16/ubantu14-04-安装hexo/index.html">
 <meta property="og:site_name" content="泽枫's blog">
-<meta property="og:description" content="最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。
-1、显示数据库show dbs   — 显示当前所有数据库
-2、移除某一个文档db.collection.remove({});
-3.查找文档db.collection.find({});如果参数为空，返回所有的数据；可以加一个参数，进行过滤选择
-4、插入文档db.collection.insert(Json数据);">
-<meta property="og:updated_time" content="2016-09-04T12:57:36.000Z">
+<meta property="og:description" content="安装hexo需要首先安装node与npm，具体如下：
+1.安装node最好从官网直接下载源码(https://nodejs.org/en/download/)，然后使用123./configure make sudo make install">
+<meta property="og:updated_time" content="2017-01-16T03:28:19.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb 常用操作">
-<meta name="twitter:description" content="最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。
-1、显示数据库show dbs   — 显示当前所有数据库
-2、移除某一个文档db.collection.remove({});
-3.查找文档db.collection.find({});如果参数为空，返回所有的数据；可以加一个参数，进行过滤选择
-4、插入文档db.collection.insert(Json数据);">
+<meta name="twitter:title" content="ubantu14.04 安装hexo">
+<meta name="twitter:description" content="安装hexo需要首先安装node与npm，具体如下：
+1.安装node最好从官网直接下载源码(https://nodejs.org/en/download/)，然后使用123./configure make sudo make install">
 
 
 
@@ -103,7 +94,7 @@
 })();
 </script>
 
-  <title> mongodb 常用操作 | 泽枫's blog </title>
+  <title> ubantu14.04 安装hexo | 泽枫's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +244,7 @@
             
             
               
-                mongodb 常用操作
+                ubantu14.04 安装hexo
               
             
           </h1>
@@ -265,8 +256,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T20:43:03+08:00" content="2016-09-04">
-              2016-09-04
+            <time itemprop="dateCreated" datetime="2017-01-16T11:19:59+08:00" content="2017-01-16">
+              2017-01-16
             </time>
           </span>
 
@@ -279,8 +270,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">mongodb</span>
+                  <a href="/categories/ubantu/" itemprop="url" rel="index">
+                    <span itemprop="name">ubantu</span>
                   </a>
                 </span>
 
@@ -295,8 +286,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/04/mongodb-常用操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/mongodb-常用操作/" itemprop="commentsCount"></span>
+                <a href="/2017/01/16/ubantu14-04-安装hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/ubantu14-04-安装hexo/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -306,7 +297,7 @@
 
           
           
-             <span id="/2016/09/04/mongodb-常用操作/" class="leancloud_visitors" data-flag-title="mongodb 常用操作">
+             <span id="/2017/01/16/ubantu14-04-安装hexo/" class="leancloud_visitors" data-flag-title="ubantu14.04 安装hexo">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -327,11 +318,18 @@
       
 
       
-        <p>最近发射猫项目在测试上传文件时，需要简单操作下数据库，然后记下这几个简单的指令。</p>
-<h4 id="1_u3001_u663E_u793A_u6570_u636E_u5E93"><a href="#1_u3001_u663E_u793A_u6570_u636E_u5E93" class="headerlink" title="1、显示数据库"></a>1、显示数据库</h4><p>show dbs   — 显示当前所有数据库</p>
-<h4 id="2_u3001_u79FB_u9664_u67D0_u4E00_u4E2A_u6587_u6863"><a href="#2_u3001_u79FB_u9664_u67D0_u4E00_u4E2A_u6587_u6863" class="headerlink" title="2、移除某一个文档"></a>2、移除某一个文档</h4><p>db.collection.remove({});</p>
-<h4 id="3-_u67E5_u627E_u6587_u6863"><a href="#3-_u67E5_u627E_u6587_u6863" class="headerlink" title="3.查找文档"></a>3.查找文档</h4><p>db.collection.find({});<br>如果参数为空，返回所有的数据；可以加一个参数，进行过滤选择</p>
-<h4 id="4_u3001_u63D2_u5165_u6587_u6863"><a href="#4_u3001_u63D2_u5165_u6587_u6863" class="headerlink" title="4、插入文档"></a>4、插入文档</h4><p>db.collection.insert(Json数据);</p>
+        <p>安装hexo需要首先安装node与npm，具体如下：</p>
+<h4 id="1-_u5B89_u88C5node"><a href="#1-_u5B89_u88C5node" class="headerlink" title="1.安装node"></a>1.安装node</h4><p>最好从官网直接下载源码(<a href="https://nodejs.org/en/download/" target="_blank" rel="external">https://nodejs.org/en/download/</a>)，然后使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure </span><br><span class="line">make </span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>指令进行安装，直接使用apt-get安装版本一般比较低，或者不成功。</p>
+<p>参考地址：<a href="http://jingyan.baidu.com/article/72ee561a533c55e16138dfef.html" target="_blank" rel="external">http://jingyan.baidu.com/article/72ee561a533c55e16138dfef.html</a></p>
+<p>(通过在命令行输入node查看是否安装成功)</p>
+<h4 id="2-_u5B89_u88C5npm"><a href="#2-_u5B89_u88C5npm" class="headerlink" title="2.安装npm"></a>2.安装npm</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<h4 id="3-_u5229_u7528npm_u5B89_u88C5hexo"><a href="#3-_u5229_u7528npm_u5B89_u88C5hexo" class="headerlink" title="3.利用npm安装hexo"></a>3.利用npm安装hexo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install --unsafe-perm --verbose -g hexo</span><br><span class="line">```  </span><br><span class="line"><span class="comment">#### 4.安装Remarkable编辑器</span></span><br><span class="line">Remarkable编辑器支持在ubantu下编辑markdown文件</span><br><span class="line">+ <span class="number">4.1</span> 下载安装包 http://remarkableapp.github.io/linux/download.html                                              </span><br><span class="line">  安装： ```     dpkg -i remarkable_1.<span class="number">62</span>_all.deb</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4.2 补上依赖项：<figure class="highlight"><figcaption><span>apt-get install -f ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 4.3 &#36816;&#34892;&#65306;``` remarkable &#38;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>参考地址:<a href="http://blog.csdn.net/gw569453350game/article/details/50403945" target="_blank" rel="external">http://blog.csdn.net/gw569453350game/article/details/50403945</a></p>
 
       
     </div>
@@ -352,7 +350,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/ubantu/" rel="tag">#ubantu</a>
           
         </div>
       
@@ -361,17 +361,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/27/正则表达式/" rel="next" title="正则表达式">
-                <i class="fa fa-chevron-left"></i> 正则表达式
+              <a href="/2016/10/10/一道简单的JavaScript编程题/" rel="next" title="一道简单的JavaScript编程题">
+                <i class="fa fa-chevron-left"></i> 一道简单的JavaScript编程题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/04/redis-常用操作/" rel="prev" title="redis 常用操作">
-                redis 常用操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -386,10 +382,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/09/04/mongodb-常用操作/"
-     data-title="mongodb 常用操作"
+        <div class="ds-share flat" data-thread-key="2017/01/16/ubantu14-04-安装hexo/"
+     data-title="ubantu14.04 安装hexo"
      data-content=""
-     data-url="http://blog.zhangyulei.site/2016/09/04/mongodb-常用操作/">
+     data-url="http://blog.zhangyulei.site/2017/01/16/ubantu14-04-安装hexo/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -416,8 +412,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/04/mongodb-常用操作/"
-           data-title="mongodb 常用操作" data-url="http://blog.zhangyulei.site/2016/09/04/mongodb-常用操作/">
+      <div class="ds-thread" data-thread-key="2017/01/16/ubantu14-04-安装hexo/"
+           data-title="ubantu14.04 安装hexo" data-url="http://blog.zhangyulei.site/2017/01/16/ubantu14-04-安装hexo/">
       </div>
     
   </div>
@@ -555,7 +551,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1_u3001_u663E_u793A_u6570_u636E_u5E93"><span class="nav-number">1.</span> <span class="nav-text">1、显示数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2_u3001_u79FB_u9664_u67D0_u4E00_u4E2A_u6587_u6863"><span class="nav-number">2.</span> <span class="nav-text">2、移除某一个文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_u67E5_u627E_u6587_u6863"><span class="nav-number">3.</span> <span class="nav-text">3.查找文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4_u3001_u63D2_u5165_u6587_u6863"><span class="nav-number">4.</span> <span class="nav-text">4、插入文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_u5B89_u88C5node"><span class="nav-number">1.</span> <span class="nav-text">1.安装node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_u5B89_u88C5npm"><span class="nav-number">2.</span> <span class="nav-text">2.安装npm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_u5229_u7528npm_u5B89_u88C5hexo"><span class="nav-number">3.</span> <span class="nav-text">3.利用npm安装hexo</span></a></li></ol></div>
             
           </div>
         </section>
